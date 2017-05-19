@@ -1,5 +1,6 @@
 import * as path from 'path';
 // import * as express from 'express';
+import Page from './page/Page';
 import {Express, RequestHandler, Router, Request, Response, NextFunction} from 'express';
 import * as express from 'express';
 import * as logger from 'morgan';
@@ -51,8 +52,7 @@ export class BackApp {
     //     message: 'Hello World!'
     //   });
     // });
-    // this.express.use('/', router);
-    // this.express.use('/aPI/hire', Hire);
+    this.express.use('/', Page);
   }
 
   public run() {
@@ -62,12 +62,12 @@ export class BackApp {
       this.server.listen(this.port);
       this.server.on('error', () => this.onError);
       this.server.on('listening', () => this.onListening());
-      this.router.get('/', this.get);
+      // this.router.get('/', this.get);
   }
 
-  private get(request: Request, response: Response){
-    response.sendFile(path.resolve('public/index.html'));
-  }
+  // private get(request: Request, response: Response){
+  //   response.sendFile(path.resolve('public/index.html'));
+  // }
 
   private onError(error: NodeJS.ErrnoException){
     if (error.syscall !== 'listen') throw error;
