@@ -1,16 +1,9 @@
-import * as express from "express";
-import * as path from "path";
-var app = express();
+import * as express from 'express';
+import {BackApp} from './backApp/backApp';
 
-app.use(express.static(path.resolve('public')));
+let backApp = new BackApp(express(), normalizePort(process.env.PORT || 3000));
+backApp.run();
 
-app.get('/', function (req, res) {
-  res.sendFile(path.resolve('public/index.html'));
-})
-
-app.listen(normalizePort(process.env.PORT || 3000), function () {
-  console.log('backApp listening on port 3000!')
-})
 
 function normalizePort(val: number|string): number|string|boolean {
   let port: number = (typeof val === 'string') ? parseInt(val, 10) : val;
