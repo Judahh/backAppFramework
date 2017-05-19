@@ -1,0 +1,7 @@
+header{
+    background-color: red;
+    top: 0;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+}

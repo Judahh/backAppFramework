@@ -1,0 +1,8 @@
+typings
+*.js
+*.map
+node_modules
+!node_modules/@types/declaration/*
+jspm_packages
+bower_components
+platforms
