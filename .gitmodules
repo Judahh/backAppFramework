@@ -1,0 +1,3 @@
+[submodule "tools/share/cmake/Modules/cmake-modules"]
+	path = public
+	url = https://github.com/judahh/appFramework.git
