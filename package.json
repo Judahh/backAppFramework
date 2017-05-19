@@ -37,5 +37,6 @@
     "concurrently": "^3.4.0"
   },
   "devDependencies": {
+    "@types/node": "^7.0.18"
   }
 }
