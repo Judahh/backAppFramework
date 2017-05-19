@@ -1,3 +1,6 @@
 [submodule "appFramework"]
 	path = public
 	url = https://github.com/judahh/appFramework.git
+[submodule "public"]
+	path = public
+	url = http://github.com/judahh/appFramework.git
