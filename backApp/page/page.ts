@@ -3,7 +3,7 @@ import * as logger from 'morgan';
 import * as path from 'path';
 
 export class Page {
-  router: Router
+  private router: Router
 
   /**
    * Initialize the HeroRouter
@@ -13,6 +13,9 @@ export class Page {
     this.init();
   }
 
+  public getRouter(){
+      return this.router;
+  }
   /**
    * GET all Heroes.
    */
@@ -44,4 +47,4 @@ export class Page {
 const page = new Page();
 page.init();
 
-export default page.router;
+export default page.getRouter();
