@@ -1,6 +1,6 @@
 import * as path from 'path';
 // import * as express from 'express';
-import Page from './page/Page';
+import Page from './page/page';
 import {Express, RequestHandler, Router, Request, Response, NextFunction} from 'express';
 import * as express from 'express';
 import * as logger from 'morgan';
