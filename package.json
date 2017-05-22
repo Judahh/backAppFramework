@@ -36,11 +36,12 @@
     "path": "0.12.7",
     "body-parser": "^1.17.1",
     "morgan": "^1.8.1",
-    "concurrently": "^3.4.0"
-  },
-  "devDependencies": {
+    "concurrently": "^3.4.0",
     "@types/node": "^7.0.18",
     "@types/body-parser": "1.16.3",
     "@types/morgan": "^1.7.32"
+  },
+  "devDependencies": {
+    
   }
 }
