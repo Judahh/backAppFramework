@@ -5,7 +5,7 @@ import {Express, RequestHandler, Router, Request, Response, NextFunction} from '
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
-import allowCrossDomain = require("./middleware/allowCrossDomain");
+import * as allowCrossDomain from "./middleware/allowCrossDomain";
 import * as http from 'http';
 // import * as debug from 'debug';
 
