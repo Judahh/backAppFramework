@@ -17,6 +17,8 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
+    "requirejs":"2.3.3",
+    "@types/requirejs":"2.1.29",
     "start": "tsc && concurrently \"npm run tsc:w\" \"node server.js\"",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
