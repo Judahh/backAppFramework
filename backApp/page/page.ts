@@ -43,7 +43,7 @@ export class Page {
 
 }
 
-// Create the HeroRouter, and export its configured Expresponses.Router
+// Create the HeroRouter, and export its configured Expresponses.Router .
 const page = new Page();
 page.init();
 
