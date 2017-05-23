@@ -17,7 +17,7 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "tsc && concurrently \"npm run tsc:w\" \"node server.js\"",
+    "start": "tsc && tsc --p public && concurrently \"npm run tsc:w\" \"npm run tsc --p public:w\" \"node server.js\"",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "prestart": "",
