@@ -3,6 +3,7 @@ typings
 *.map
 node_modules
 !node_modules/@types/declaration/*
+public
 jspm_packages
 bower_components
 platforms
