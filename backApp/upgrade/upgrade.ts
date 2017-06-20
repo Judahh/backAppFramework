@@ -62,7 +62,7 @@ export class Upgrade {
     console.info("Install:");
     Upgrade.showInfo(stdout, stderr);
 
-    childProcess.exec('sudo npm start', null);
+    // childProcess.exec('sudo npm start', null);
 
     process.exit();
   }
