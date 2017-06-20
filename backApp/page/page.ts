@@ -80,7 +80,7 @@ export class Page {
    */
   init() {
     this.router.get('/', this.getPage);
-    // this.router.get('/:id', this.getOne);
+    // this.router.get('/:id', this.getOne); 
     this.router.get('/refresh', this.refresh);
     this.router.post('/', this.getPage);
     // this.router.post('/:id', this.getOne);
