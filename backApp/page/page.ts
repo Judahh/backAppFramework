@@ -35,8 +35,8 @@ export class Page {
    * GET all Heroes.
    */
   public refresh(request: Request, response: Response, nextFunction: NextFunction) {
-    console.log(request.body.pusher.name + " pushed to " + request.body.repository.name);
-    console.log("Pulling code from Github...");
+    console.info(request.body.pusher.name + " pushed to " + request.body.repository.name);
+    console.info("Pulling code from Github...");
 
     // reset any changes that have been made locally
     childProcess.exec('git -C /home/projects/backAppFramework reset --hard', this.execCallback);
@@ -65,8 +65,12 @@ export class Page {
   }
 
   public execCallback(err, stdout, stderr) {
-    if(stdout) console.log(stdout);
-    if(stderr) console.log(stderr);
+    if(stdout){
+      console.info(stdout);
+    }
+    if(stderr){
+      console.info(stderr);
+    }
   }
 
   /**
