@@ -66,6 +66,10 @@ export class Page {
   }
 
   public static execCallback(err, stdout, stderr) {
+    Page.showExecInfo(stdout, stderr);
+  }
+
+  public static showExecInfo(stdout, stderr){
     if(stdout){
       console.info(stdout);
     }
