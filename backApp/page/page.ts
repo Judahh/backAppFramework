@@ -47,6 +47,15 @@ export class Page {
     // now pull down the latest
     childProcess.exec('git -C /home/projects/backAppFramework pull -f', this.execCallback);
 
+    // reset any changes that have been made locally
+    childProcess.exec('git -C /home/projects/backAppFramework/public reset --hard', this.execCallback);
+
+    // and ditch any files that have been added locally too
+    childProcess.exec('git -C /home/projects/backAppFramework/public clean -df', this.execCallback);
+
+    // now pull down the latest
+    childProcess.exec('git -C /home/projects/backAppFramework/public pull -f', this.execCallback);
+
     // and npm install with --production
     childProcess.exec('npm -C /home/projects/backAppFramework install --production', this.execCallback);
 
