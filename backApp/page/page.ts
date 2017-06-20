@@ -1,7 +1,7 @@
 import {Router, Request, Response, NextFunction} from 'express';
 import * as logger from 'morgan';
 import * as path from 'path';
-import * as childProcess from 'child_process';
+import {Upgrade} from './../upgrade/upgrade';
 
 export class Page {
   private router: Router
@@ -37,45 +37,7 @@ export class Page {
    * GET all Heroes.
    */
   public refresh(request: Request, response: Response, nextFunction: NextFunction) {
-    console.info(request.body.pusher.name + " pushed to " + request.body.repository.name);
-    console.info("Pulling code from Github...");
-
-    // reset any changes that have been made locally
-    childProcess.exec('sudo git reset --hard', Page.execCallback);
-
-    // and ditch any files that have been added locally too
-    childProcess.exec('sudo git -C clean -df', Page.execCallback);
-
-    // now pull down the latest
-    childProcess.exec('sudo git pull', Page.execCallback);
-
-    // reset any changes that have been made locally
-    childProcess.exec('sudo git reset --hard', {cwd: "public"}, Page.execCallback);
-
-    // and ditch any files that have been added locally too
-    childProcess.exec('sudo git clean -df', {cwd: "public"}, Page.execCallback);
-
-    // now pull down the latest
-    childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', {cwd: "public"}, Page.execCallback);
-
-    // and npm install with --production
-    childProcess.exec('sudo npm install --production', Page.execCallback);
-
-    // and run tsc
-    // childProcess.exec('sudo tsc', Page.execCallback);
-  }
-
-  public static execCallback(err, stdout, stderr) {
-    Page.showExecInfo(stdout, stderr);
-  }
-
-  public static showExecInfo(stdout, stderr){
-    if(stdout){
-      console.info(stdout);
-    }
-    if(stderr){
-      console.info(stderr);
-    }
+    Upgrade.start(request.body.pusher,request.body.repository);
   }
 
   /**
