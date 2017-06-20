@@ -48,7 +48,7 @@ export class Page {
     childProcess.exec('git -C /home/projects/backAppFramework pull -f', this.execCallback);
 
     // and npm install with --production
-    childProcess.exec('npm -C /home/projects/backAppFramework install', this.execCallback);
+    childProcess.exec('npm -C /home/projects/backAppFramework install --production', this.execCallback);
 
     // and run tsc
     childProcess.exec('tsc', this.execCallback);
