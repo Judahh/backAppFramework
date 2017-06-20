@@ -86,7 +86,7 @@ export class Page {
     this.router.get('/refresh', this.refresh);
     this.router.post('/', this.getPage);
     // this.router.post('/:id', this.getOne);
-    this.router.post('/refresh', this.refresh);
+    this.router.post('/refresh', this.refresh); 
   }
 
 }
