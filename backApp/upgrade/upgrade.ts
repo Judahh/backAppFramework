@@ -8,6 +8,7 @@ export class Upgrade {
   public static start(pusher: any, repository: any) {
     console.log(pusher.name + " pushed to " + repository.name);
     console.log("Pulling code from Github...");
+    process.stdout.write('\x07');
 
     // reset any changes that have been made locally
     childProcess.exec('sudo git reset --hard', Upgrade.currentReset);
