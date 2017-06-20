@@ -61,7 +61,6 @@ export class Page {
 
     // and run tsc
     childProcess.exec('tsc', this.execCallback);
-
   }
 
   public execCallback(err, stdout, stderr) {
