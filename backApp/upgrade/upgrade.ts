@@ -61,6 +61,10 @@ export class Upgrade {
   public static install(err, stdout, stderr) {
     console.info("Install:"); 
     Upgrade.showInfo(stdout, stderr);
+
+    childProcess.exec('sudo npm start', null);
+
+    process.exit();
   }
 
   public static showInfo(stdout, stderr){
