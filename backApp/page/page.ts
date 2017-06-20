@@ -41,31 +41,24 @@ export class Page {
     console.info("Pulling code from Github...");
 
     // reset any changes that have been made locally
-    console.info("sudo git reset --hard");
     childProcess.exec('sudo git reset --hard', Page.execCallback);
 
     // and ditch any files that have been added locally too
-    console.info("sudo git -C clean -df");
     childProcess.exec('sudo git -C clean -df', Page.execCallback);
 
     // now pull down the latest
-    console.info("sudo git pull");
     childProcess.exec('sudo git pull', Page.execCallback);
 
     // reset any changes that have been made locally
-    console.info("sudo git -C public reset --hard");
-    childProcess.exec('sudo git -C public reset --hard', Page.execCallback);
+    childProcess.exec('sudo git reset --hard', {cwd: "public"}, Page.execCallback);
 
     // and ditch any files that have been added locally too
-    console.info("sudo git -C public clean -df");
-    childProcess.exec('sudo git -C public clean -df', Page.execCallback);
+    childProcess.exec('sudo git clean -df', {cwd: "public"}, Page.execCallback);
 
     // now pull down the latest
-    console.info("sudo git -C public pull master master");
-    childProcess.exec('sudo git -C public pull master master', Page.execCallback);
+    childProcess.exec('sudo git pull master master', {cwd: "public"}, Page.execCallback);
 
     // and npm install with --production
-    console.info("sudo npm install --production");
     childProcess.exec('sudo npm install --production', Page.execCallback);
 
     // and run tsc
