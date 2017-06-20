@@ -72,7 +72,7 @@ export class Upgrade {
       console.log(stdout);
     }
     if (stderr) {
-      console.log(stderr); 
+      console.log(stderr);
     }
   }
 }
