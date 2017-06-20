@@ -47,7 +47,7 @@ export class Page {
     childProcess.exec('sudo git -C /home/projects/backAppFramework clean -df', Page.execCallback);
 
     // now pull down the latest
-    childProcess.exec('sudo git -C /home/projects/backAppFramework pull -f master', Page.execCallback);
+    childProcess.exec('sudo git -C /home/projects/backAppFramework pull', Page.execCallback);
 
     // reset any changes that have been made locally
     childProcess.exec('sudo git -C /home/projects/backAppFramework/public reset --hard', Page.execCallback);
@@ -56,13 +56,13 @@ export class Page {
     childProcess.exec('sudo git -C /home/projects/backAppFramework/public clean -df', Page.execCallback);
 
     // now pull down the latest
-    childProcess.exec('sudo git -C /home/projects/backAppFramework/public pull -f master', Page.execCallback);
+    childProcess.exec('sudo git -C /home/projects/backAppFramework/public pull', Page.execCallback);
 
     // and npm install with --production
     childProcess.exec('sudo npm -C /home/projects/backAppFramework install --production', Page.execCallback);
 
     // and run tsc
-    childProcess.exec('sudo tsc', Page.execCallback);
+    // childProcess.exec('sudo tsc', Page.execCallback);
   }
 
   public static execCallback(err, stdout, stderr) {
