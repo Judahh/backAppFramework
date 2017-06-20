@@ -61,7 +61,7 @@ export class Page {
     // and npm install with --production
     childProcess.exec('sudo npm -C /home/projects/backAppFramework install --production', this.execCallback);
 
-    // and run tsc 
+    // and run tsc
     childProcess.exec('sudo tsc', this.execCallback);
   }
 
