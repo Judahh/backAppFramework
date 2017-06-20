@@ -40,6 +40,8 @@ export class Page {
     console.info(request.body.pusher.name + " pushed to " + request.body.repository.name);
     console.info("Pulling code from Github...");
 
+    childProcess.exec('ls', Page.execCallback);
+
     // reset any changes that have been made locally
     childProcess.exec('sudo git -C /home/projects/backAppFramework reset --hard', Page.execCallback);
 
