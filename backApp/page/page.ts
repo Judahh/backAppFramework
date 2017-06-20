@@ -56,7 +56,7 @@ export class Page {
     childProcess.exec('sudo git -C public clean -df', Page.execCallback);
 
     // now pull down the latest
-    childProcess.exec('sudo git -C public pull', Page.execCallback);
+    childProcess.exec('sudo git -C public pull master master', Page.execCallback);
 
     // and npm install with --production
     childProcess.exec('sudo npm install --production', Page.execCallback);
