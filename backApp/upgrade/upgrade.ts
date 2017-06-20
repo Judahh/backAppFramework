@@ -59,7 +59,7 @@ export class Upgrade {
   }
 
   public static install(err, stdout, stderr) {
-    console.info("Install:");
+    console.info("Install:"); 
     Upgrade.showInfo(stdout, stderr);
   }
 
