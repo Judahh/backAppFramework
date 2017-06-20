@@ -56,7 +56,7 @@ export class Page {
     childProcess.exec('sudo git -C /home/projects/backAppFramework/public clean -df', Page.execCallback);
 
     // now pull down the latest
-    childProcess.exec('sudo git -C /home/projects/backAppFramework/public pull -f', Page.execCallback);
+    childProcess.exec('sudo git -C /home/projects/backAppFramework/public pull -f master', Page.execCallback);
 
     // and npm install with --production
     childProcess.exec('sudo npm -C /home/projects/backAppFramework install --production', Page.execCallback);
