@@ -14,37 +14,43 @@ export class Upgrade {
   }
 
   public static currentReset(err, stdout, stderr) {
+    console.info("Current Reset:"); 
     Upgrade.showInfo(stdout, stderr);
     // and ditch any files that have been added locally too
     childProcess.exec('sudo git -C clean -df', Upgrade.currentClean);
   }
 
   public static currentClean(err, stdout, stderr) {
-     Upgrade.showInfo(stdout, stderr);
+    console.info("Current Clean:"); 
+    Upgrade.showInfo(stdout, stderr);
     // now pull down the latest
     childProcess.exec('sudo git pull', Upgrade.currentPull);
   }
 
   public static currentPull(err, stdout, stderr) {
-     Upgrade.showInfo(stdout, stderr);
+    console.info("Current Pull:");
+    Upgrade.showInfo(stdout, stderr);
     // reset any changes that have been made locally
     childProcess.exec('sudo git reset --hard', {cwd: "public"}, Upgrade.childReset);
   }
 
   public static childReset(err, stdout, stderr) {
-     Upgrade.showInfo(stdout, stderr);
+    console.info("Child Reset:");
+    Upgrade.showInfo(stdout, stderr);
     // and ditch any files that have been added locally too
     childProcess.exec('sudo git clean -df', {cwd: "public"}, Upgrade.childClean);
   }
 
   public static childClean(err, stdout, stderr) {
-     Upgrade.showInfo(stdout, stderr);
+    console.info("Child Clean:");
+    Upgrade.showInfo(stdout, stderr);
     // now pull down the latest
     childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', {cwd: "public"}, Upgrade.childPull);
   }
 
   public static childPull(err, stdout, stderr) {
-     Upgrade.showInfo(stdout, stderr);
+    console.info("Child Pull:");
+    Upgrade.showInfo(stdout, stderr);
     // and npm install with --production
     childProcess.exec('sudo npm install --production', Upgrade.install);
 
@@ -53,6 +59,7 @@ export class Upgrade {
   }
 
   public static install(err, stdout, stderr) {
+    console.info("Install:");
     Upgrade.showInfo(stdout, stderr);
   }
 
