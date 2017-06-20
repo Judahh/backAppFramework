@@ -40,28 +40,26 @@ export class Page {
     console.info(request.body.pusher.name + " pushed to " + request.body.repository.name);
     console.info("Pulling code from Github...");
 
-    childProcess.exec('ls', Page.execCallback);
-
     // reset any changes that have been made locally
-    childProcess.exec('sudo git -C /home/projects/backAppFramework reset --hard', Page.execCallback);
+    childProcess.exec('sudo git reset --hard', Page.execCallback);
 
     // and ditch any files that have been added locally too
-    childProcess.exec('sudo git -C /home/projects/backAppFramework clean -df', Page.execCallback);
+    childProcess.exec('sudo git -C clean -df', Page.execCallback);
 
     // now pull down the latest
-    childProcess.exec('sudo git -C /home/projects/backAppFramework pull', Page.execCallback);
+    childProcess.exec('sudo git pull', Page.execCallback);
 
     // reset any changes that have been made locally
-    childProcess.exec('sudo git -C /home/projects/backAppFramework/public reset --hard', Page.execCallback);
+    childProcess.exec('sudo git -C public reset --hard', Page.execCallback);
 
     // and ditch any files that have been added locally too
-    childProcess.exec('sudo git -C /home/projects/backAppFramework/public clean -df', Page.execCallback);
+    childProcess.exec('sudo git -C public clean -df', Page.execCallback);
 
     // now pull down the latest
-    childProcess.exec('sudo git -C /home/projects/backAppFramework/public pull', Page.execCallback);
+    childProcess.exec('sudo git -C public pull', Page.execCallback);
 
     // and npm install with --production
-    childProcess.exec('sudo npm -C /home/projects/backAppFramework install --production', Page.execCallback);
+    childProcess.exec('sudo npm install --production', Page.execCallback);
 
     // and run tsc
     // childProcess.exec('sudo tsc', Page.execCallback);
