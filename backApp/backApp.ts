@@ -58,6 +58,7 @@ export class BackApp {
   public run() {
       // this.express.listen(this.port);  
       console.info('ts-express:server');
+      console.info('NEW');
       this.server = http.createServer(this.express);
       this.server.listen(this.port);
       this.server.on('error', () => this.onError);
