@@ -69,7 +69,7 @@ export class Upgrade {
 
   public static showInfo(stdout, stderr) {
     if (stdout) {
-      console.info(stdout);
+      console.info(stdout); 
     }
     if (stderr) {
       console.info(stderr);
