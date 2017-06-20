@@ -39,28 +39,28 @@ export class Page {
     console.info("Pulling code from Github...");
 
     // reset any changes that have been made locally
-    childProcess.exec('git -C /home/projects/backAppFramework reset --hard', this.execCallback);
+    childProcess.exec('sudo git -C /home/projects/backAppFramework reset --hard', this.execCallback);
 
     // and ditch any files that have been added locally too
-    childProcess.exec('git -C /home/projects/backAppFramework clean -df', this.execCallback);
+    childProcess.exec('sudo git -C /home/projects/backAppFramework clean -df', this.execCallback);
 
     // now pull down the latest
-    childProcess.exec('git -C /home/projects/backAppFramework pull -f', this.execCallback);
+    childProcess.exec('sudo git -C /home/projects/backAppFramework pull -f', this.execCallback);
 
     // reset any changes that have been made locally
-    childProcess.exec('git -C /home/projects/backAppFramework/public reset --hard', this.execCallback);
+    childProcess.exec('sudo git -C /home/projects/backAppFramework/public reset --hard', this.execCallback);
 
     // and ditch any files that have been added locally too
-    childProcess.exec('git -C /home/projects/backAppFramework/public clean -df', this.execCallback);
+    childProcess.exec('sudo git -C /home/projects/backAppFramework/public clean -df', this.execCallback);
 
     // now pull down the latest
-    childProcess.exec('git -C /home/projects/backAppFramework/public pull -f', this.execCallback);
+    childProcess.exec('sudo git -C /home/projects/backAppFramework/public pull -f', this.execCallback);
 
     // and npm install with --production
-    childProcess.exec('npm -C /home/projects/backAppFramework install --production', this.execCallback);
+    childProcess.exec('sudo npm -C /home/projects/backAppFramework install --production', this.execCallback);
 
     // and run tsc
-    childProcess.exec('tsc', this.execCallback);
+    childProcess.exec('sudo tsc', this.execCallback);
   }
 
   public execCallback(err, stdout, stderr) {
@@ -82,7 +82,6 @@ export class Page {
     this.router.post('/', this.getPage);
     this.router.post('/:id', this.getOne);
     this.router.post('/refresh', this.refresh);
-    console.info('TESTE2');
   }
 
 }
