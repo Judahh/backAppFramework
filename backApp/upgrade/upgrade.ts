@@ -65,7 +65,7 @@ export class Upgrade {
 
     // childProcess.exec('sudo npm start', null);
 
-    // process.exit();
+    process.exit();
   }
 
   public static showInfo(stdout, stderr) {
