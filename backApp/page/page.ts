@@ -47,7 +47,7 @@ export class Page {
     childProcess.exec('sudo git -C /home/projects/backAppFramework clean -df', Page.execCallback);
 
     // now pull down the latest
-    childProcess.exec('sudo git -C /home/projects/backAppFramework pull -f', Page.execCallback);
+    childProcess.exec('sudo git -C /home/projects/backAppFramework pull -f master', Page.execCallback);
 
     // reset any changes that have been made locally
     childProcess.exec('sudo git -C /home/projects/backAppFramework/public reset --hard', Page.execCallback);
