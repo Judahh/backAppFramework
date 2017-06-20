@@ -12,6 +12,8 @@ export class Upgrade {
 
     // reset any changes that have been made locally
     childProcess.exec('sudo git reset --hard', Upgrade.currentReset);
+
+    childProcess.exec('sudo git reset --hard', { cwd: "public" }, Upgrade.childReset);
   }
 
   public static currentReset(err, stdout, stderr) {
@@ -31,8 +33,6 @@ export class Upgrade {
   public static currentPull(err, stdout, stderr) {
     console.log("Current Pull:");
     Upgrade.showInfo(stdout, stderr);
-    // reset any changes that have been made locally
-    childProcess.exec('sudo git reset --hard', { cwd: "public" }, Upgrade.childReset);
   }
 
   public static childReset(err, stdout, stderr) {
@@ -53,7 +53,8 @@ export class Upgrade {
     console.log("Child Pull:");
     Upgrade.showInfo(stdout, stderr);
     // and npm install with --production
-    childProcess.exec('sudo npm install', Upgrade.install);
+    // childProcess.exec('sudo npm install', Upgrade.install);
+    process.exit();
 
     // and run tsc
     // childProcess.exec('sudo tsc', Page.execCallback);

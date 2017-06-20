@@ -20,7 +20,7 @@
     "start": "tsc && tsc --p public/tsconfig.json && concurrently \"npm run tsc:w\" \"nodemon server.js\"",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
-    "prestart": "sudo npm install nodemon -g",
+    "prestart": "sudo npm install nodemon -g && sudo npm install",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
     "lite": "lite-server",
