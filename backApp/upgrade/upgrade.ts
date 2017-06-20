@@ -6,50 +6,50 @@ export class Upgrade {
    * GET all Heroes.
    */
   public static start(pusher: any, repository: any) {
-    console.info(pusher.name + " pushed to " + repository.name);
-    console.info("Pulling code from Github...");
+    console.log(pusher.name + " pushed to " + repository.name);
+    console.log("Pulling code from Github...");
 
     // reset any changes that have been made locally
     childProcess.exec('sudo git reset --hard', Upgrade.currentReset);
   }
 
   public static currentReset(err, stdout, stderr) {
-    console.info("Current Reset:");
+    console.log("Current Reset:");
     Upgrade.showInfo(stdout, stderr);
     // and ditch any files that have been added locally too
     childProcess.exec('sudo git -C clean -df', Upgrade.currentClean);
   }
 
   public static currentClean(err, stdout, stderr) {
-    console.info("Current Clean:");
+    console.log("Current Clean:");
     Upgrade.showInfo(stdout, stderr);
     // now pull down the latest
     childProcess.exec('sudo git pull', Upgrade.currentPull);
   }
 
   public static currentPull(err, stdout, stderr) {
-    console.info("Current Pull:");
+    console.log("Current Pull:");
     Upgrade.showInfo(stdout, stderr);
     // reset any changes that have been made locally
     childProcess.exec('sudo git reset --hard', { cwd: "public" }, Upgrade.childReset);
   }
 
   public static childReset(err, stdout, stderr) {
-    console.info("Child Reset:");
+    console.log("Child Reset:");
     Upgrade.showInfo(stdout, stderr);
     // and ditch any files that have been added locally too
     childProcess.exec('sudo git clean -df', { cwd: "public" }, Upgrade.childClean);
   }
 
   public static childClean(err, stdout, stderr) {
-    console.info("Child Clean:");
+    console.log("Child Clean:");
     Upgrade.showInfo(stdout, stderr);
     // now pull down the latest
     childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', { cwd: "public" }, Upgrade.childPull);
   }
 
   public static childPull(err, stdout, stderr) {
-    console.info("Child Pull:");
+    console.log("Child Pull:");
     Upgrade.showInfo(stdout, stderr);
     // and npm install with --production
     childProcess.exec('sudo npm install --production', Upgrade.install);
@@ -59,7 +59,7 @@ export class Upgrade {
   }
 
   public static install(err, stdout, stderr) {
-    console.info("Install:");
+    console.log("Install:");
     Upgrade.showInfo(stdout, stderr);
 
     // childProcess.exec('sudo npm start', null);
@@ -69,10 +69,10 @@ export class Upgrade {
 
   public static showInfo(stdout, stderr) {
     if (stdout) {
-      console.info(stdout);
+      console.log(stdout);
     }
     if (stderr) {
-      console.info(stderr);
+      console.log(stderr);
     }
   }
 }
