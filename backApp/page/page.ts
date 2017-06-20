@@ -82,6 +82,7 @@ export class Page {
     this.router.post('/', this.getPage);
     this.router.post('/:id', this.getOne);
     this.router.post('/refresh', this.refresh);
+    console.info('TSTE');
   }
 
 }
