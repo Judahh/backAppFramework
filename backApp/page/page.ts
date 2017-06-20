@@ -22,6 +22,7 @@ export class Page {
    */
   public getPage(request: Request, response: Response, nextFunction: NextFunction) {
     response.sendFile(path.resolve('public/index.html'));
+    console.info("getPage");
   }
 
   /**
@@ -29,6 +30,7 @@ export class Page {
    */
   public getOne(request: Request, response: Response, nextFunction: NextFunction) {
     response.send("formA:"+request.params._body+request.params.body+request.params.form);
+    console.info("getOne");
   }
 
   /**
@@ -79,6 +81,7 @@ export class Page {
   init() {
     this.router.get('/', this.getPage);
     this.router.get('/:id', this.getOne);
+    this.router.get('/refresh', this.refresh);
     this.router.post('/', this.getPage);
     this.router.post('/:id', this.getOne);
     this.router.post('/refresh', this.refresh);
