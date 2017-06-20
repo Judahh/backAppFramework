@@ -52,7 +52,7 @@ export class Upgrade {
     console.log("Child Pull:");
     Upgrade.showInfo(stdout, stderr);
     // and npm install with --production
-    childProcess.exec('sudo npm install --production', Upgrade.install);
+    childProcess.exec('sudo npm install', Upgrade.install);
 
     // and run tsc
     // childProcess.exec('sudo tsc', Page.execCallback);
