@@ -46,7 +46,7 @@ export class Terminal {
         "push"
       ],
       "config": {
-        "url": link,
+        "url": link+"/refresh",
         "content_type": "json"
       }
     }
