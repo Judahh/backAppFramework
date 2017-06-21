@@ -57,8 +57,8 @@ export class Terminal {
     var stringData = JSON.stringify(data);
 
     Terminal.token=process.env.TOKEN;
-    Terminal.token=Terminal.token.replace("-NTK-","");
-    console.log("token:"+Terminal.token);
+    var token=Terminal.token.replace("-NTK-","");
+    console.log("token:"+token);
 
     var options = {
       method: 'post',
@@ -66,7 +66,7 @@ export class Terminal {
       json: true,
       url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks',
       headers: {
-        'Authorization': 'token ' + Terminal.token,
+        'Authorization': 'token ' + token,
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
         'Content-Type': 'application/json.',
         'User-Agent': 'request'
@@ -93,15 +93,15 @@ export class Terminal {
 
     console.log("Deleting:"+Terminal.webhookID);
     Terminal.token=process.env.TOKEN;
-    Terminal.token=Terminal.token.replace("-NTK-","");
-    console.log("token:"+Terminal.token);
+    var token=Terminal.token.replace("-NTK-","");
+    console.log("token:"+token);
 
     var options = {
       method: 'delete',
       json: true,
       url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/'+Terminal.webhookID,
       headers: {
-        'Authorization': 'token ' + Terminal.token,
+        'Authorization': 'token ' + token,
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
         'Content-Type': 'application/json.',
         'User-Agent': 'request'
