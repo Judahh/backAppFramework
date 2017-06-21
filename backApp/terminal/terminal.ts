@@ -1,59 +1,73 @@
 import * as childProcess from 'child_process';
+import * as webhook from 'node-webhooks';
 
-export class Upgrade {
+export class Terminal {
 
   /**
    * GET all Heroes.
    */
-  public static start(pusher: any, repository: any) {
+  public static startNgrok() {
+    console.log("Starting ngrok...");
+    childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), { cwd: ".." }, Terminal.ngrok);
+  }
+
+  public static ngrok(err, stdout, stderr) {
+    console.log("ngrok:");
+    Terminal.showInfo(stdout, stderr);
+  }
+
+  /**
+   * GET all Heroes.
+   */
+  public static upgrade(pusher: any, repository: any) {
     console.log(pusher.name + " pushed to " + repository.name);
     console.log("Pulling code from Github...");
     process.stdout.write('\x07');
 
     // reset any changes that have been made locally
-    childProcess.exec('sudo git reset --hard', Upgrade.currentReset);
+    childProcess.exec('sudo git reset --hard', Terminal.currentReset);
 
-    childProcess.exec('sudo git reset --hard', { cwd: "public" }, Upgrade.childReset);
+    childProcess.exec('sudo git reset --hard', { cwd: "public" }, Terminal.childReset);
   }
 
   public static currentReset(err, stdout, stderr) {
     console.log("Current Reset:");
-    Upgrade.showInfo(stdout, stderr);
+    Terminal.showInfo(stdout, stderr);
     // and ditch any files that have been added locally too
-    childProcess.exec('sudo git -C clean -df', Upgrade.currentClean);
+    childProcess.exec('sudo git -C clean -df', Terminal.currentClean);
   }
 
   public static currentClean(err, stdout, stderr) {
     console.log("Current Clean:");
-    Upgrade.showInfo(stdout, stderr);
+    Terminal.showInfo(stdout, stderr);
     // now pull down the latest
-    childProcess.exec('sudo git pull', Upgrade.currentPull);
+    childProcess.exec('sudo git pull', Terminal.currentPull);
   }
 
   public static currentPull(err, stdout, stderr) {
     console.log("Current Pull:");
-    Upgrade.showInfo(stdout, stderr);
+    Terminal.showInfo(stdout, stderr);
   }
 
   public static childReset(err, stdout, stderr) {
     console.log("Child Reset:");
-    Upgrade.showInfo(stdout, stderr);
+    Terminal.showInfo(stdout, stderr);
     // and ditch any files that have been added locally too
-    childProcess.exec('sudo git clean -df', { cwd: "public" }, Upgrade.childClean);
+    childProcess.exec('sudo git clean -df', { cwd: "public" }, Terminal.childClean);
   }
 
   public static childClean(err, stdout, stderr) {
     console.log("Child Clean:");
-    Upgrade.showInfo(stdout, stderr);
+    Terminal.showInfo(stdout, stderr);
     // now pull down the latest
-    childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', { cwd: "public" }, Upgrade.childPull);
+    childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', { cwd: "public" }, Terminal.childPull);
   }
 
   public static childPull(err, stdout, stderr) {
     console.log("Child Pull:");
-    Upgrade.showInfo(stdout, stderr);
+    Terminal.showInfo(stdout, stderr);
     // and npm install with --production
-    // childProcess.exec('sudo npm install', Upgrade.install);
+    // childProcess.exec('sudo npm install', Terminal.install);
     // process.exit();
 
     // and run tsc
@@ -62,7 +76,7 @@ export class Upgrade {
 
   public static install(err, stdout, stderr) {
     console.log("Install:");
-    Upgrade.showInfo(stdout, stderr);
+    Terminal.showInfo(stdout, stderr);
 
     // childProcess.exec('sudo npm start', null);
 

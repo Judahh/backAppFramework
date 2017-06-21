@@ -1,6 +1,6 @@
 import * as path from 'path';
 // import * as express from 'express';
-import Page from './page/page';
+import API from './aPI/aPI';
 import {Express, RequestHandler, Router, Request, Response, NextFunction} from 'express';
 import * as express from 'express';
 import * as logger from 'morgan';
@@ -52,7 +52,7 @@ export class BackApp {
     //     message: 'Hello World!'
     //   });
     // });
-    this.express.use('/', Page);
+    this.express.use('/', API);
   }
 
   public run() {

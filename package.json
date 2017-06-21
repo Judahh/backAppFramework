@@ -31,7 +31,6 @@
     "gulp": "gulp"
   },
   "dependencies": {
-
     "express": "4.15.3",
     "ntypescript": "1.201609302242.1",
     "typescript": "2.3.4",
@@ -39,10 +38,10 @@
     "body-parser": "^1.17.1",
     "morgan": "^1.8.1",
     "concurrently": "^3.4.0",
-
     "compression": "^1.6.2",
     "node-local-tunnel": "^0.1.8",
     "q": "^1.5.0",
+    "node-webhooks" : "1.1.32",
 
     "@types/node": "^7.0.18",
     "@types/body-parser": "1.16.3",

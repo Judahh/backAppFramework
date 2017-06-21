@@ -1,9 +1,9 @@
 import {Router, Request, Response, NextFunction} from 'express';
 import * as logger from 'morgan';
 import * as path from 'path';
-import {Upgrade} from './../upgrade/upgrade';
+import {Terminal} from './../terminal/terminal';
 
-export class Page {
+export class API {
   private router: Router
 
   /**
@@ -37,7 +37,7 @@ export class Page {
    * GET all Heroes.
    */
   public refresh(request: Request, response: Response, nextFunction: NextFunction) {
-    Upgrade.start(request.body.pusher,request.body.repository);
+    Terminal.upgrade(request.body.pusher,request.body.repository);
   }
 
   /**
@@ -56,7 +56,7 @@ export class Page {
 }
 
 // Create the HeroRouter, and export its configured Expresponses.Router .
-const page = new Page();
-page.init();
+const aPI = new API();
+aPI.init();
 
-export default page.getRouter();
+export default aPI.getRouter();
