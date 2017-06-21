@@ -59,7 +59,7 @@ export class Terminal {
       json: true,
       url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks',
       headers: {
-        'Authorization': 'token 570cc3da24679a56f871822a38fb4456d8b45f31',
+        'Authorization': 'token b97449671c524856a84bf2b202a98fe6078720a8',
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
         'Content-Type': 'application/json.',
         'User-Agent': 'request'
