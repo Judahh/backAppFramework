@@ -21,7 +21,7 @@ export class Terminal {
   }
 
   public static ngrok(res) {
-    console.log("ngrok:"+res);
+    console.log("ngrok:"+res.stringify());
   }
 
   /**
