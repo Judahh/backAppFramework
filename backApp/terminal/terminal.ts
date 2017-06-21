@@ -105,6 +105,7 @@ export class Terminal {
     console.log("Pulling code from Github...");
     process.stdout.write('\x07');
 
+    Terminal.removeWebhook();
     // reset any changes that have been made locally
     childProcess.exec('sudo git reset --hard', Terminal.currentReset);
 
@@ -149,17 +150,10 @@ export class Terminal {
     Terminal.showInfo(stdout, stderr);
     // and npm install with --production
     // childProcess.exec('sudo npm install', Terminal.install);
-    // process.exit();
+    process.exit();
 
     // and run tsc
     // childProcess.exec('sudo tsc', Page.execCallback);
-  }
-
-  public static install(err, stdout, stderr) {
-    console.log("Install:");
-    Terminal.showInfo(stdout, stderr);
-    Terminal.removeWebhook();
-    process.exit();
   }
 
   public static showInfo(stdout, stderr) {
