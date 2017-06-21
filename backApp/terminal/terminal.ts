@@ -56,10 +56,10 @@ export class Terminal {
       'Content-Type': 'application/json',
       'Authorization': 'Basic ZmYwZTZjYTlkYzgyNWY1NDAwYzAwOTM0NGJhNmNmNGY2ODA2OTYyOTo=',
       'username': 'ff0e6ca9dc825f5400c009344ba6cf4f68069629',
-      'body': data,
       'path': '/Judahh/backAppFramework'
     };
-    http.request(httpOptions, Terminal.webhook);
+    var request=http.request(httpOptions, Terminal.webhook);
+    request.write(data);
   }
 
   public static webhook(response:http.ClientResponse) {//
