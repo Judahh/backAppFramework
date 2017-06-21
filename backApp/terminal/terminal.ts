@@ -1,5 +1,5 @@
 import * as childProcess from 'child_process';
-import * as http from 'https';
+import * as http from 'http';
 // import * as webhook from 'node-webhooks';
 // var Webhook = require('node-webhooks');
 // import * as Webhook from 'node-webhooks';
@@ -56,8 +56,8 @@ export class Terminal {
       method: 'POST',
       host: 'api.github.com',
       path: '/repos/Judahh/backAppFramework/hooks',
+      Authorization: 'token b5eb39de252adf40155f8da0b9aa34d3b9fc3934',
       headers: {
-        'Authorization': 'token b5eb39de252adf40155f8da0b9aa34d3b9fc3934',
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
         'Content-Type': 'application/json.'
       }
