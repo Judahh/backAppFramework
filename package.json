@@ -37,6 +37,7 @@
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
     "concurrently": "^3.4.0",
+    "dotenv": "^4.0.0",
     "express": "4.15.3",
     "morgan": "^1.8.2",
     "node-local-tunnel": "^0.1.8",

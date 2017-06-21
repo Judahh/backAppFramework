@@ -1,5 +1,6 @@
 import * as express from 'express';
 import {BackApp} from './backApp/backApp';
+require('dotenv').config();
 
 let backApp = new BackApp(express(), normalizePort(process.env.PORT || 3000));
 backApp.run();
