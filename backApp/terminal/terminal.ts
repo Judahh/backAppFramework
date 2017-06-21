@@ -53,24 +53,13 @@ export class Terminal {
 
     var stringData=JSON.stringify(data);
 
-    var httpOptions={ 
-      method: 'POST',
-      host: 'api.github.com',
-      path: '/repos/Judahh/backAppFramework/hooks',
-      Authorization: 'token b5eb39de252adf40155f8da0b9aa34d3b9fc3934',
-      headers: {
-        'Content-Length': Buffer.byteLength(stringData, 'utf8'),
-        'Content-Type': 'application/json.'
-      }
-    };
-
     var options={ 
       method: 'post',
       body: data,
       json: true,
       url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks',
       headers: {
-        'Authorization': 'token b5eb39de252adf40155f8da0b9aa34d3b9fc3934',
+        'Authorization': 'token 3e8670422df6790599eb7d0831bae46d515a8db6',
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
         'Content-Type': 'application/json.',
         'User-Agent': 'request'
@@ -78,35 +67,11 @@ export class Terminal {
     };
 
     request(options, Terminal.webhook);
-    // var request=http.request(httpOptions, Terminal.webhook);
-    // request.write(stringData);
-    // request.end();
-    // request.on('data', Terminal.webhookData);
-    // request.on('error', Terminal.webhookData);
   }
 
-  public static webhook(error,response,body) {//
-    // console.log("A:");
-    // console.log("statusCode: ", response.statusCode);
-    // console.log("statusMessage: ", response.statusMessage);
-    // console.log("URL: ", response.url);
-    // response.on('data', Terminal.webhookData);
-    // response.on('error', Terminal.webhookData);
+  public static webhook(error,response,body) {
     console.log('Error :', error);
     console.log(' Body :', body)
-  }
-
-  public static webhookData(data) {
-    console.log("webhookData:"+data);
-
-    // var jSONdata = JSON.parse(data.toString());
-    // for (var index = 0; index < jSONdata.tunnels.length; index++) {
-    //   var element = jSONdata.tunnels[index];
-    //   if(element.public_url.indexOf("https") != -1){
-    //     console.log(index + ":" + element.public_url);
-    //     Terminal.createWebhook(element.public_url);
-    //   }
-    // }
   }
 
   /**
