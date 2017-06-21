@@ -72,12 +72,29 @@ export class Terminal {
   }
 
   public static removeWebhook() {
+    var data = {
+      "name": "web",
+      "active": true,
+      "events": [
+        "push"
+      ],
+      "config": {
+        "url": Terminal.webhookLink,
+        "content_type": "json"
+      }
+    }
+
+    var stringData = JSON.stringify(data);
+
+    console.log("Deleting:"+Terminal.webhookID);
+
     var options = {
       method: 'delete',
       json: true,
       url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/'+Terminal.webhookID,
       headers: {
         'Authorization': 'token ' + process.env.TOKEN,
+        'Content-Length': Buffer.byteLength(stringData, 'utf8'),
         'Content-Type': 'application/json.',
         'User-Agent': 'request'
       }
