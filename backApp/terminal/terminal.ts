@@ -13,8 +13,9 @@ export class Terminal {
     childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), Terminal.ngrok);
     var httpOptions={ 
       'connection': 'application/json.',
-      'host': 'localhost/api/tunnels',
-      'port': 4040
+      'host': 'localhost',
+      'port': 4040,
+      'path': '/api/tunnels'
     };
     http.get(httpOptions, Terminal.ngrok);
   }
