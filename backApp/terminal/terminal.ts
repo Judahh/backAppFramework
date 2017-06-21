@@ -104,7 +104,10 @@ export class Terminal {
   }
 
   public static webhook(error, response, body) {
-    Terminal.webhookID=body.id;
+    if(body.id!=undefined){
+      Terminal.webhookID=body.id;
+      console.log("webhookID:"+Terminal.webhookID);
+    }
     console.log('Error :', error);
     console.log('Body :', body);
   }
@@ -166,7 +169,7 @@ export class Terminal {
   public static childPull(err, stdout, stderr) {
     console.log("Child Pull:");
     Terminal.showInfo(stdout, stderr);
-    
+
     // and npm install with --production
     // childProcess.exec('sudo npm install', Terminal.install);
     // process.exit();
