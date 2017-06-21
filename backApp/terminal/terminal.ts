@@ -54,12 +54,10 @@ export class Terminal {
       'method': 'POST',
       'host': 'https://api.github.com',
       'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(JSON.stringify(data)),
+      'body': data,
       'path': '/Judahh/backAppFramework'
     };
     var request=http.request(httpOptions, Terminal.webhook);
-    request.write(data);
-    request.end();
   }
 
   public static webhook(response:http.ClientResponse) {//
