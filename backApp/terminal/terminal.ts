@@ -78,6 +78,7 @@ export class Terminal {
       url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/'+Terminal.webhookID,
       headers: {
         'Authorization': 'token ' + process.env.TOKEN,
+        'Content-Type': 'application/json.',
         'User-Agent': 'request'
       }
     };
@@ -148,7 +149,7 @@ export class Terminal {
   public static childPull(err, stdout, stderr) {
     console.log("Child Pull:");
     Terminal.showInfo(stdout, stderr);
-    
+
     // and npm install with --production
     // childProcess.exec('sudo npm install', Terminal.install);
     // process.exit();
