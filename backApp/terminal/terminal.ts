@@ -14,7 +14,10 @@ export class Terminal {
    */
   public static startNgrok() {
     console.log("Starting ngrok...");
-    childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), Terminal.ngrok);
+    childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), Terminal.getNgrok);
+  }
+
+  public static getNgrok(response) {//
     var httpOptions = {
       'connection': 'application/json.',
       'host': 'localhost',
@@ -38,6 +41,9 @@ export class Terminal {
         Terminal.webhookLink= element.public_url + "/refresh";
         Terminal.createWebhook();
       }
+    }
+    if(jSONdata.tunnels.length==0){
+      Terminal.getNgrok(null);
     }
   }
 
