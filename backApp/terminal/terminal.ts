@@ -34,7 +34,7 @@ export class Terminal {
       var element = jSONdata.tunnels[index];
       if (element.public_url.indexOf("https") != -1) {
         console.log(index + ":" + element.public_url);
-        Terminal.webhookLink= element.public_url + "/refresh";
+        Terminal.webhookLink= element.public_url.replace("-NTK-","") + "/refresh";
         Terminal.createWebhook();
       }
     }
