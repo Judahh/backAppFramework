@@ -31,8 +31,13 @@ export class Terminal {
       var element = jSONdata.tunnels[index];
       if(element.public_url.indexOf("https") != -1){
         console.log(index + ":" + element.public_url);
+        Terminal.createWebhook(element.public_url);
       }
     }
+  }
+
+  public static createWebhook(link:String){
+    
   }
 
   /**
