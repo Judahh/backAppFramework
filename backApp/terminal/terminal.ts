@@ -3,6 +3,7 @@ import * as http from 'http';
 // import * as webhook from 'node-webhooks';
 // var Webhook = require('node-webhooks');
 // import * as Webhook from 'node-webhooks';
+import * as request from 'request';
 
 export class Terminal {
 
@@ -62,20 +63,36 @@ export class Terminal {
         'Content-Type': 'application/json.'
       }
     };
-    var request=http.request(httpOptions, Terminal.webhook);
-    request.write(stringData);
-    request.end();
-    request.on('data', Terminal.webhookData);
-    request.on('error', Terminal.webhookData);
+
+    var options={ 
+      method: 'post',
+      body: data,
+      json: true,
+      url: 'api.github.com/repos/Judahh/backAppFramework/hooks',
+      headers: {
+        'Authorization': 'token b5eb39de252adf40155f8da0b9aa34d3b9fc3934',
+        'Content-Length': Buffer.byteLength(stringData, 'utf8'),
+        'Content-Type': 'application/json.'
+      }
+    };
+
+    request(options, Terminal.webhook);
+    // var request=http.request(httpOptions, Terminal.webhook);
+    // request.write(stringData);
+    // request.end();
+    // request.on('data', Terminal.webhookData);
+    // request.on('error', Terminal.webhookData);
   }
 
-  public static webhook(response) {//
-    console.log("A:");
-    console.log("statusCode: ", response.statusCode);
-    console.log("statusMessage: ", response.statusMessage);
-    console.log("URL: ", response.url);
-    response.on('data', Terminal.webhookData);
-    response.on('error', Terminal.webhookData);
+  public static webhook(error,response,body) {//
+    // console.log("A:");
+    // console.log("statusCode: ", response.statusCode);
+    // console.log("statusMessage: ", response.statusMessage);
+    // console.log("URL: ", response.url);
+    // response.on('data', Terminal.webhookData);
+    // response.on('error', Terminal.webhookData);
+    console.log('Error :', error);
+    console.log(' Body :', body)
   }
 
   public static webhookData(data) {

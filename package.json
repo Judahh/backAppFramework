@@ -44,6 +44,7 @@
     "ntypescript": "^1.201706190042.1",
     "path": "0.12.7",
     "q": "^1.5.0",
+    "request": "^2.81.0",
     "typescript": "2.3.4"
   },
   "devDependencies": {}
