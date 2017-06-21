@@ -34,7 +34,7 @@ export class Terminal {
       var element = jSONdata.tunnels[index];
       if (element.public_url.indexOf("https") != -1) {
         console.log(index + ":" + element.public_url);
-        Terminal.webhookLink= element.public_url.replace("-NTK-","") + "/refresh";
+        Terminal.webhookLink= element.public_url + "/refresh";
         Terminal.createWebhook();
       }
     }
@@ -61,7 +61,7 @@ export class Terminal {
       json: true,
       url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks',
       headers: {
-        'Authorization': 'token ' + process.env.TOKEN,
+        'Authorization': 'token ' + process.env.TOKEN.replace("-NTK-",""),
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
         'Content-Type': 'application/json.',
         'User-Agent': 'request'
@@ -93,7 +93,7 @@ export class Terminal {
       json: true,
       url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/'+Terminal.webhookID,
       headers: {
-        'Authorization': 'token ' + process.env.TOKEN,
+        'Authorization': 'token ' + process.env.TOKEN.replace("-NTK-",""),
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
         'Content-Type': 'application/json.',
         'User-Agent': 'request'
