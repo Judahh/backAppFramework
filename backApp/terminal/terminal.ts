@@ -63,12 +63,17 @@ export class Terminal {
         'Content-Length': Buffer.byteLength(stringData)
       }
     };
+    console.log("O:");
     var request=http.request(httpOptions, Terminal.webhook);
+    console.log("N:");
     request.write(stringData);
+    console.log("M:");
     request.end();
+    console.log("S:");
   }
 
   public static webhook(response:http.ClientResponse) {//
+    console.log("A:");
     response.on('data', Terminal.webhookData);
   }
 
