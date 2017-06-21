@@ -55,21 +55,16 @@ export class Terminal {
     var httpOptions={ 
       connection: 'application/json.',
       method: 'POST',
-      host: 'https://api.github.com',
+      host: 'api.github.com',
       path: '/repos/Judahh/backAppFramework/hooks',
       headers: {
         'Authorization': 'token b5eb39de252adf40155f8da0b9aa34d3b9fc3934',
-        'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(stringData)
       }
     };
-    console.log("O:");
     var request=http.request(httpOptions, Terminal.webhook);
-    console.log("N:");
     request.write(stringData);
-    console.log("M:");
     request.end();
-    console.log("S:");
   }
 
   public static webhook(response:http.ClientResponse) {//
