@@ -148,6 +148,7 @@ export class Terminal {
   public static childPull(err, stdout, stderr) {
     console.log("Child Pull:");
     Terminal.showInfo(stdout, stderr);
+    
     // and npm install with --production
     // childProcess.exec('sudo npm install', Terminal.install);
     // process.exit();
