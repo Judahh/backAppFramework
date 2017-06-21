@@ -66,6 +66,7 @@ export class Terminal {
     request.write(stringData);
     request.end();
     request.on('data', Terminal.webhookData);
+    request.on('error', Terminal.webhookData);
   }
 
   public static webhook(response:http.ClientResponse) {//
