@@ -25,7 +25,11 @@ export class Terminal {
   }
 
   public static ngrokData(data) {
-    console.log("ngrok:" + data.tunnels[0].public_url);
+    console.log("ngrok:");
+    for (var index = 0; index < data.tunnels.length; index++) {
+      var element = data.tunnels[index];
+      console.log(index + ":" + element.public_url);
+    }
   }
 
   /**
