@@ -1,7 +1,8 @@
 import * as childProcess from 'child_process';
 import * as http from 'http';
 // import * as webhook from 'node-webhooks';
-var webhook = require('node-webhooks');
+// var Webhook = require('node-webhooks');
+import * as Webhook from 'node-webhooks';
 
 export class Terminal {
 
@@ -37,7 +38,9 @@ export class Terminal {
   }
 
   public static createWebhook(link:String){
-
+    var webHook = new Webhook({
+        db: './webHooksDB.json', // json file that store webhook URLs
+    })
   }
 
   /**
