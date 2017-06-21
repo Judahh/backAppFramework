@@ -1,6 +1,3 @@
-class Util {
-}
-
 interface Array<T> {
   type: any;
   getType(): string;
