@@ -120,9 +120,11 @@ export class Terminal {
   }
 
   public static webhook(error, response, body) {
-    if(body.id!=undefined){
-      Terminal.webhookID=body.id;
-      console.log("webhookID:"+Terminal.webhookID);
+    if(body!=undefined){
+      if(body.id!=undefined){
+        Terminal.webhookID=body.id;
+        console.log("webhookID:"+Terminal.webhookID);
+      }
     }
     console.log('Error :', error);
     console.log('Body :', body);
