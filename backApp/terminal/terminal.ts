@@ -32,6 +32,7 @@ export class Terminal {
         console.log(index + ":" + element.public_url);
       }
     }
+    console.log("full:"+data);
   }
 
   /**
