@@ -73,6 +73,7 @@ export class Terminal {
     console.log("A:");
     console.log("statusCode: ", response.statusCode);
     console.log("statusMessage: ", response.statusMessage);
+    console.log("URL: ", response.url);
     response.on('data', Terminal.webhookData);
     response.on('error', Terminal.webhookData);
   }
