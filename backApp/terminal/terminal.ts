@@ -21,7 +21,7 @@ export class Terminal {
     http.get(httpOptions, Terminal.ngrok);
   }
 
-  public static ngrok(response:http.ClientResponse) {//
+  public static ngrok(response) {//
     response.on('data', Terminal.ngrokData);
   }
 
@@ -69,7 +69,7 @@ export class Terminal {
     request.on('error', Terminal.webhookData);
   }
 
-  public static webhook(response:http.ClientResponse) {//
+  public static webhook(response) {//
     console.log("A:");
     console.log("statusCode: ", response.statusCode);
     console.log("statusMessage: ", response.statusMessage);
