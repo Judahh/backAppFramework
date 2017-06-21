@@ -59,7 +59,7 @@ export class Terminal {
       json: true,
       url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks',
       headers: {
-        'Authorization': 'token fdbac8570fd6946cc2abd023f3472cd480d7430f',
+        'Authorization': 'token 570cc3da24679a56f871822a38fb4456d8b45f31',
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
         'Content-Type': 'application/json.',
         'User-Agent': 'request'
@@ -71,7 +71,7 @@ export class Terminal {
 
   public static webhook(error,response,body) {
     console.log('Error :', error);
-    console.log(' Body :', body)
+    console.log('Body :', body)
   }
 
   /**
