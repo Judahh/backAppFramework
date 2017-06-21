@@ -1,7 +1,7 @@
 import * as childProcess from 'child_process';
 import * as http from 'http';
 // import * as webhook from 'node-webhooks';
-var webhook = require('github-webhook-handler');
+var webhook = require('node-webhooks');
 
 export class Terminal {
 
