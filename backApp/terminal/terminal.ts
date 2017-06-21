@@ -59,12 +59,13 @@ export class Terminal {
       path: '/repos/Judahh/backAppFramework/hooks',
       headers: {
         'Authorization': 'token b5eb39de252adf40155f8da0b9aa34d3b9fc3934',
-        'Content-Length': Buffer.byteLength(stringData)
+        'Content-Length': Buffer.byteLength(stringData, 'utf8')
       }
     };
     var request=http.request(httpOptions, Terminal.webhook);
     request.write(stringData);
     request.end();
+    request.on('data', Terminal.webhookData);
   }
 
   public static webhook(response:http.ClientResponse) {//
