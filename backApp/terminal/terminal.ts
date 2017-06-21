@@ -10,13 +10,17 @@ export class Terminal {
    */
   public static startNgrok() {
     console.log("Starting ngrok...");
-    childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), { cwd: ".." }, Terminal.ngrok);
-    
+    childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), Terminal.ngrok);
+    var httpOptions={ 
+      'connection': 'application/json.',
+      'host': 'localhost/api/tunnels',
+      'port': 4040
+    };
+    http.get(httpOptions, Terminal.ngrok);
   }
 
-  public static ngrok(err, stdout, stderr) {
-    console.log("ngrok:");
-    Terminal.showInfo(stdout, stderr);
+  public static ngrok(res) {
+    console.log("ngrok:"+res);
   }
 
   /**
