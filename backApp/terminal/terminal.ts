@@ -172,7 +172,7 @@ export class Terminal {
 
     // and npm install with --production
     // childProcess.exec('sudo npm install', Terminal.install);
-    // process.exit();
+    process.exit();
     // and run tsc
     // childProcess.exec('sudo tsc', Page.execCallback);
   }
