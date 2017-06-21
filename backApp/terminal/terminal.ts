@@ -54,6 +54,8 @@ export class Terminal {
       'method': 'POST',
       'host': 'https://api.github.com',
       'Content-Type': 'application/json',
+      'Authorization': 'Basic ZmYwZTZjYTlkYzgyNWY1NDAwYzAwOTM0NGJhNmNmNGY2ODA2OTYyOTo=',
+      'username': 'ff0e6ca9dc825f5400c009344ba6cf4f68069629',
       'body': data,
       'path': '/Judahh/backAppFramework'
     };
