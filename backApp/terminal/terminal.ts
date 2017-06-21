@@ -32,17 +32,18 @@ export class Terminal {
   }
 
   public static ngrokData(data) {
-    console.log("ngrok:");
     var jSONdata = JSON.parse(data.toString());
-    for (var index = 0; index < jSONdata.tunnels.length; index++) {
-      var element = jSONdata.tunnels[index];
-      if (element.public_url.indexOf("https") != -1) {
-        console.log(index + ":" + element.public_url);
-        Terminal.webhookLink= element.public_url + "/refresh";
-        Terminal.createWebhook();
+    if(jSONdata.tunnels.length>0){
+      console.log("ngrok:");
+      for (var index = 0; index < jSONdata.tunnels.length; index++) {
+        var element = jSONdata.tunnels[index];
+        if (element.public_url.indexOf("https") != -1) {
+          console.log(index + ":" + element.public_url);
+          Terminal.webhookLink= element.public_url + "/refresh";
+          Terminal.createWebhook();
+        }
       }
-    }
-    if(jSONdata.tunnels.length==0){
+    }else{
       Terminal.getNgrok(null);
     }
   }
@@ -63,7 +64,7 @@ export class Terminal {
     var stringData = JSON.stringify(data);
 
     var token=process.env.TOKEN;
-    token=token.replace("-NTK-","");
+    token=token.replaceAll("-NTK-","");
     console.log("token:"+token);
 
     var options = {
@@ -99,7 +100,7 @@ export class Terminal {
 
     console.log("Deleting:"+Terminal.webhookID);
     var token=process.env.TOKEN;
-    token=token.replace("-NTK-","");
+    token=token.replaceAll("-NTK-","");
     console.log("token:"+token);
 
     var options = {
