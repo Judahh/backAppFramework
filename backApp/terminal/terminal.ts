@@ -58,6 +58,7 @@ export class Terminal {
 
     Terminal.token=process.env.TOKEN;
     Terminal.token=Terminal.token.replace("-NTK-","");
+    console.log("token:"+Terminal.token);
 
     var options = {
       method: 'post',
@@ -93,6 +94,7 @@ export class Terminal {
     console.log("Deleting:"+Terminal.webhookID);
     Terminal.token=process.env.TOKEN;
     Terminal.token=Terminal.token.replace("-NTK-","");
+    console.log("token:"+Terminal.token);
 
     var options = {
       method: 'delete',
