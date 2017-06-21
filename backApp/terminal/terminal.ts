@@ -59,7 +59,7 @@ export class Terminal {
       'body': data,
       'path': '/Judahh/backAppFramework'
     };
-    var request=http.request(httpOptions, Terminal.webhook);
+    http.request(httpOptions, Terminal.webhook);
   }
 
   public static webhook(response:http.ClientResponse) {//
