@@ -50,16 +50,18 @@ export class Terminal {
       }
     }
     var httpOptions={ 
-      'connection': 'application/json.',
-      'method': 'POST',
-      'host': 'https://api.github.com',
-      'Content-Type': 'application/json',
-      'Authorization': 'Basic ZmYwZTZjYTlkYzgyNWY1NDAwYzAwOTM0NGJhNmNmNGY2ODA2OTYyOTo=',
-      'username': 'ff0e6ca9dc825f5400c009344ba6cf4f68069629',
-      'path': '/Judahh/backAppFramework'
+      connection: 'application/json.',
+      method: 'POST',
+      host: 'https://api.github.com',
+      path: '/repos/Judahh/backAppFramework/hooks',
+      headers: {
+        'Authorization': 'token b5eb39de252adf40155f8da0b9aa34d3b9fc3934',
+        'Content-Type': 'application/json'
+      }
     };
     var request=http.request(httpOptions, Terminal.webhook);
     request.write(data);
+    request.end();
   }
 
   public static webhook(response:http.ClientResponse) {//
