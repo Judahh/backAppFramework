@@ -20,8 +20,8 @@ export class Terminal {
     http.get(httpOptions, Terminal.ngrok);
   }
 
-  public static ngrok(res) {
-    console.log("ngrok:"+JSON.stringify(res));
+  public static ngrok(response) {
+    console.log("ngrok:"+response.tunnels.public_url);
   }
 
   /**
