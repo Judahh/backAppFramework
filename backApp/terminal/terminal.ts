@@ -20,7 +20,7 @@ export class Terminal {
     http.get(httpOptions, Terminal.ngrok);
   }
 
-  public static ngrok(response:http.ClientResponse) {tunnels[0].public_url
+  public static ngrok(response:http.ClientResponse) {//tunnels[0].public_url
     response.on('data', Terminal.ngrokData);
   }
 
