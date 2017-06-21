@@ -14,6 +14,7 @@ export class Terminal {
   public static startNgrok() {
     console.log("Starting ngrok...");
     childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), Terminal.getNgrok);
+    Terminal.getNgrok(null);
   }
 
   public static getNgrok(response) {//
