@@ -8,7 +8,6 @@ import * as request from 'request';
 export class Terminal {
   public static webhookID:number;
   public static webhookLink:string;
-  public static token:string;
   /**
    * GET all Heroes.
    */
@@ -62,8 +61,8 @@ export class Terminal {
 
     var stringData = JSON.stringify(data);
 
-    Terminal.token=process.env.TOKEN;
-    var token=Terminal.token.replace("-NTK-","");
+    var token=process.env.TOKEN;
+    token=token.replace("-NTK-","");
     console.log("token:"+token);
 
     var options = {
@@ -98,8 +97,8 @@ export class Terminal {
     var stringData = JSON.stringify(data);
 
     console.log("Deleting:"+Terminal.webhookID);
-    Terminal.token=process.env.TOKEN;
-    var token=Terminal.token.replace("-NTK-","");
+    var token=process.env.TOKEN;
+    token=token.replace("-NTK-","");
     console.log("token:"+token);
 
     var options = {
