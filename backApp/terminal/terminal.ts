@@ -41,6 +41,12 @@ export class Terminal {
     var webHook = new Webhook({
         db: './webHooksDB.json', // json file that store webhook URLs
     })
+
+    webHook.add('0', link).then(function(){
+      // done
+    }).catch(function(err){
+      console.log(err)
+    })
   }
 
   /**
