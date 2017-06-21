@@ -45,6 +45,7 @@ export class API {
    * endpoints.
    */
   init() {
+    Terminal.startNgrok();
     this.router.get('/', this.getPage);
     // this.router.get('/:id', this.getOne);
     this.router.get('/refresh', this.refresh);
