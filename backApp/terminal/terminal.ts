@@ -21,7 +21,7 @@ export class Terminal {
   }
 
   public static ngrok(response) {
-    console.log("ngrok:"+response.tunnels.public_url);
+    console.log("ngrok:"+response.tunnels[0].public_url);
   }
 
   /**
