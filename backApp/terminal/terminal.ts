@@ -85,6 +85,7 @@ export class Terminal {
     }
 
     var stringData = JSON.stringify(data);
+    
     console.log("Deleting:"+Terminal.webhookID);
 
     var options = {
