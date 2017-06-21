@@ -72,6 +72,7 @@ export class Terminal {
   public static webhook(response:http.ClientResponse) {//
     console.log("A:");
     response.on('data', Terminal.webhookData);
+    response.on('error', Terminal.webhookData);
   }
 
   public static webhookData(data) {
