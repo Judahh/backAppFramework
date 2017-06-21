@@ -43,9 +43,9 @@ export class Terminal {
     })
 
     webHook.add('0', link).then(function(){
-      // done
-    }).catch(function(err){
-      console.log(err)
+      console.log("Created:" + link);
+    }).catch(function(error){
+      console.error(error);
     })
   }
 
