@@ -6,14 +6,15 @@ import * as http from 'http';
 import * as request from 'request';
 
 export class Terminal {
-
+  public static webhookID:number;
+  public static webhookLink:string;
   /**
    * GET all Heroes.
    */
   public static startNgrok() {
     console.log("Starting ngrok...");
     childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), Terminal.ngrok);
-    var httpOptions={ 
+    var httpOptions = {
       'connection': 'application/json.',
       'host': 'localhost',
       'port': 4040,
@@ -31,35 +32,36 @@ export class Terminal {
     var jSONdata = JSON.parse(data.toString());
     for (var index = 0; index < jSONdata.tunnels.length; index++) {
       var element = jSONdata.tunnels[index];
-      if(element.public_url.indexOf("https") != -1){
+      if (element.public_url.indexOf("https") != -1) {
         console.log(index + ":" + element.public_url);
-        Terminal.createWebhook(element.public_url);
+        Terminal.webhookLink= element.public_url + "/refresh";
+        Terminal.createWebhook();
       }
     }
   }
 
-  public static createWebhook(link:String){
-    var data={
+  public static createWebhook() {
+    var data = {
       "name": "web",
       "active": true,
       "events": [
         "push"
       ],
       "config": {
-        "url": link+"/refresh",
+        "url": Terminal.webhookLink,
         "content_type": "json"
       }
     }
 
-    var stringData=JSON.stringify(data);
+    var stringData = JSON.stringify(data);
 
-    var options={ 
+    var options = {
       method: 'post',
       body: data,
       json: true,
       url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks',
       headers: {
-        'Authorization': 'token '+process.env.TOKEN,
+        'Authorization': 'token ' + process.env.TOKEN,
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
         'Content-Type': 'application/json.',
         'User-Agent': 'request'
@@ -69,19 +71,34 @@ export class Terminal {
     request(options, Terminal.webhook);
   }
 
-  public static webhook(error,response,body) {
+  public static removeWebhook() {
+    var options = {
+      method: 'delete',
+      json: true,
+      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/'+Terminal.webhookID,
+      headers: {
+        'Authorization': 'token ' + process.env.TOKEN,
+        'User-Agent': 'request'
+      }
+    };
+
+    request(options, Terminal.webhook);
+  }
+
+  public static webhook(error, response, body) {
+    Terminal.webhookID=body.id;
     console.log('Error :', error);
-    console.log('Body :', body)
+    console.log('Body :', body);
   }
 
   /**
    * GET all Heroes.
    */
   public static upgrade(pusher: any, repository: any) {
-    if(pusher!=undefined){
+    if (pusher != undefined) {
       console.log(pusher.name + " pushed to " + repository.name);
-    }else{
-      if(repository!=undefined){
+    } else {
+      if (repository != undefined) {
         console.log(repository.name + " pushed");
       }
     }
@@ -143,7 +160,7 @@ export class Terminal {
     Terminal.showInfo(stdout, stderr);
 
     // childProcess.exec('sudo npm start', null);
-
+    Terminal.removeWebhook();
     process.exit();
   }
 
