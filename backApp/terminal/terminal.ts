@@ -26,9 +26,10 @@ export class Terminal {
 
   public static ngrokData(data) {
     console.log("ngrok:");
-    if(data["tunnels"]!=undefined){
-      for (var index = 0; index < data["tunnels"].length; index++) {
-        var element = data["tunnels"][index];
+    var jSONdata = JSON.parse(data);
+    if(jSONdata["tunnels"]!=undefined){
+      for (var index = 0; index < jSONdata["tunnels"].length; index++) {
+        var element = jSONdata["tunnels"][index];
         console.log(index + ":" + element.public_url);
       }
     }
