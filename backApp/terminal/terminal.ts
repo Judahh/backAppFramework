@@ -72,7 +72,8 @@ export class Terminal {
       headers: {
         'Authorization': 'token b5eb39de252adf40155f8da0b9aa34d3b9fc3934',
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
-        'Content-Type': 'application/json.'
+        'Content-Type': 'application/json.',
+        'User-Agent': 'request'
       }
     };
 
