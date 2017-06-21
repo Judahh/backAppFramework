@@ -158,8 +158,6 @@ export class Terminal {
   public static install(err, stdout, stderr) {
     console.log("Install:");
     Terminal.showInfo(stdout, stderr);
-
-    // childProcess.exec('sudo npm start', null);
     Terminal.removeWebhook();
     process.exit();
   }
