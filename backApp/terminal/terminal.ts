@@ -1,4 +1,5 @@
 import * as childProcess from 'child_process';
+import * as http from 'http';
 // import * as webhook from 'node-webhooks';
 // let webhook = require('node-webhooks');
 
@@ -10,6 +11,7 @@ export class Terminal {
   public static startNgrok() {
     console.log("Starting ngrok...");
     childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), { cwd: ".." }, Terminal.ngrok);
+    
   }
 
   public static ngrok(err, stdout, stderr) {
