@@ -2,7 +2,7 @@ import * as childProcess from 'child_process';
 import * as http from 'http';
 // import * as webhook from 'node-webhooks';
 // var Webhook = require('node-webhooks');
-import * as Webhook from 'node-webhooks';
+// import * as Webhook from 'node-webhooks';
 
 export class Terminal {
 
@@ -38,15 +38,45 @@ export class Terminal {
   }
 
   public static createWebhook(link:String){
-    var webHook = new Webhook({
-        db: './webHooksDB.json', // json file that store webhook URLs
-    })
+    var data={
+      "name": "web",
+      "active": true,
+      "events": [
+        "push"
+      ],
+      "config": {
+        "url": link,
+        "content_type": "json"
+      }
+    }
+    var httpOptions={ 
+      'connection': 'application/json.',
+      'method': 'POST',
+      'host': 'https://api.github.com',
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(JSON.stringify(data)),
+      'path': '/Judahh/backAppFramework'
+    };
+    var request=http.request(httpOptions, Terminal.webhook);
+    request.write(data);
+    request.end();
+  }
 
-    webHook.add('0', link).then(function(){
-      console.log("Created:" + link);
-    }).catch(function(error){
-      console.error(error);
-    })
+  public static webhook(response:http.ClientResponse) {//
+    response.on('data', Terminal.webhookData);
+  }
+
+  public static webhookData(data) {
+    console.log("webhookData:"+data);
+
+    // var jSONdata = JSON.parse(data.toString());
+    // for (var index = 0; index < jSONdata.tunnels.length; index++) {
+    //   var element = jSONdata.tunnels[index];
+    //   if(element.public_url.indexOf("https") != -1){
+    //     console.log(index + ":" + element.public_url);
+    //     Terminal.createWebhook(element.public_url);
+    //   }
+    // }
   }
 
   /**
