@@ -78,7 +78,13 @@ export class Terminal {
    * GET all Heroes.
    */
   public static upgrade(pusher: any, repository: any) {
-    console.log(pusher.name + " pushed to " + repository.name);
+    if(pusher!=undefined){
+      console.log(pusher.name + " pushed to " + repository.name);
+    }else{
+      if(repository!=undefined){
+        console.log(repository.name + " pushed");
+      }
+    }
     console.log("Pulling code from Github...");
     process.stdout.write('\x07');
 
