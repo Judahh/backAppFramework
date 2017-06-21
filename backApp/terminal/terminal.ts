@@ -49,6 +49,9 @@ export class Terminal {
         "content_type": "json"
       }
     }
+
+    var stringData=JSON.stringify(data);
+
     var httpOptions={ 
       connection: 'application/json.',
       method: 'POST',
@@ -56,11 +59,12 @@ export class Terminal {
       path: '/repos/Judahh/backAppFramework/hooks',
       headers: {
         'Authorization': 'token b5eb39de252adf40155f8da0b9aa34d3b9fc3934',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(stringData)
       }
     };
     var request=http.request(httpOptions, Terminal.webhook);
-    request.write(data);
+    request.write(stringData);
     request.end();
   }
 
