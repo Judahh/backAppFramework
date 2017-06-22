@@ -27,7 +27,7 @@ export class Terminal {
     };
     var options = {
       method: 'get',
-      url: 'http://localhost/api/tunnels:4040',
+      url: 'http://127.0.0.1:4040/api/tunnels',
       headers: {
         'Content-Type': 'application/json.',
         'User-Agent': 'request'
