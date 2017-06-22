@@ -7,9 +7,8 @@ import { Webhook } from "./../webhook/webhook"
 import * as request from 'request';
 
 export class Terminal {
-  // public static webhook:Webhook;
+  public static webhook: Webhook;
   public static webhookID: number;
-  public static webhookLink: string;
 
   /**
    * GET all Heroes.
@@ -47,7 +46,8 @@ export class Terminal {
           var element = body.tunnels[index];
           if (element.public_url.indexOf("https") != -1) {
             console.log(index + ":" + element.public_url);
-            Terminal.webhookLink = element.public_url + "/refresh";
+            Terminal.webhook = new Webhook(element.public_url + "/refresh");
+            // Terminal.webhookLink = element.public_url + "/refresh";
             Terminal.createWebhook();
           }
         }
@@ -65,7 +65,7 @@ export class Terminal {
         "push"
       ],
       "config": {
-        "url": Terminal.webhookLink,
+        "url": Terminal.webhook.getLink(),
         "content_type": "json"
       }
     }
@@ -100,7 +100,7 @@ export class Terminal {
         "push"
       ],
       "config": {
-        "url": Terminal.webhookLink,
+        "url": Terminal.webhook.getLink(),
         "content_type": "json"
       }
     }
