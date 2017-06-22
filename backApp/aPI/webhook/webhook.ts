@@ -80,6 +80,7 @@ export class Webhook {
     if(error){
       console.error(error);
     }
+    console.log("ADD EVENT");
     var events = db.collection('events');
 
     events.insert(this.addOptions,()=>this.addEventResult);

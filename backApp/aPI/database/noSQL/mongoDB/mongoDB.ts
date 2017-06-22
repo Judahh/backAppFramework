@@ -20,6 +20,7 @@ export class MongoDB {
     }
 
     public connect(callback){
+        console.log("CONNECTING");
         MongoClient.connect("mongodb://"+this.host+":"+this.port+"/"+this.database, callback);
     }
 }
