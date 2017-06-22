@@ -60,5 +60,6 @@ export class API {
 
 // Create the HeroRouter, and export its configured Expresponses.Router .
 const aPI = new API();
+aPI.init();
 
 export default aPI.getRouter();
