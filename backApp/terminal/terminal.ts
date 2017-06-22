@@ -45,7 +45,7 @@ export class Terminal {
 
   public static ngrokData(error,response,body) {
     // var jSONdata = data;//JSON.parse(data.toString());
-    console.log("DATA:"+response+body);
+    console.log("DATA:"+error+response+body);
     // if(jSONdata.tunnels.length>0){
     //   console.log("ngrok:");
     //   for (var index = 0; index < jSONdata.tunnels.length; index++) {
