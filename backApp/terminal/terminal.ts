@@ -8,7 +8,6 @@ import * as request from 'request';
 
 export class Terminal {
   public static webhook: Webhook;
-  public static webhookID: number;
 
   /**
    * GET all Heroes.
@@ -107,7 +106,7 @@ export class Terminal {
 
     var stringData = JSON.stringify(data);
 
-    console.log("Deleting:" + Terminal.webhookID);
+    console.log("Deleting:" + Terminal.webhook.getId());
     var token = process.env.TOKEN;
     token = token.replaceAll("-NTK-", "");
     console.log("token:" + token);
@@ -115,7 +114,7 @@ export class Terminal {
     var options = {
       method: 'delete',
       json: true,
-      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/' + Terminal.webhookID,
+      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/' + Terminal.webhook.getId(),
       headers: {
         'Authorization': 'token ' + token,
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
@@ -134,8 +133,8 @@ export class Terminal {
     if (body != undefined) {
       console.log('Body :', body);
       if (body.id != undefined) {
-        Terminal.webhookID = body.id;
-        console.log("webhookID:" + Terminal.webhookID);
+        Terminal.webhook.setId(body.id);
+        console.log("webhookID:" + Terminal.webhook.getId());
       }
     }
   }
