@@ -35,7 +35,7 @@ export class Terminal {
   }
 
   public static ngrokData(error, response, body) {
-    console.log("Get ngrokData...");
+    // console.log("Get ngrokData...");
     if (error) {
       console.error('Error :', error);
       Terminal.startNgrok();
