@@ -4,6 +4,7 @@ export class Webhook {
   private data;
   private token;
   private addOptions;
+  private deleteOptions;
 
   constructor(link:string){
     this.link = link;
@@ -34,6 +35,18 @@ export class Webhook {
         'User-Agent': 'request'
       }
     };
+
+    this.deleteOptions = {
+      method: 'delete',
+      json: true,
+      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/' + this.id,
+      headers: {
+        'Authorization': 'token ' + this.token,
+        'Content-Length': Buffer.byteLength(stringData, 'utf8'),
+        'Content-Type': 'application/json.',
+        'User-Agent': 'request'
+      }
+    };
   }
 
   public getId(){
@@ -54,6 +67,10 @@ export class Webhook {
 
   public getAddOptions(){
       return this.addOptions;
+  }
+
+  public getDeleteOptions(){
+      return this.deleteOptions;
   }
 
   public setId(id:number){

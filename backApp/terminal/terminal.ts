@@ -61,24 +61,7 @@ export class Terminal {
   }
 
   public static removeWebhook() {
-    var stringData = JSON.stringify(Terminal.webhook.getData());
-
-    console.log("Deleting:" + Terminal.webhook.getId());
-    console.log("token:" + Terminal.webhook.getToken());
-
-    var options = {
-      method: 'delete',
-      json: true,
-      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/' + Terminal.webhook.getId(),
-      headers: {
-        'Authorization': 'token ' + Terminal.webhook.getToken(),
-        'Content-Length': Buffer.byteLength(stringData, 'utf8'),
-        'Content-Type': 'application/json.',
-        'User-Agent': 'request'
-      }
-    };
-
-    request(options, Terminal.webhookData);
+    request(Terminal.webhook.getDeleteOptions(), Terminal.webhookData);
   }
 
   public static webhookData(error, response, body) {
