@@ -50,6 +50,8 @@ export class Terminal {
   public static createWebhook() {
     var stringData = JSON.stringify(Terminal.webhook.getData());
 
+    console.log("getData:"+Terminal.webhook.getData());
+
     var token=process.env.TOKEN;
     token=token.replaceAll("-NTK-","");
     console.log("token:"+token);
