@@ -1,4 +1,4 @@
-import {EventDB} from "./../database/eventDB/eventDB";
+import { EventDB } from "./../database/eventDB/eventDB";
 import * as MongoDB from "mongodb";
 
 export class Webhook {
@@ -8,7 +8,7 @@ export class Webhook {
   private token;
   private addOptions;
   private deleteOptions;
-  private eventDB:EventDB;
+  private eventDB: EventDB;
 
   constructor(link: string) {
     this.link = link;
@@ -52,7 +52,7 @@ export class Webhook {
       }
     };
 
-    this.eventDB=new EventDB();
+    this.eventDB = new EventDB();
   }
 
   public getId() {
@@ -72,24 +72,28 @@ export class Webhook {
   }
 
   public getAddOptions() {
-    this.eventDB.connect(()=>this.addEvent);
+    // this.eventDB.connect(()=>this.addEvent);
+
+    this.eventDB.connect(function (err, db) {
+      console.log("ADD EVENT");
+    });
     return this.addOptions;
   }
 
-  public addEvent(error, db:MongoDB.Db){
-    if(error){
+  public addEvent(error, db: MongoDB.Db) {
+    if (error) {
       console.error(error);
     }
     console.log("ADD EVENT");
     var events = db.collection('events');
 
-    events.insert(this.addOptions,()=>this.addEventResult);
+    events.insert(this.addOptions, () => this.addEventResult);
   }
 
-  public addEventResult(error, result){
-    if(error){
+  public addEventResult(error, result) {
+    if (error) {
       console.error(error);
-    }else{
+    } else {
       console.log(result);
     }
   }
