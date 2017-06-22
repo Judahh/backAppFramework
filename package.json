@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@types/body-parser": "1.16.3",
+    "@types/mongodb": "^2.2.6",
     "@types/morgan": "^1.7.32",
     "@types/node": "^8.0.1",
     "@types/request": "^0.0.44",
@@ -40,6 +41,7 @@
     "concurrently": "^3.4.0",
     "dotenv": "^4.0.0",
     "express": "4.15.3",
+    "mongodb": "^2.2.29",
     "morgan": "^1.8.2",
     "node-local-tunnel": "^0.1.8",
     "node-webhooks": "^1.1.32",

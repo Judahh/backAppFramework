@@ -1,7 +1,7 @@
 import {Router, Request, Response, NextFunction} from 'express';
 import * as logger from 'morgan';
 import * as path from 'path';
-import {Terminal} from './../terminal/terminal';
+import {Terminal} from './terminal/terminal';
 
 export class API {
   private router: Router

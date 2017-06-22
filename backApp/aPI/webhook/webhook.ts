@@ -1,12 +1,16 @@
+import {EventDB} from "./../database/eventDB/eventDB";
+import * as MongoDB from "mongodb";
+
 export class Webhook {
-  private id:number;
-  private link:string;
+  private id: number;
+  private link: string;
   private data;
   private token;
   private addOptions;
   private deleteOptions;
+  private eventDB:EventDB;
 
-  constructor(link:string){
+  constructor(link: string) {
     this.link = link;
     this.token = process.env.TOKEN;
     this.token = this.token.replaceAll("-NTK-", "");
@@ -47,33 +51,53 @@ export class Webhook {
         'User-Agent': 'request'
       }
     };
+
+    this.eventDB=new EventDB();
   }
 
-  public getId(){
-      return this.id;
+  public getId() {
+    return this.id;
   }
 
-  public getLink(){
-      return this.link;
+  public getLink() {
+    return this.link;
   }
 
-  public getData(){
-      return this.data;
+  public getData() {
+    return this.data;
   }
 
-  public getToken(){
-      return this.token;
+  public getToken() {
+    return this.token;
   }
 
-  public getAddOptions(){
-      return this.addOptions;
+  public getAddOptions() {
+    this.eventDB.connect(()=>this.addEvent);
+    return this.addOptions;
   }
 
-  public getDeleteOptions(){
-      return this.deleteOptions;
+  public addEvent(error, db:MongoDB.Db){
+    if(error){
+      console.error(error);
+    }
+    var events = db.collection('events');
+
+    events.insert(this.addOptions,()=>this.addEventResult);
   }
 
-  public setId(id:number){
-    this.id=id;
+  public addEventResult(error, result){
+    if(error){
+      console.error(error);
+    }else{
+      console.log(result);
+    }
+  }
+
+  public getDeleteOptions() {
+    return this.deleteOptions;
+  }
+
+  public setId(id: number) {
+    this.id = id;
   }
 }
