@@ -1,21 +1,35 @@
 import * as childProcess from 'child_process';
 import "./../util/utils"
-import {Webhook} from "./../webhook/webhook"
+import { Webhook } from "./../webhook/webhook"
 // import * as webhook from 'node-webhooks';
 // var Webhook = require('node-webhooks');
 // import * as Webhook from 'node-webhooks';
 import * as request from 'request';
 
 export class Terminal {
+  private static instance: Terminal = new Terminal();
   // public static webhook:Webhook;
-  public webhookID:number;
-  public webhookLink:string;
+  public webhookID: number;
+  public webhookLink: string;
+
+  constructor() {
+    if (Terminal.instance) {
+      throw new Error("The Logger is a singleton class and cannot be created!");
+    }
+
+    Terminal.instance = this;
+  }
+
+  public static getInstance(): Terminal {
+    return Terminal.instance;
+  }
+
   /**
    * GET all Heroes.
    */
   public startNgrok() {
     console.log("Starting ngrok...");
-    childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), this.getNgrok);
+    childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), null);
     this.getNgrok();
   }
 
@@ -33,22 +47,24 @@ export class Terminal {
     request(options, this.ngrokData);
   }
 
-  public ngrokData(error,response,body) {
-    if(error){
+  public ngrokData(error, response, body) {
+    if (error) {
       console.error('Error :', error);
-    }
-    if(body.tunnels.length>0){
-      console.log("ngrok:");
-      for (var index = 0; index < body.tunnels.length; index++) {
-        var element = body.tunnels[index];
-        if (element.public_url.indexOf("https") != -1) {
-          console.log(index + ":" + element.public_url);
-          this.webhookLink= element.public_url + "/refresh";
-          this.createWebhook();
-        }
-      }
+      this.startNgrok();
     }else{
-      this.getNgrok();
+      if (body.tunnels.length > 0) {
+        console.log("ngrok:");
+        for (var index = 0; index < body.tunnels.length; index++) {
+          var element = body.tunnels[index];
+          if (element.public_url.indexOf("https") != -1) {
+            console.log(index + ":" + element.public_url);
+            this.webhookLink = element.public_url + "/refresh";
+            this.createWebhook();
+          }
+        }
+      } else {
+        this.getNgrok();
+      }
     }
   }
 
@@ -67,9 +83,9 @@ export class Terminal {
 
     var stringData = JSON.stringify(data);
 
-    var token=process.env.TOKEN;
-    token=token.replaceAll("-NTK-","");
-    console.log("token:"+token);
+    var token = process.env.TOKEN;
+    token = token.replaceAll("-NTK-", "");
+    console.log("token:" + token);
 
     var options = {
       method: 'post',
@@ -102,15 +118,15 @@ export class Terminal {
 
     var stringData = JSON.stringify(data);
 
-    console.log("Deleting:"+this.webhookID);
-    var token=process.env.TOKEN;
-    token=token.replaceAll("-NTK-","");
-    console.log("token:"+token);
+    console.log("Deleting:" + this.webhookID);
+    var token = process.env.TOKEN;
+    token = token.replaceAll("-NTK-", "");
+    console.log("token:" + token);
 
     var options = {
       method: 'delete',
       json: true,
-      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/'+this.webhookID,
+      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/' + this.webhookID,
       headers: {
         'Authorization': 'token ' + token,
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
@@ -123,14 +139,14 @@ export class Terminal {
   }
 
   public webhook(error, response, body) {
-    if(error){
+    if (error) {
       console.error('Error :', error);
     }
-    if(body!=undefined){
+    if (body != undefined) {
       console.log('Body :', body);
-      if(body.id!=undefined){
-        this.webhookID=body.id;
-        console.log("webhookID:"+this.webhookID);
+      if (body.id != undefined) {
+        this.webhookID = body.id;
+        console.log("webhookID:" + this.webhookID);
       }
     }
   }

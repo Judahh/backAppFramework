@@ -11,9 +11,11 @@ export class API {
    * Initialize the HeroRouter
    */
   constructor() {
+    this.terminal = Terminal.getInstance();
+
     this.router = Router();
     this.init();
-    this.terminal = new Terminal();
+    
 
     this.terminal.startNgrok();
   }
