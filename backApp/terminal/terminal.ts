@@ -35,15 +35,15 @@ export class Terminal {
       }
     };
 
-    request(options, Terminal.ngrokData);
+    request(options, Terminal.ngrok);
     // http.get(httpOptions, Terminal.ngrok);
   }
 
-  public static ngrok(response) {//
+  public static ngrok(error,response,body) {//
     response.on('data', Terminal.ngrokData);
   }
 
-  public static ngrokData(error,response,body) {
+  public static ngrokData(body) {
     // var jSONdata = data;//JSON.parse(data.toString());
     console.log("DATA:"+body);
     // if(jSONdata.tunnels.length>0){
