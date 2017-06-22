@@ -73,7 +73,7 @@ export class Webhook {
 
   public getAddOptions() {
     var self=this;
-    this.eventDB.connect((error, db)=>self.addEvent(self, error, db));
+    this.eventDB.connect(this.addEvent);
 
     // this.eventDB.connect(function (err, db) {
     //   console.log("ADD EVENT");
@@ -81,17 +81,17 @@ export class Webhook {
     return this.addOptions;
   }
 
-  public addEvent(self, error, db: MongoDB.Db) {
+  public addEvent = (error, db: MongoDB.Db) =>{
     if (error) {
       console.error(error);
     }
     console.log("ADD EVENT");
     var events = db.collection('events');
 
-    events.insert(self.addOptions, () => self.addEventResult);
+    events.insert(this.addOptions, this.addEventResult);
   }
 
-  public addEventResult(error, result) {
+  public addEventResult = (error, result) =>{
     console.log("RESULT EVENT");
     if (error) {
       console.error(error);
