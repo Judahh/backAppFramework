@@ -1,13 +1,10 @@
 import * as childProcess from 'child_process';
 import "./../util/utils"
-// import * as webhook from 'node-webhooks';
-// var Webhook = require('node-webhooks');
-// import * as Webhook from 'node-webhooks';
+import {Webhook} from "./../webhook/webhook"
 import * as request from 'request';
 
 export class Terminal {
-  public static webhookID:number;
-  public static webhookLink:string;
+  public static webhook:Webhook;
   /**
    * GET all Heroes.
    */
@@ -29,11 +26,9 @@ export class Terminal {
     };
 
     request(options, Terminal.ngrokData);
-    // http.get(httpOptions, Terminal.ngrok);
   }
 
   public static ngrokData(error,response,body) {
-    // var jSONdata = data;//JSON.parse(data.toString());
     if(error){
       console.error('Error :', error);
     }
@@ -43,7 +38,7 @@ export class Terminal {
         var element = body.tunnels[index];
         if (element.public_url.indexOf("https") != -1) {
           console.log(index + ":" + element.public_url);
-          Terminal.webhookLink= element.public_url + "/refresh";
+          Terminal.webhook=new Webhook(element.public_url + "/refresh");
           Terminal.createWebhook();
         }
       }
@@ -53,19 +48,7 @@ export class Terminal {
   }
 
   public static createWebhook() {
-    var data = {
-      "name": "web",
-      "active": true,
-      "events": [
-        "push"
-      ],
-      "config": {
-        "url": Terminal.webhookLink,
-        "content_type": "json"
-      }
-    }
-
-    var stringData = JSON.stringify(data);
+    var stringData = JSON.stringify(Terminal.webhook.getData());
 
     var token=process.env.TOKEN;
     token=token.replaceAll("-NTK-","");
@@ -73,7 +56,7 @@ export class Terminal {
 
     var options = {
       method: 'post',
-      body: data,
+      body: Terminal.webhook.getData(),
       json: true,
       url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks',
       headers: {
@@ -88,21 +71,10 @@ export class Terminal {
   }
 
   public static removeWebhook() {
-    var data = {
-      "name": "web",
-      "active": true,
-      "events": [
-        "push"
-      ],
-      "config": {
-        "url": Terminal.webhookLink,
-        "content_type": "json"
-      }
-    }
 
-    var stringData = JSON.stringify(data);
+    var stringData = JSON.stringify(Terminal.webhook.getData());
 
-    console.log("Deleting:"+Terminal.webhookID);
+    console.log("Deleting:"+Terminal.webhook.getId());
     var token=process.env.TOKEN;
     token=token.replaceAll("-NTK-","");
     console.log("token:"+token);
@@ -110,7 +82,7 @@ export class Terminal {
     var options = {
       method: 'delete',
       json: true,
-      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/'+Terminal.webhookID,
+      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/'+Terminal.webhook.getId(),
       headers: {
         'Authorization': 'token ' + token,
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
@@ -119,18 +91,18 @@ export class Terminal {
       }
     };
 
-    request(options, Terminal.webhook);
+    request(options, Terminal.webhookData);
   }
 
-  public static webhook(error, response, body) {
+  public static webhookData(error, response, body) {
     if(error){
       console.error('Error :', error);
     }
     if(body!=undefined){
       console.log('Body :', body);
       if(body.id!=undefined){
-        Terminal.webhookID=body.id;
-        console.log("webhookID:"+Terminal.webhookID);
+        Terminal.webhook.setId(body.id);
+        console.log("webhookID:"+Terminal.webhook.getId());
       }
     }
   }
