@@ -92,6 +92,7 @@ export class Webhook {
   }
 
   public addEventResult(error, result) {
+    console.log("RESULT EVENT");
     if (error) {
       console.error(error);
     } else {
