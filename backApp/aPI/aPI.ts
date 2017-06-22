@@ -12,11 +12,8 @@ export class API {
    */
   constructor() {
     this.terminal = Terminal.getInstance();
-
     this.router = Router();
     this.init();
-    
-
     this.terminal.startNgrok();
   }
 
@@ -63,6 +60,5 @@ export class API {
 
 // Create the HeroRouter, and export its configured Expresponses.Router .
 const aPI = new API();
-aPI.init();
 
 export default aPI.getRouter();
