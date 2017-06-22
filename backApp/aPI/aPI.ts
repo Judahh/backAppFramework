@@ -11,10 +11,9 @@ export class API {
    * Initialize the HeroRouter
    */
   constructor() {
-    this.terminal = new Terminal();
     this.router = Router();
     this.init();
-    this.terminal.startNgrok();
+    Terminal.startNgrok();
   }
 
   public getRouter(){
@@ -40,7 +39,7 @@ export class API {
    * GET all Heroes.
    */
   public refresh(request: Request, response: Response, nextFunction: NextFunction) {
-    this.terminal.upgrade(request.body.pusher,request.body.repository);
+    Terminal.upgrade(request.body.pusher,request.body.repository);
   }
 
   /**
