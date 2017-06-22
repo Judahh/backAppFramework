@@ -100,7 +100,7 @@ export class Terminal {
       }
     };
 
-    request(options, this.webhook);
+    request(options, this.webhookData);
   }
 
   public removeWebhook() {
@@ -135,10 +135,10 @@ export class Terminal {
       }
     };
 
-    request(options, this.webhook);
+    request(options, this.webhookData);
   }
 
-  public webhook(error, response, body) {
+  public webhookData(error, response, body) {
     if (error) {
       console.error('Error :', error);
     }
