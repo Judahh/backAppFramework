@@ -31,26 +31,22 @@ export class Terminal {
     // http.get(httpOptions, Terminal.ngrok);
   }
 
-  public static ngrok(response) {//
-    response.on('data', Terminal.ngrokData);
-  }
-
   public static ngrokData(error,response,body) {
     // var jSONdata = data;//JSON.parse(data.toString());
-    console.log("DATA:"+error+response+body);
-    // if(jSONdata.tunnels.length>0){
-    //   console.log("ngrok:");
-    //   for (var index = 0; index < jSONdata.tunnels.length; index++) {
-    //     var element = jSONdata.tunnels[index];
-    //     if (element.public_url.indexOf("https") != -1) {
-    //       console.log(index + ":" + element.public_url);
-    //       Terminal.webhookLink= element.public_url + "/refresh";
-    //       Terminal.createWebhook();
-    //     }
-    //   }
-    // }else{
-    //   Terminal.getNgrok(null);
-    // }
+    // console.log("DATA:"+error+response+body);
+    if(body.tunnels.length>0){
+      console.log("ngrok:");
+      for (var index = 0; index < body.tunnels.length; index++) {
+        var element = body.tunnels[index];
+        if (element.public_url.indexOf("https") != -1) {
+          console.log(index + ":" + element.public_url);
+          Terminal.webhookLink= element.public_url + "/refresh";
+          Terminal.createWebhook();
+        }
+      }
+    }else{
+      Terminal.getNgrok(null);
+    }
   }
 
   public static createWebhook() {
