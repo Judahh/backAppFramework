@@ -45,19 +45,20 @@ export class Terminal {
 
   public static ngrokData(error,response,data) {
     var jSONdata = data;//JSON.parse(data.toString());
-    if(jSONdata.tunnels.length>0){
-      console.log("ngrok:");
-      for (var index = 0; index < jSONdata.tunnels.length; index++) {
-        var element = jSONdata.tunnels[index];
-        if (element.public_url.indexOf("https") != -1) {
-          console.log(index + ":" + element.public_url);
-          Terminal.webhookLink= element.public_url + "/refresh";
-          Terminal.createWebhook();
-        }
-      }
-    }else{
-      Terminal.getNgrok(null);
-    }
+    console.log("DATA:"+data);
+    // if(jSONdata.tunnels.length>0){
+    //   console.log("ngrok:");
+    //   for (var index = 0; index < jSONdata.tunnels.length; index++) {
+    //     var element = jSONdata.tunnels[index];
+    //     if (element.public_url.indexOf("https") != -1) {
+    //       console.log(index + ":" + element.public_url);
+    //       Terminal.webhookLink= element.public_url + "/refresh";
+    //       Terminal.createWebhook();
+    //     }
+    //   }
+    // }else{
+    //   Terminal.getNgrok(null);
+    // }
   }
 
   public static createWebhook() {
