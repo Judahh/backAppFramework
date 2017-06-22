@@ -14,10 +14,10 @@ export class Terminal {
   public static startNgrok() {
     console.log("Starting ngrok...");
     childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), Terminal.getNgrok);
-    Terminal.getNgrok(null);
+    Terminal.getNgrok();
   }
 
-  public static getNgrok(response) {
+  public static getNgrok() {
     var options = {
       method: 'get',
       json: true,
@@ -37,7 +37,6 @@ export class Terminal {
     if(error){
       console.error('Error :', error);
     }
-    console.log("DATA:"+body);
     if(body.tunnels.length>0){
       console.log("ngrok:");
       for (var index = 0; index < body.tunnels.length; index++) {
@@ -49,7 +48,7 @@ export class Terminal {
         }
       }
     }else{
-      Terminal.getNgrok(null);
+      Terminal.getNgrok();
     }
   }
 
