@@ -20,6 +20,7 @@ export class Terminal {
 
   public static getNgrok(response) {//
     var httpOptions = {
+      method: 'get',
       'connection': 'application/json.',
       'host': 'localhost',
       'port': 4040,
@@ -35,7 +36,7 @@ export class Terminal {
       }
     };
 
-    request(options, Terminal.ngrokData);
+    request(httpOptions, Terminal.ngrokData);
     // http.get(httpOptions, Terminal.ngrok);
   }
 
