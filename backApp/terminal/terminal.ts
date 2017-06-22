@@ -69,6 +69,8 @@ export class Terminal {
       }
     };
 
+    console.log("Options:"+options);
+
     request(options, Terminal.webhook);
   }
 
