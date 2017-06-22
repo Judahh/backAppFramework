@@ -69,7 +69,7 @@ export class Terminal {
       }
     };
 
-    console.log("Options:"+options);
+    console.log("Options:"+JSON.stringify(options));
 
     request(options, Terminal.webhook);
   }
