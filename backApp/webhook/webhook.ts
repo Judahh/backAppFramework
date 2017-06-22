@@ -5,6 +5,7 @@ export class Webhook {
 
   constructor(link:string){
     this.link = link;
+    console.log("WEBHOOK LINK:"+this.link);
     this.data = {
       "name": "web",
       "active": true,
@@ -31,6 +32,7 @@ export class Webhook {
   }
 
   public setId(id:number){
+    console.log("WEBHOOK ID:"+this.id);
     this.id=id;
   }
 }
