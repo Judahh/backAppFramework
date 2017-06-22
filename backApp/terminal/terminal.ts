@@ -57,18 +57,6 @@ export class Terminal {
   }
 
   public static createWebhook() {
-    // var data = {
-    //   "name": "web",
-    //   "active": true,
-    //   "events": [
-    //     "push"
-    //   ],
-    //   "config": {
-    //     "url": Terminal.webhook.getLink(),
-    //     "content_type": "json"
-    //   }
-    // }
-
     var stringData = JSON.stringify(Terminal.webhook.getData());
 
     var token = process.env.TOKEN;
@@ -92,19 +80,7 @@ export class Terminal {
   }
 
   public static removeWebhook() {
-    var data = {
-      "name": "web",
-      "active": true,
-      "events": [
-        "push"
-      ],
-      "config": {
-        "url": Terminal.webhook.getLink(),
-        "content_type": "json"
-      }
-    }
-
-    var stringData = JSON.stringify(data);
+    var stringData = JSON.stringify(Terminal.webhook.getData());
 
     console.log("Deleting:" + Terminal.webhook.getId());
     var token = process.env.TOKEN;
