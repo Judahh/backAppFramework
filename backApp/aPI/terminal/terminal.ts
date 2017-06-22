@@ -1,5 +1,5 @@
 import * as childProcess from 'child_process';
-import "./../util/utils"
+import "./../../util/utils"
 import { Webhook } from "./../webhook/webhook"
 // import * as webhook from 'node-webhooks';
 // var Webhook = require('node-webhooks');
