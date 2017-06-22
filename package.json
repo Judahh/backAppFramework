@@ -34,6 +34,7 @@
     "@types/body-parser": "1.16.3",
     "@types/morgan": "^1.7.32",
     "@types/node": "^8.0.1",
+    "@types/request": "^0.0.44",
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
     "concurrently": "^3.4.0",

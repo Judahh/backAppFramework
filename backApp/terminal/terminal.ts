@@ -16,7 +16,8 @@ export class Terminal {
    */
   public startNgrok() {
     console.log("Starting ngrok...");
-    childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), () => this.getNgrok);
+    var self=this;
+    childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), self.getNgrok);
     this.getNgrok();
   }
 
@@ -31,8 +32,8 @@ export class Terminal {
         'User-Agent': 'request'
       }
     };
-
-    request(options, () => this.ngrokData);
+    var self=this;
+    request(options, self.ngrokData);
   }
 
   public ngrokData(error, response, body) {
@@ -40,7 +41,7 @@ export class Terminal {
     if (error) {
       console.error('Error :', error);
       this.startNgrok();
-    }else{
+    } else {
       if (body.tunnels.length > 0) {
         console.log("ngrok:");
         for (var index = 0; index < body.tunnels.length; index++) {
@@ -89,7 +90,8 @@ export class Terminal {
       }
     };
 
-    request(options, () => this.webhookData);
+    var self=this;
+    request(options, self.webhookData);
   }
 
   public removeWebhook() {
@@ -124,7 +126,8 @@ export class Terminal {
       }
     };
 
-    request(options, () => this.webhookData);
+    var self=this;
+    request(options, self.webhookData);
   }
 
   public webhookData(error, response, body) {
@@ -155,24 +158,27 @@ export class Terminal {
     process.stdout.write('\x07');
 
     this.removeWebhook();
+    var self=this;
     // reset any changes that have been made locally
-    childProcess.exec('sudo git reset --hard', () => this.currentReset);
+    childProcess.exec('sudo git reset --hard', self.currentReset);
 
-    childProcess.exec('sudo git reset --hard', { cwd: "public" }, () => this.childReset);
+    childProcess.exec('sudo git reset --hard', { cwd: "public" }, self.childReset);
   }
 
   public currentReset(err, stdout, stderr) {
     console.log("Current Reset:");
     this.showInfo(stdout, stderr);
+    var self=this;
     // and ditch any files that have been added locally too
-    childProcess.exec('sudo git -C clean -df', () => this.currentClean);
+    childProcess.exec('sudo git -C clean -df', self.currentClean);
   }
 
   public currentClean(err, stdout, stderr) {
     console.log("Current Clean:");
     this.showInfo(stdout, stderr);
+    var self=this;
     // now pull down the latest
-    childProcess.exec('sudo git pull', () => this.currentPull);
+    childProcess.exec('sudo git pull', self.currentPull);
   }
 
   public currentPull(err, stdout, stderr) {
@@ -183,23 +189,25 @@ export class Terminal {
   public childReset(err, stdout, stderr) {
     console.log("Child Reset:");
     this.showInfo(stdout, stderr);
+    var self=this;
     // and ditch any files that have been added locally too
-    childProcess.exec('sudo git clean -df', { cwd: "public" }, () => this.childClean);
+    childProcess.exec('sudo git clean -df', { cwd: "public" }, self.childClean);
   }
 
   public childClean(err, stdout, stderr) {
     console.log("Child Clean:");
     this.showInfo(stdout, stderr);
+    var self=this;
     // now pull down the latest
-    childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', { cwd: "public" }, () => this.childPull);
+    childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', { cwd: "public" }, self.childPull);
   }
 
   public childPull(err, stdout, stderr) {
     console.log("Child Pull:");
     this.showInfo(stdout, stderr);
-
+    var self=this;
     // and npm install with --production
-    // childProcess.exec('sudo npm install', () => this.install);
+    // childProcess.exec('sudo npm install', self.install);
     process.exit();
     // and run tsc
     // childProcess.exec('sudo tsc', Page.execCallback);
