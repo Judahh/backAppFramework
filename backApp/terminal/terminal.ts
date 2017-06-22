@@ -29,7 +29,7 @@ export class Terminal {
       method: 'get',
       json: true,
       url: 'http://localhost/api/tunnels',
-      port: '4040',
+      port: 4040,
       headers: {
         'Content-Type': 'application/json.',
         'User-Agent': 'request'
