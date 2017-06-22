@@ -7,22 +7,9 @@ import { Webhook } from "./../webhook/webhook"
 import * as request from 'request';
 
 export class Terminal {
-  private static instance: Terminal = new Terminal();
   // public static webhook:Webhook;
   public webhookID: number;
   public webhookLink: string;
-
-  constructor() {
-    if (Terminal.instance) {
-      throw new Error("The Logger is a singleton class and cannot be created!");
-    }
-
-    Terminal.instance = this;
-  }
-
-  public static getInstance(): Terminal {
-    return Terminal.instance;
-  }
 
   /**
    * GET all Heroes.
