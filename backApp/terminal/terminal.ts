@@ -20,6 +20,7 @@ export class Terminal {
   public static getNgrok(response) {
     var options = {
       method: 'get',
+      json: true,
       url: 'http://localhost:4040/api/tunnels',
       headers: {
         'Content-Type': 'application/json.',
