@@ -2,6 +2,7 @@ export class Webhook {
   private id:number;
   private link:string;
   private data;
+  private token;
 
   constructor(link:string){
     this.link = link;
@@ -17,6 +18,8 @@ export class Webhook {
         "content_type": "json"
       }
     }
+    this.token = process.env.TOKEN;
+    this.token = this.token.replaceAll("-NTK-", "");
   }
 
   public getId(){
@@ -29,6 +32,10 @@ export class Webhook {
 
   public getData(){
       return this.data;
+  }
+
+  public getToken(){
+      return this.token;
   }
 
   public setId(id:number){
