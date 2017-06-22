@@ -25,14 +25,25 @@ export class Terminal {
       'port': 4040,
       'path': '/api/tunnels'
     };
-    http.get(httpOptions, Terminal.ngrok);
+    var options = {
+      method: 'get',
+      json: true,
+      url: 'localhost/api/tunnels',
+      headers: {
+        'Content-Type': 'application/json.',
+        'User-Agent': 'request'
+      }
+    };
+
+    request(options, Terminal.ngrokData);
+    // http.get(httpOptions, Terminal.ngrok);
   }
 
   public static ngrok(response) {//
     response.on('data', Terminal.ngrokData);
   }
 
-  public static ngrokData(data) {
+  public static ngrokData(error,response,data) {
     var jSONdata = JSON.parse(data.toString());
     if(jSONdata.tunnels.length>0){
       console.log("ngrok:");
