@@ -74,10 +74,6 @@ export class Webhook {
   public getAddOptions() {
     var self=this;
     this.eventDB.connect(this.addEvent);
-
-    // this.eventDB.connect(function (err, db) {
-    //   console.log("ADD EVENT");
-    // });
     return this.addOptions;
   }
 
