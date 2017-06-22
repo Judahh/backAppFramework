@@ -58,7 +58,7 @@ export class Terminal {
 
     var options = {
       method: 'post',
-      body: Terminal.webhook.getData(),
+      body: stringData,
       json: true,
       url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks',
       headers: {
