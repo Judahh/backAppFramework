@@ -1,5 +1,4 @@
 import * as childProcess from 'child_process';
-import * as http from 'http';
 import "./../util/utils"
 // import * as webhook from 'node-webhooks';
 // var Webhook = require('node-webhooks');
@@ -18,13 +17,7 @@ export class Terminal {
     Terminal.getNgrok(null);
   }
 
-  public static getNgrok(response) {//
-    var httpOptions = {
-      'connection': 'application/json.',
-      'host': 'localhost',
-      'port': 4040,
-      'path': '/api/tunnels'
-    };
+  public static getNgrok(response) {
     var options = {
       method: 'get',
       url: 'http://localhost:4040/api/tunnels',
