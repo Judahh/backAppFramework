@@ -72,11 +72,12 @@ export class Webhook {
   }
 
   public getAddOptions() {
-    // this.eventDB.connect(()=>this.addEvent);
+    var self=this;
+    this.eventDB.connect(self.addEvent);
 
-    this.eventDB.connect(function (err, db) {
-      console.log("ADD EVENT");
-    });
+    // this.eventDB.connect(function (err, db) {
+    //   console.log("ADD EVENT");
+    // });
     return this.addOptions;
   }
 
