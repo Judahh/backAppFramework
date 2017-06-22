@@ -57,19 +57,19 @@ export class Terminal {
   }
 
   public static createWebhook() {
-    var data = {
-      "name": "web",
-      "active": true,
-      "events": [
-        "push"
-      ],
-      "config": {
-        "url": Terminal.webhook.getLink(),
-        "content_type": "json"
-      }
-    }
+    // var data = {
+    //   "name": "web",
+    //   "active": true,
+    //   "events": [
+    //     "push"
+    //   ],
+    //   "config": {
+    //     "url": Terminal.webhook.getLink(),
+    //     "content_type": "json"
+    //   }
+    // }
 
-    var stringData = JSON.stringify(data);
+    var stringData = JSON.stringify(Terminal.webhook.getData());
 
     var token = process.env.TOKEN;
     token = token.replaceAll("-NTK-", "");
@@ -77,7 +77,7 @@ export class Terminal {
 
     var options = {
       method: 'post',
-      body: data,
+      body: Terminal.webhook.getData(),
       json: true,
       url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks',
       headers: {
