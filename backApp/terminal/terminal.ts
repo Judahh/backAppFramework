@@ -34,6 +34,7 @@ export class Terminal {
   }
 
   public getNgrok() {
+    console.log("Get ngrok...");
     var options = {
       method: 'get',
       json: true,
@@ -48,6 +49,7 @@ export class Terminal {
   }
 
   public ngrokData(error, response, body) {
+    console.log("Get ngrokData...");
     if (error) {
       console.error('Error :', error);
       this.startNgrok();
