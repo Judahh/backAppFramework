@@ -33,7 +33,10 @@ export class Terminal {
 
   public static ngrokData(error,response,body) {
     // var jSONdata = data;//JSON.parse(data.toString());
-    // console.log("DATA:"+error+response+body);
+    if(error){
+      console.error('Error :', error);
+    }
+    console.log("DATA:"+body);
     if(body.tunnels.length>0){
       console.log("ngrok:");
       for (var index = 0; index < body.tunnels.length; index++) {
@@ -120,14 +123,16 @@ export class Terminal {
   }
 
   public static webhook(error, response, body) {
+    if(error){
+      console.error('Error :', error);
+    }
     if(body!=undefined){
+      console.log('Body :', body);
       if(body.id!=undefined){
         Terminal.webhookID=body.id;
         console.log("webhookID:"+Terminal.webhookID);
       }
     }
-    console.log('Error :', error);
-    console.log('Body :', body);
   }
 
   /**
