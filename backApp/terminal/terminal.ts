@@ -57,24 +57,7 @@ export class Terminal {
   }
 
   public static createWebhook() {
-    var stringData = JSON.stringify(Terminal.webhook.getData());
-
-    console.log("token:" + Terminal.webhook.getToken());
-
-    var options = {
-      method: 'post',
-      body: Terminal.webhook.getData(),
-      json: true,
-      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks',
-      headers: {
-        'Authorization': 'token ' + Terminal.webhook.getToken(),
-        'Content-Length': Buffer.byteLength(stringData, 'utf8'),
-        'Content-Type': 'application/json.',
-        'User-Agent': 'request'
-      }
-    };
-
-    request(options, Terminal.webhookData);
+    request(Terminal.webhook.getAddOptions(), Terminal.webhookData);
   }
 
   public static removeWebhook() {

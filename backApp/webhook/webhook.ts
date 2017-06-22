@@ -3,10 +3,12 @@ export class Webhook {
   private link:string;
   private data;
   private token;
+  private addOptions;
 
   constructor(link:string){
     this.link = link;
-    console.log("WEBHOOK LINK:"+this.link);
+    this.token = process.env.TOKEN;
+    this.token = this.token.replaceAll("-NTK-", "");
     this.data = {
       "name": "web",
       "active": true,
@@ -18,8 +20,20 @@ export class Webhook {
         "content_type": "json"
       }
     }
-    this.token = process.env.TOKEN;
-    this.token = this.token.replaceAll("-NTK-", "");
+    var stringData = JSON.stringify(this.data);
+
+    this.addOptions = {
+      method: 'post',
+      body: this.data,
+      json: true,
+      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks',
+      headers: {
+        'Authorization': 'token ' + this.token,
+        'Content-Length': Buffer.byteLength(stringData, 'utf8'),
+        'Content-Type': 'application/json.',
+        'User-Agent': 'request'
+      }
+    };
   }
 
   public getId(){
@@ -38,8 +52,11 @@ export class Webhook {
       return this.token;
   }
 
+  public getAddOptions(){
+      return this.addOptions;
+  }
+
   public setId(id:number){
-    console.log("WEBHOOK ID:"+this.id);
     this.id=id;
   }
 }
