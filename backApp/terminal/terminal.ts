@@ -8,18 +8,18 @@ import * as request from 'request';
 
 export class Terminal {
   // public static webhook:Webhook;
-  public static webhookID:number;
-  public static webhookLink:string;
+  public webhookID:number;
+  public webhookLink:string;
   /**
    * GET all Heroes.
    */
-  public static startNgrok() {
+  public startNgrok() {
     console.log("Starting ngrok...");
-    childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), Terminal.getNgrok);
-    Terminal.getNgrok();
+    childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), this.getNgrok);
+    this.getNgrok();
   }
 
-  public static getNgrok() {
+  public getNgrok() {
     var options = {
       method: 'get',
       json: true,
@@ -30,10 +30,10 @@ export class Terminal {
       }
     };
 
-    request(options, Terminal.ngrokData);
+    request(options, this.ngrokData);
   }
 
-  public static ngrokData(error,response,body) {
+  public ngrokData(error,response,body) {
     if(error){
       console.error('Error :', error);
     }
@@ -43,16 +43,16 @@ export class Terminal {
         var element = body.tunnels[index];
         if (element.public_url.indexOf("https") != -1) {
           console.log(index + ":" + element.public_url);
-          Terminal.webhookLink= element.public_url + "/refresh";
-          Terminal.createWebhook();
+          this.webhookLink= element.public_url + "/refresh";
+          this.createWebhook();
         }
       }
     }else{
-      Terminal.getNgrok();
+      this.getNgrok();
     }
   }
 
-  public static createWebhook() {
+  public createWebhook() {
     var data = {
       "name": "web",
       "active": true,
@@ -60,7 +60,7 @@ export class Terminal {
         "push"
       ],
       "config": {
-        "url": Terminal.webhookLink,
+        "url": this.webhookLink,
         "content_type": "json"
       }
     }
@@ -84,10 +84,10 @@ export class Terminal {
       }
     };
 
-    request(options, Terminal.webhook);
+    request(options, this.webhook);
   }
 
-  public static removeWebhook() {
+  public removeWebhook() {
     var data = {
       "name": "web",
       "active": true,
@@ -95,14 +95,14 @@ export class Terminal {
         "push"
       ],
       "config": {
-        "url": Terminal.webhookLink,
+        "url": this.webhookLink,
         "content_type": "json"
       }
     }
 
     var stringData = JSON.stringify(data);
 
-    console.log("Deleting:"+Terminal.webhookID);
+    console.log("Deleting:"+this.webhookID);
     var token=process.env.TOKEN;
     token=token.replaceAll("-NTK-","");
     console.log("token:"+token);
@@ -110,7 +110,7 @@ export class Terminal {
     var options = {
       method: 'delete',
       json: true,
-      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/'+Terminal.webhookID,
+      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/'+this.webhookID,
       headers: {
         'Authorization': 'token ' + token,
         'Content-Length': Buffer.byteLength(stringData, 'utf8'),
@@ -119,18 +119,18 @@ export class Terminal {
       }
     };
 
-    request(options, Terminal.webhook);
+    request(options, this.webhook);
   }
 
-  public static webhook(error, response, body) {
+  public webhook(error, response, body) {
     if(error){
       console.error('Error :', error);
     }
     if(body!=undefined){
       console.log('Body :', body);
       if(body.id!=undefined){
-        Terminal.webhookID=body.id;
-        console.log("webhookID:"+Terminal.webhookID);
+        this.webhookID=body.id;
+        console.log("webhookID:"+this.webhookID);
       }
     }
   }
@@ -138,7 +138,7 @@ export class Terminal {
   /**
    * GET all Heroes.
    */
-  public static upgrade(pusher: any, repository: any) {
+  public upgrade(pusher: any, repository: any) {
     if (pusher != undefined) {
       console.log(pusher.name + " pushed to " + repository.name);
     } else {
@@ -149,58 +149,58 @@ export class Terminal {
     console.log("Pulling code from Github...");
     process.stdout.write('\x07');
 
-    Terminal.removeWebhook();
+    this.removeWebhook();
     // reset any changes that have been made locally
-    childProcess.exec('sudo git reset --hard', Terminal.currentReset);
+    childProcess.exec('sudo git reset --hard', this.currentReset);
 
-    childProcess.exec('sudo git reset --hard', { cwd: "public" }, Terminal.childReset);
+    childProcess.exec('sudo git reset --hard', { cwd: "public" }, this.childReset);
   }
 
-  public static currentReset(err, stdout, stderr) {
+  public currentReset(err, stdout, stderr) {
     console.log("Current Reset:");
-    Terminal.showInfo(stdout, stderr);
+    this.showInfo(stdout, stderr);
     // and ditch any files that have been added locally too
-    childProcess.exec('sudo git -C clean -df', Terminal.currentClean);
+    childProcess.exec('sudo git -C clean -df', this.currentClean);
   }
 
-  public static currentClean(err, stdout, stderr) {
+  public currentClean(err, stdout, stderr) {
     console.log("Current Clean:");
-    Terminal.showInfo(stdout, stderr);
+    this.showInfo(stdout, stderr);
     // now pull down the latest
-    childProcess.exec('sudo git pull', Terminal.currentPull);
+    childProcess.exec('sudo git pull', this.currentPull);
   }
 
-  public static currentPull(err, stdout, stderr) {
+  public currentPull(err, stdout, stderr) {
     console.log("Current Pull:");
-    Terminal.showInfo(stdout, stderr);
+    this.showInfo(stdout, stderr);
   }
 
-  public static childReset(err, stdout, stderr) {
+  public childReset(err, stdout, stderr) {
     console.log("Child Reset:");
-    Terminal.showInfo(stdout, stderr);
+    this.showInfo(stdout, stderr);
     // and ditch any files that have been added locally too
-    childProcess.exec('sudo git clean -df', { cwd: "public" }, Terminal.childClean);
+    childProcess.exec('sudo git clean -df', { cwd: "public" }, this.childClean);
   }
 
-  public static childClean(err, stdout, stderr) {
+  public childClean(err, stdout, stderr) {
     console.log("Child Clean:");
-    Terminal.showInfo(stdout, stderr);
+    this.showInfo(stdout, stderr);
     // now pull down the latest
-    childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', { cwd: "public" }, Terminal.childPull);
+    childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', { cwd: "public" }, this.childPull);
   }
 
-  public static childPull(err, stdout, stderr) {
+  public childPull(err, stdout, stderr) {
     console.log("Child Pull:");
-    Terminal.showInfo(stdout, stderr);
+    this.showInfo(stdout, stderr);
 
     // and npm install with --production
-    // childProcess.exec('sudo npm install', Terminal.install);
+    // childProcess.exec('sudo npm install', this.install);
     process.exit();
     // and run tsc
     // childProcess.exec('sudo tsc', Page.execCallback);
   }
 
-  public static showInfo(stdout, stderr) {
+  public showInfo(stdout, stderr) {
     if (stdout) {
       console.log(stdout);
     }
