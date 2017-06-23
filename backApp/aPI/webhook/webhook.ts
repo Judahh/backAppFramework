@@ -1,7 +1,6 @@
-import { EventDB } from "./../database/eventDB/eventDB";
-import { Event } from "./../database/eventDB/event/event";
-import {Operation} from "./../database/eventDB/event/operation";
-import * as MongoDB from "mongodb";
+import { Write } from "./../database/write/write";
+import { Event } from "./../database/event/event";
+import { Operation } from "./../database/event/operation";
 
 export class Webhook {
   private id: number;
@@ -14,8 +13,8 @@ export class Webhook {
   private readAllOptions;
   private updateOptions;
   private deleteOptions;
-  
-  private eventDB: EventDB;
+
+  private write: Write;
 
   constructor(link: string) {
     this.link = link;
@@ -95,7 +94,7 @@ export class Webhook {
       }
     };
 
-    this.eventDB = new EventDB();
+    this.write = new Write();
   }
 
   public setId(id: number) {
@@ -128,112 +127,57 @@ export class Webhook {
   }
 
   public getAddOptions() {
-    this.eventDB.connect(this.addEvent);
+    var content = {
+      id: this.id,
+      link: this.link
+    };
+    var event = new Event(Operation.add, "webhook", content);
+
+    this.write.sendEvent(event);
     return this.addOptions;
   }
 
-  public addEvent = (error, db: MongoDB.Db) => {
-    if (error) {
-      console.error(error);
-    }
-    console.log("ADD EVENT");
-    var events = db.collection('events');
-
-    var addContent = {
-      id:this.id,
-      link:this.link
-    };
-
-    var event = new Event(Operation.add,"Webhook",addContent);
-
-    events.insert(event, this.eventResult);
-  }
-
   public getDeleteOptions() {
-    this.eventDB.connect(this.deleteEvent);
-    return this.deleteOptions;
-  }
-
-  public deleteEvent = (error, db: MongoDB.Db) => {
-    if (error) {
-      console.error(error);
-    }
-    console.log("DELETE EVENT");
-    var events = db.collection('events');
-
-    var addContent = {
-      id:this.id,
-      link:this.link
+    var content = {
+      id: this.id,
+      link: this.link
     };
+    var event = new Event(Operation.delete, "webhook", content);
 
-    var event = new Event(Operation.delete,"Webhook",addContent);
-
-    events.insert(event, this.eventResult);
+    this.write.sendEvent(event);
+    return this.deleteOptions;
   }
 
   public getCorrectOptions() {
-    this.eventDB.connect(this.correctEvent);
-    return this.updateOptions;
-  }
-
-  public correctEvent = (error, db: MongoDB.Db) => {
-    if (error) {
-      console.error(error);
-    }
-    console.log("CORRECT EVENT");
-    var events = db.collection('events');
-
-    var addContent = {
-      id:this.id,
-      link:this.link
+    var content = {
+      id: this.id,
+      link: this.link
     };
+    var event = new Event(Operation.correct, "webhook", content);
 
-    var event = new Event(Operation.correct,"Webhook",addContent);
-
-    events.insert(event, this.eventResult);
+    this.write.sendEvent(event);
+    return this.updateOptions;
   }
 
   public getUpdateOptions() {
-    this.eventDB.connect(this.updateEvent);
+    var content = {
+      id: this.id,
+      link: this.link
+    };
+    var event = new Event(Operation.update, "webhook", content);
+
+    this.write.sendEvent(event);
     return this.updateOptions;
   }
 
-  public updateEvent = (error, db: MongoDB.Db) => {
-    if (error) {
-      console.error(error);
-    }
-    console.log("UPDATE EVENT");
-    var events = db.collection('events');
-
-    var addContent = {
-      id:this.id,
-      link:this.link
-    };
-
-    var event = new Event(Operation.update,"Webhook",addContent);
-
-    events.insert(event, this.eventResult);
-  }
-
   public getNonexistentOptions() {
-    this.eventDB.connect(this.nonexistentEvent);
-    return this.deleteOptions;
-  }
-
-  public nonexistentEvent = (error, db: MongoDB.Db) => {
-    if (error) {
-      console.error(error);
-    }
-    console.log("NONEXISTENT EVENT");
-    var events = db.collection('events');
-
-    var addContent = {
-      id:this.id,
-      link:this.link
+    var content = {
+      id: this.id,
+      link: this.link
     };
+    var event = new Event(Operation.nonexistent, "webhook", content);
 
-    var event = new Event(Operation.nonexistent,"Webhook",addContent);
-
-    events.insert(event, this.eventResult);
+    this.write.sendEvent(event);
+    return this.deleteOptions;
   }
 }
