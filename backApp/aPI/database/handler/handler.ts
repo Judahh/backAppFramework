@@ -1,5 +1,5 @@
-import { Write } from "./../database/write/write";
-import { Event } from "./../database/event/event";
-import { Operation } from "./../database/event/operation";
+import { Write } from "./../write/write";
+import { Event } from "./../event/event";
+import { Operation } from "./../event/operation";
 export class Handler {
 }
