@@ -1,4 +1,4 @@
-import { ReadDB } from "./../readDB/readDB";
+import { ReadDB } from "./../database/readDB/readDB";
 import { Event } from "./../event/event";
 import * as MongoDB from "mongodb";
 export class Read {
@@ -7,19 +7,18 @@ export class Read {
     private objects: MongoDB.Collection;
 
     constructor() {
-        this.readDB.connect(this.connected);
-    }
-
-    public connected = (error, db: MongoDB.Db) => {
-        if (error) {
-            console.error(error);
-        } else {
-            this.readMongoDB = db;
-            this.objects = this.readMongoDB.collection('objects');
-        }
+        this.readDB=new ReadDB();
     }
 
     public update(event:Event){
-
+        // this.readDB.addItem("objects",event,function(error, result){
+        //     console.log("RESULT EVENT");
+        //     if (error) {
+        //         console.error(error);
+        //     } else {
+        //         console.log(result);
+        //         this.read.update(event);
+        //     }
+        // });
     }
 }

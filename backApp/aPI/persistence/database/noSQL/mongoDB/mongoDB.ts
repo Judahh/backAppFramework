@@ -7,6 +7,7 @@ export class MongoDB implements PersistenceAdapter {
     private port: number;
     private database: string;
     private mongooseInstance: mongoose.MongooseThenable;
+    private genericSchema = new mongoose.Schema({}, { strict: false });
 
     constructor(database: string, host?: string, port?: number) {
         if (host) {
@@ -23,19 +24,24 @@ export class MongoDB implements PersistenceAdapter {
         this.mongooseInstance = mongoose.connect("mongodb://" + this.host + ":" + this.port + "/" + this.database);
     }
 
-    update(item: any) {
-        throw new Error("Method not implemented.");
+    update(array: string, item: any, callback) {
+        var Item = mongoose.model(array, this.genericSchema);
+        Item.findOneAndUpdate(item, callback);
     }
-    readArray(): any[] {
-        return mongoose.model('ads').schema.indexes();
+    readArray(array: string, callback) {
+        var Item = mongoose.model(array, this.genericSchema);
+        Item.find(callback);
     }
-    deleteArray() {
-        throw new Error("Method not implemented.");
+    deleteArray(array: string, callback) {
+        var Item = mongoose.model(array, this.genericSchema);
+        Item.remove(callback);
     }
-    addItem(item: any) {
-        throw new Error("Method not implemented.");
+    addItem(array: string, item: any, callback) {
+        var Item = mongoose.model(array, this.genericSchema);
+        Item.create(item, callback);
     }
-    deleteItem(item: any) {
-        throw new Error("Method not implemented.");
+    deleteItem(array: string, item: any, callback) {
+        var Item = mongoose.model(array, this.genericSchema);
+        Item.findByIdAndRemove(item, callback);
     }
 }
