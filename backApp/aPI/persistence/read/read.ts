@@ -1,5 +1,6 @@
 import { ReadDB } from "./../database/readDB/readDB";
 import { Event } from "./../event/event";
+import { Operation } from "./../event/operation";
 import * as MongoDB from "mongodb";
 export class Read {
     private readDB: ReadDB;
@@ -10,15 +11,41 @@ export class Read {
         this.readDB=new ReadDB();
     }
 
-    public update(event:Event){
-        // this.readDB.addItem("objects",event,function(error, result){
-        //     console.log("RESULT EVENT");
-        //     if (error) {
-        //         console.error(error);
-        //     } else {
-        //         console.log(result);
-        //         this.read.update(event);
-        //     }
-        // });
+    public newEvent(event:Event){
+        switch(event.getOperation()){
+            case Operation.add:
+                this.create(event);
+            break; 
+
+            case Operation.read:
+                this.read(event);
+            break; 
+
+            case Operation.correct:
+            case Operation.update:
+                this.update(event);
+            break; 
+
+            case Operation.delete:
+            case Operation.nonexistent:
+                this.delete(event);
+            break; 
+        }
+    }
+
+    private create(event:Event){
+
+    }
+
+    private read(event:Event){
+
+    }
+
+    private update(event:Event){
+
+    }
+
+    private delete(event:Event){
+
     }
 }

@@ -12,6 +12,22 @@ export class Event {
         this.content= content;
     }
 
+    public getOperation(){
+        return this.operation;
+    }
+
+    public getTimestamp(){
+        return this.timestamp;
+    }
+
+    public getName(){
+        return this.name;
+    }
+
+    public getContent(){
+        return this.content;
+    }
+
     private currentTimestamp() {
         var date = new Date();
         var dash = "-";

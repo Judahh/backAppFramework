@@ -22,7 +22,7 @@ export class Write {
                 console.error(error);
             } else {
                 console.log(result);
-                this.read.update(event);
+                this.read.newEvent(event);
             }
         });
     }
