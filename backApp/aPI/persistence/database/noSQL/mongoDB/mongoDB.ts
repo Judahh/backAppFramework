@@ -24,7 +24,7 @@ export class MongoDB implements PersistenceAdapter {
         this.mongooseInstance = mongoose.connect("mongodb://" + this.host + ":" + this.port + "/" + this.database);
     }
 
-    update(array: string, item: any, callback) {
+    updateItem(array: string, item: any, callback) {
         var Item = mongoose.model(array, this.genericSchema);
         Item.findOneAndUpdate(item, callback);
     }

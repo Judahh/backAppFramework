@@ -1,5 +1,5 @@
 export interface PersistenceAdapter {
-	update(array:string, item, callback);
+	updateItem(array:string, item, callback);
 
 	readArray(array:string, callback);
 	

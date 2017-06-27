@@ -18,7 +18,7 @@ export class Read {
             break; 
 
             case Operation.read:
-                this.read(event);
+                // this.read(event);
             break; 
 
             case Operation.correct:
@@ -34,18 +34,39 @@ export class Read {
     }
 
     private create(event:Event){
-
+        this.readDB.addItem(event.getName(),event.getContent(),function(error, result){
+            console.log("RESULT CREATE");
+            if (error) {
+                console.error(error);
+            } else {
+                console.log(result);
+            }
+        });
     }
 
     private read(event:Event){
-
+        
     }
 
     private update(event:Event){
-
+        this.readDB.updateItem(event.getName(),event.getContent(),function(error, result){
+            console.log("RESULT UPDATE");
+            if (error) {
+                console.error(error);
+            } else {
+                console.log(result);
+            }
+        });
     }
 
     private delete(event:Event){
-
+        this.readDB.deleteItem(event.getName(),event.getContent(),function(error, result){
+            console.log("RESULT DELETE");
+            if (error) {
+                console.error(error);
+            } else {
+                console.log(result);
+            }
+        });
     }
 }
