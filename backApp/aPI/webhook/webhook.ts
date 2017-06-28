@@ -1,6 +1,7 @@
 import { Handler } from "./../persistence/handler/handler";
 import { Event } from "./../persistence/event/event";
 import { Operation } from "./../persistence/event/operation";
+require('dotenv').config();
 
 export class Webhook {
   private id: number;
