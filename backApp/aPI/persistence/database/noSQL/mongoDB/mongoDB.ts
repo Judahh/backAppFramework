@@ -24,23 +24,23 @@ export class MongoDB implements PersistenceAdapter {
         this.mongooseInstance = mongoose.connect("mongodb://" + this.host + ":" + this.port + "/" + this.database);
     }
 
-    updateItem(array: string, item: any, callback) {
+    public updateItem(array: string, item: any, callback) {
         var Item = mongoose.model(array, this.genericSchema);
         Item.findOneAndUpdate(item, callback);
     }
-    readArray(array: string, callback) {
+    public readArray(array: string, callback) {
         var Item = mongoose.model(array, this.genericSchema);
         Item.find(callback);
     }
-    deleteArray(array: string, callback) {
+    public deleteArray(array: string, callback) {
         var Item = mongoose.model(array, this.genericSchema);
         Item.remove(callback);
     }
-    addItem(array: string, item: any, callback) {
+    public addItem(array: string, item: any, callback) {
         var Item = mongoose.model(array, this.genericSchema);
         Item.create(item, callback);
     }
-    deleteItem(array: string, item: any, callback) {
+    public deleteItem(array: string, item: any, callback) {
         var Item = mongoose.model(array, this.genericSchema);
         Item.findByIdAndRemove(item, callback);
     }
