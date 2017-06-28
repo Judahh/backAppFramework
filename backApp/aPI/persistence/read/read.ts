@@ -54,7 +54,7 @@ export class Read {
         });
     }
 
-    private read(event: Event) {
+    public read(event: Event) {
 
     }
 

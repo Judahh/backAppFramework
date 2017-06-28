@@ -22,7 +22,6 @@ export class MongoDB implements PersistenceAdapter {
         }
         this.database = database;
 
-        // console.log("DATABASE:"+database);
         var mongoose = new Mongoose();
         this.mongooseInstance = mongoose.connect("mongodb://" + this.host + ":" + this.port + "/" + this.database);
         this.genericSchema = new this.mongooseInstance.Schema({}, { strict: false });
@@ -41,7 +40,6 @@ export class MongoDB implements PersistenceAdapter {
         Item.remove(callback);
     }
     public addItem(array: string, item: any, callback) {
-        // console.log("ADD ITEN ON:"+this.mongooseInstance.model('events',this.genericSchema).db.db.databaseName);
         var Item = this.mongooseInstance.model(array, this.genericSchema);
         Item.create(item, callback);
     }
