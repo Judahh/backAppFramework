@@ -133,7 +133,7 @@ export class Webhook {
     };
     var event = new Event(Operation.add, "webhook", content);
 
-    this.write.sendEvent(event);
+    this.write.addEvent(event);
     return this.addOptions;
   }
 
@@ -144,7 +144,7 @@ export class Webhook {
     };
     var event = new Event(Operation.delete, "webhook", content);
 
-    this.write.sendEvent(event);
+    this.write.addEvent(event);
     return this.deleteOptions;
   }
 
@@ -155,7 +155,7 @@ export class Webhook {
     };
     var event = new Event(Operation.correct, "webhook", content);
 
-    this.write.sendEvent(event);
+    this.write.addEvent(event);
     return this.updateOptions;
   }
 
@@ -166,7 +166,7 @@ export class Webhook {
     };
     var event = new Event(Operation.update, "webhook", content);
 
-    this.write.sendEvent(event);
+    this.write.addEvent(event);
     return this.updateOptions;
   }
 
@@ -177,7 +177,7 @@ export class Webhook {
     };
     var event = new Event(Operation.nonexistent, "webhook", content);
 
-    this.write.sendEvent(event);
+    this.write.addEvent(event);
     return this.deleteOptions;
   }
 }
