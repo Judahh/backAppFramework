@@ -52,6 +52,10 @@ export class Read {
                 console.log(result);
             }
         });
+    }
+
+    public readArray(array: string, callback) {
+        this.readDB.readArray(array, callback);
     }    
 
     private update(event: Event) {

@@ -21,6 +21,10 @@ export class Webhook {
     this.token = process.env.TOKEN;
     this.token = this.token.replaceAll("-NTK-", "");
 
+    if(link){
+      this.setLink(link);
+    }
+
     this.readOptions = {
       method: 'get',
       json: true,
@@ -132,7 +136,7 @@ export class Webhook {
     };
     var event = new Event(Operation.add, "webhook", content);
 
-    this.write.addEvent(event);
+    this.handler.addEvent(event);
     return this.addOptions;
   }
 
@@ -143,7 +147,7 @@ export class Webhook {
     };
     var event = new Event(Operation.delete, "webhook", content);
 
-    this.write.addEvent(event);
+    this.handler.addEvent(event);
     return this.deleteOptions;
   }
 
@@ -154,7 +158,7 @@ export class Webhook {
     };
     var event = new Event(Operation.correct, "webhook", content);
 
-    this.write.addEvent(event);
+    this.handler.addEvent(event);
     return this.updateOptions;
   }
 
@@ -165,7 +169,7 @@ export class Webhook {
     };
     var event = new Event(Operation.update, "webhook", content);
 
-    this.write.addEvent(event);
+    this.handler.addEvent(event);
     return this.updateOptions;
   }
 
@@ -176,7 +180,7 @@ export class Webhook {
     };
     var event = new Event(Operation.nonexistent, "webhook", content);
 
-    this.write.addEvent(event);
+    this.handler.addEvent(event);
     return this.deleteOptions;
   }
 }
