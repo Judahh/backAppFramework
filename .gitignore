@@ -6,6 +6,7 @@ ngrok
 !node_modules/@types/declaration/*
 !node_modules/@types/jquery/*
 !node_modules/@types/jnode-webhooks/*
+app
 jspm_packages
 bower_components
 platforms
