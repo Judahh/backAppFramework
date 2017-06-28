@@ -1,6 +1,7 @@
 import * as childProcess from 'child_process';
 import "./../../util/utils"
-import { Webhook } from "./../webhook/webhook"
+import { Webhook } from "./../webhook/webhook";
+import { Handler } from "./../persistence/handler/handler";
 import * as os from 'os';
 // import * as webhook from 'node-webhooks';
 // var Webhook = require('node-webhooks');
@@ -9,15 +10,21 @@ import * as request from 'request';
 
 export class Terminal {
   private webhook: Webhook;
+  private handler: Handler;
   private static instance: Terminal = new Terminal();
 
   constructor() {
-    this.readDB = ReadDB.getInstance();
+    this.handler = Handler.getInstance();
+    this.handler.readArray("webhooks",)
     if (Terminal.instance) {
       throw new Error("The Read is a singleton class and cannot be created!");
     }
 
     Terminal.instance = this;
+  }
+
+  private webHooksReceived=(error,result)=>{
+
   }
 
   public static getInstance(): Terminal {
