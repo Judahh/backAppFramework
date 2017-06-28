@@ -37,6 +37,7 @@
     "@types/morgan": "^1.7.32",
     "@types/node": "^8.0.1",
     "@types/request": "^0.0.44",
+    "async": "^2.5.0",
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
     "concurrently": "^3.4.0",
@@ -51,7 +52,8 @@
     "path": "0.12.7",
     "q": "^1.5.0",
     "request": "^2.81.0",
-    "typescript": "2.3.4"
+    "typescript": "2.3.4",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {}
 }
