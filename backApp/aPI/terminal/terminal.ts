@@ -9,7 +9,20 @@ import * as request from 'request';
 
 export class Terminal {
   private webhook: Webhook;
+  private static instance: Terminal = new Terminal();
 
+  constructor() {
+    this.readDB = ReadDB.getInstance();
+    if (Terminal.instance) {
+      throw new Error("The Read is a singleton class and cannot be created!");
+    }
+
+    Terminal.instance = this;
+  }
+
+  public static getInstance(): Terminal {
+    return Terminal.instance;
+  }
   /**
    * GET all Heroes.
    */
@@ -64,15 +77,15 @@ export class Terminal {
     }
   }
 
-  private createWebhook=()=> {
+  private createWebhook = () => {
     request(this.webhook.getAddOptions(), this.webhookData);
   }
 
-  private removeWebhook=()=> {
+  private removeWebhook = () => {
     request(this.webhook.getDeleteOptions(), this.webhookData);
   }
 
-  private webhookData=(error, response, body)=>{
+  private webhookData = (error, response, body) => {
     if (error) {
       console.error('Error :', error);
     }
@@ -106,40 +119,40 @@ export class Terminal {
     childProcess.exec('sudo git reset --hard', { cwd: "app" }, this.childReset);
   }
 
-  private currentReset=(err, stdout, stderr) => {
+  private currentReset = (err, stdout, stderr) => {
     console.log("Current Reset:");
     this.showInfo(stdout, stderr);
     // and ditch any files that have been added locally too
     childProcess.exec('sudo git -C clean -df', this.currentClean);
   }
 
-  private currentClean=(err, stdout, stderr) => {
+  private currentClean = (err, stdout, stderr) => {
     console.log("Current Clean:");
     this.showInfo(stdout, stderr);
     // now pull down the latest
     childProcess.exec('sudo git pull', this.currentPull);
   }
 
-  private currentPull=(err, stdout, stderr)=> {
+  private currentPull = (err, stdout, stderr) => {
     console.log("Current Pull:");
     this.showInfo(stdout, stderr);
   }
 
-  private childReset=(err, stdout, stderr)=> {
+  private childReset = (err, stdout, stderr) => {
     console.log("Child Reset:");
     this.showInfo(stdout, stderr);
     // and ditch any files that have been added locally too
     childProcess.exec('sudo git clean -df', { cwd: "app" }, this.childClean);
   }
 
-  private childClean=(err, stdout, stderr)=> {
+  private childClean = (err, stdout, stderr) => {
     console.log("Child Clean:");
     this.showInfo(stdout, stderr);
     // now pull down the latest
     childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', { cwd: "app" }, this.childPull);
   }
 
-  private childPull=(err, stdout, stderr)=> {
+  private childPull = (err, stdout, stderr) => {
     console.log("Child Pull:");
     this.showInfo(stdout, stderr);
 
