@@ -7,9 +7,6 @@ export class Write {
     private read: Read;
     private eventDB: EventDB;
     private static instance: Write = new Write();
-    // private eventMongoDB: MongoDB.Db;
-    // private events: MongoDB.Collection;
-    // private currentEvent: Event;
 
     constructor() {
         this.read = Read.getInstance();
