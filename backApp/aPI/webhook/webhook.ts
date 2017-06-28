@@ -1,4 +1,4 @@
-import { Write } from "./../persistence/write/write";
+import { Handler } from "./../persistence/handler/handler";
 import { Event } from "./../persistence/event/event";
 import { Operation } from "./../persistence/event/operation";
 
@@ -14,9 +14,10 @@ export class Webhook {
   private updateOptions;
   private deleteOptions;
 
-  private write: Write;
+  private handler: Handler;
 
   constructor(link: string) {
+    this.handler = Handler.getInstance();
     this.token = process.env.TOKEN;
     this.token = this.token.replaceAll("-NTK-", "");
 
@@ -52,8 +53,6 @@ export class Webhook {
         'User-Agent': 'request'
       }
     };
-
-    this.write = Write.getInstance();
   }
 
   public setLink(link:string){
