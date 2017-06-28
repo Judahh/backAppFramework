@@ -23,7 +23,7 @@ export class API {
    * GET all Heroes.
    */
   public getPage(request: Request, response: Response, nextFunction: NextFunction) {
-    response.sendFile(path.resolve('public/index.html'));
+    response.sendFile(path.resolve('app/index.html'));
     console.info("getPage");
   }
 

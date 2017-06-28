@@ -95,7 +95,7 @@ export class Terminal {
     // reset any changes that have been made locally
     childProcess.exec('sudo git reset --hard', Terminal.currentReset);
 
-    childProcess.exec('sudo git reset --hard', { cwd: "public" }, Terminal.childReset);
+    childProcess.exec('sudo git reset --hard', { cwd: "app" }, Terminal.childReset);
   }
 
   public static currentReset(err, stdout, stderr) {
@@ -121,14 +121,14 @@ export class Terminal {
     console.log("Child Reset:");
     Terminal.showInfo(stdout, stderr);
     // and ditch any files that have been added locally too
-    childProcess.exec('sudo git clean -df', { cwd: "public" }, Terminal.childClean);
+    childProcess.exec('sudo git clean -df', { cwd: "app" }, Terminal.childClean);
   }
 
   public static childClean(err, stdout, stderr) {
     console.log("Child Clean:");
     Terminal.showInfo(stdout, stderr);
     // now pull down the latest
-    childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', { cwd: "public" }, Terminal.childPull);
+    childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', { cwd: "app" }, Terminal.childPull);
   }
 
   public static childPull(err, stdout, stderr) {
