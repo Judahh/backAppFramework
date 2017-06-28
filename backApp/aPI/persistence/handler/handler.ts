@@ -24,4 +24,8 @@ export class Handler {
     public addEvent(event: Event) {
         this.write.addEvent(event);
     }
+
+    public readArray(array: string, callback) {
+        this.read.readArray(array, callback);
+    }
 }

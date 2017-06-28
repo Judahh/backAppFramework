@@ -54,7 +54,7 @@ export class Read {
         });
     }
 
-    public read(array: string, callback) {
+    public readArray(array: string, callback) {
         this.readDB.readArray(array, callback);
     }
 
