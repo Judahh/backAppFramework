@@ -1,6 +1,6 @@
-import { Write } from "./../database/write/write";
-import { Event } from "./../database/event/event";
-import { Operation } from "./../database/event/operation";
+import { Write } from "./../persistence/write/write";
+import { Event } from "./../persistence/event/event";
+import { Operation } from "./../persistence/event/operation";
 
 export class Webhook {
   private id: number;
