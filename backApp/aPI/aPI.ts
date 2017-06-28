@@ -5,7 +5,6 @@ import {Terminal} from './terminal/terminal';
 
 export class API {
   private router: Router
-  private terminal: Terminal;
 
   /**
    * Initialize the HeroRouter
@@ -13,8 +12,7 @@ export class API {
   constructor() {
     this.router = Router();
     this.init();
-    this.terminal=new Terminal();
-    this.terminal.startNgrok();
+    Terminal.getInstance().startNgrok();
   }
 
   public getRouter(){
@@ -40,7 +38,7 @@ export class API {
    * GET all Heroes.
    */
   public refresh(request: Request, response: Response, nextFunction: NextFunction) {
-    this.terminal.upgrade(request.body.pusher,request.body.repository);
+    Terminal.getInstance().upgrade(request.body.pusher,request.body.repository);
   }
 
   /**
