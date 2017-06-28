@@ -3,12 +3,10 @@ export class EventDB extends MongoDB {
     private static instance: EventDB = new EventDB();
 
     constructor(host?: string, port?: number) {
+        super("eventDB", host, port);
         if (EventDB.instance) {
             throw new Error("The Write is a singleton class and cannot be created!");
         }
-
-        super("eventDB", host, port);
-
         EventDB.instance = this;
     }
 

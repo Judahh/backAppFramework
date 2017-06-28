@@ -12,14 +12,13 @@ export class Write {
     // private currentEvent: Event;
 
     constructor() {
+        this.read = Read.getInstance();
+        this.eventDB = EventDB.getInstance();
         if (Write.instance) {
             throw new Error("The Write is a singleton class and cannot be created!");
         }
 
         Write.instance = this;
-
-        this.read = Read.getInstance();
-        this.eventDB = EventDB.getInstance();
     }
 
     public static getInstance(): Write {
@@ -27,8 +26,8 @@ export class Write {
     }
 
     public addEvent(event: Event) {
-        this.eventDB.addItem("events", event, function (error, result) {
-            console.log("RESULT EVENT");
+        this.eventDB.addItem("events", event, (error, result)=> {
+            console.log("RESULT EVENT ON "+this.eventDB.getDatabase());
             if (error) {
                 console.error(error);
             } else {

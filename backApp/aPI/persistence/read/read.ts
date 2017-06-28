@@ -9,13 +9,12 @@ export class Read {
     private static instance: Read = new Read();
 
     constructor() {
+        this.readDB = ReadDB.getInstance();
         if (Read.instance) {
             throw new Error("The Read is a singleton class and cannot be created!");
         }
 
         Read.instance = this;
-
-        this.readDB = ReadDB.getInstance();
     }
 
     public static getInstance(): Read {
@@ -45,8 +44,8 @@ export class Read {
     }
 
     private create(event: Event) {
-        this.readDB.addItem(event.getName(), event.getContent(), function (error, result) {
-            console.log("RESULT CREATE");
+        this.readDB.addItem(event.getName(), event.getContent(), (error, result) => {
+            console.log("RESULT CREATE ON:"+this.readDB.getDatabase());
             if (error) {
                 console.error(error);
             } else {

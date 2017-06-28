@@ -94,7 +94,7 @@ export class Webhook {
       }
     };
 
-    this.write = new Write();
+    this.write = Write.getInstance();
   }
 
   public setId(id: number) {

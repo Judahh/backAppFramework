@@ -1,13 +1,13 @@
 import { MongoClient, Db } from "mongodb";
-import * as mongoose from "mongoose";
+import { Mongoose, MongooseThenable, Schema } from "mongoose";
 import { PersistenceAdapter } from "./../../../persistenceAdapter/persistenceAdapter";
 
 export class MongoDB implements PersistenceAdapter {
     private host: string;
     private port: number;
     private database: string;
-    private mongooseInstance: mongoose.MongooseThenable;
-    private genericSchema = new mongoose.Schema({}, { strict: false });
+    private mongooseInstance: MongooseThenable;
+    private genericSchema: Schema;
 
     constructor(database: string, host?: string, port?: number) {
         if (host) {
@@ -21,27 +21,36 @@ export class MongoDB implements PersistenceAdapter {
             this.port = 27017;
         }
         this.database = database;
+
+        // console.log("DATABASE:"+database);
+        var mongoose = new Mongoose();
         this.mongooseInstance = mongoose.connect("mongodb://" + this.host + ":" + this.port + "/" + this.database);
+        this.genericSchema = new this.mongooseInstance.Schema({}, { strict: false });
     }
 
     public updateItem(array: string, item: any, callback) {
-        var Item = mongoose.model(array, this.genericSchema);
+        var Item = this.mongooseInstance.model(array, this.genericSchema);
         Item.findOneAndUpdate(item, callback);
     }
     public readArray(array: string, callback) {
-        var Item = mongoose.model(array, this.genericSchema);
+        var Item = this.mongooseInstance.model(array, this.genericSchema);
         Item.find(callback);
     }
     public deleteArray(array: string, callback) {
-        var Item = mongoose.model(array, this.genericSchema);
+        var Item = this.mongooseInstance.model(array, this.genericSchema);
         Item.remove(callback);
     }
     public addItem(array: string, item: any, callback) {
-        var Item = mongoose.model(array, this.genericSchema);
+        // console.log("ADD ITEN ON:"+this.mongooseInstance.model('events',this.genericSchema).db.db.databaseName);
+        var Item = this.mongooseInstance.model(array, this.genericSchema);
         Item.create(item, callback);
     }
     public deleteItem(array: string, item: any, callback) {
-        var Item = mongoose.model(array, this.genericSchema);
+        var Item = this.mongooseInstance.model(array, this.genericSchema);
         Item.findByIdAndRemove(item, callback);
+    }
+
+    public getDatabase() {
+        return this.database;
     }
 }
