@@ -1,4 +1,4 @@
-[submodule "public"]
-	path = public
+[submodule "app"]
+	path = app
 	url = http://github.com/judahh/appFramework.git
 	branch = master
