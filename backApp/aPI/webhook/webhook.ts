@@ -17,9 +17,47 @@ export class Webhook {
   private write: Write;
 
   constructor(link: string) {
-    this.link = link;
     this.token = process.env.TOKEN;
     this.token = this.token.replaceAll("-NTK-", "");
+
+    this.readOptions = {
+      method: 'get',
+      json: true,
+      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/' + this.id,
+      headers: {
+        'Authorization': 'token ' + this.token,
+        'Content-Type': 'application/json.',
+        'User-Agent': 'request'
+      }
+    };
+
+    this.readAllOptions = {
+      method: 'get',
+      json: true,
+      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks',
+      headers: {
+        'Authorization': 'token ' + this.token,
+        'Content-Type': 'application/json.',
+        'User-Agent': 'request'
+      }
+    };
+
+    this.deleteOptions = {
+      method: 'delete',
+      json: true,
+      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/' + this.id,
+      headers: {
+        'Authorization': 'token ' + this.token,
+        'Content-Type': 'application/json.',
+        'User-Agent': 'request'
+      }
+    };
+
+    this.write = Write.getInstance();
+  }
+
+  public setLink(link:string){
+    this.link = link;
     this.data = {
       "name": "web",
       "active": true,
@@ -46,30 +84,6 @@ export class Webhook {
       }
     };
 
-    this.readOptions = {
-      method: 'get',
-      json: true,
-      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/' + this.id,
-      headers: {
-        'Authorization': 'token ' + this.token,
-        'Content-Length': Buffer.byteLength(stringData, 'utf8'),
-        'Content-Type': 'application/json.',
-        'User-Agent': 'request'
-      }
-    };
-
-    this.readAllOptions = {
-      method: 'get',
-      json: true,
-      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks',
-      headers: {
-        'Authorization': 'token ' + this.token,
-        'Content-Length': Buffer.byteLength(stringData, 'utf8'),
-        'Content-Type': 'application/json.',
-        'User-Agent': 'request'
-      }
-    };
-
     this.updateOptions = {
       method: 'patch',
       json: true,
@@ -81,20 +95,6 @@ export class Webhook {
         'User-Agent': 'request'
       }
     };
-
-    this.deleteOptions = {
-      method: 'delete',
-      json: true,
-      url: 'https://api.github.com/repos/Judahh/backAppFramework/hooks/' + this.id,
-      headers: {
-        'Authorization': 'token ' + this.token,
-        'Content-Length': Buffer.byteLength(stringData, 'utf8'),
-        'Content-Type': 'application/json.',
-        'User-Agent': 'request'
-      }
-    };
-
-    this.write = Write.getInstance();
   }
 
   public setId(id: number) {
