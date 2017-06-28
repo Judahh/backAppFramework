@@ -16,7 +16,7 @@ export class Webhook {
 
   private handler: Handler;
 
-  constructor(link: string) {
+  constructor(link?: string) {
     this.handler = Handler.getInstance();
     this.token = process.env.TOKEN;
     this.token = this.token.replaceAll("-NTK-", "");
