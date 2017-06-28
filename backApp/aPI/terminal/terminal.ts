@@ -15,7 +15,7 @@ export class Terminal {
 
   constructor() {
     this.handler = Handler.getInstance();
-    this.webhook=new Webhook();
+    this.webhook = new Webhook();
     this.handler.readArray("webhooks", this.webHooksReceived)
     if (Terminal.instance) {
       throw new Error("The Read is a singleton class and cannot be created!");
@@ -28,7 +28,7 @@ export class Terminal {
     if (error) {
       console.error(error);
     } else {
-      if (result.length>0) {
+      if (result.length > 0) {
         console.log(result[0]);
         this.webhook.setId(result[0].id);
         this.webhook.setLink(result[0].link);
@@ -81,10 +81,14 @@ export class Terminal {
         for (var index = 0; index < body.tunnels.length; index++) {
           var element = body.tunnels[index];
           if (element.public_url.indexOf("https") != -1) {
+            var newLink = element.public_url + "/refresh";
             console.log(index + ":" + element.public_url);
-            this.webhook = new Webhook(element.public_url + "/refresh");
-            // Terminal.webhookLink = element.public_url + "/refresh";
-            this.createWebhook();
+            if (this.webhook.getLink() != newLink) {
+              console.log(this.webhook.getLink() + "!=" + newLink);
+              this.webhook.setLink(newLink);
+              // Terminal.webhookLink = element.public_url + "/refresh";
+              this.createWebhook();
+            }
           }
         }
       } else {
