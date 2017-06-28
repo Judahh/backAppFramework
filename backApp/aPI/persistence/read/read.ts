@@ -45,7 +45,7 @@ export class Read {
 
     private create(event: Event) {
         this.readDB.addItem(event.getName(), event.getContent(), (error, result) => {
-            console.log("RESULT CREATE ON:"+this.readDB.getDatabase());
+            console.log("RESULT CREATE ON:" + this.readDB.getDatabase());
             if (error) {
                 console.error(error);
             } else {
@@ -54,8 +54,8 @@ export class Read {
         });
     }
 
-    public read(event: Event) {
-
+    public read(array: string, callback) {
+        this.readDB.readArray(array, callback);
     }
 
     private update(event: Event) {

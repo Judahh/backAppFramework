@@ -20,4 +20,8 @@ export class Handler {
     public static getInstance(): Handler {
         return Handler.instance;
     }
+
+    public addEvent(event: Event) {
+        this.write.addEvent(event);
+    }
 }
