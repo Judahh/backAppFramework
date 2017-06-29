@@ -140,9 +140,9 @@ export class Terminal {
 
     this.removeWebhook();
     // reset any changes that have been made locally
-    childProcess.exec('sudo git reset --hard', this.currentReset);
+    // childProcess.exec('sudo git reset --hard', this.currentReset);
 
-    childProcess.exec('sudo git reset --hard', { cwd: "app" }, this.childReset);
+    // childProcess.exec('sudo git reset --hard', { cwd: "app" }, this.childReset);
   }
 
   private currentReset = (err, stdout, stderr) => {
