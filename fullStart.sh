@@ -1,1 +1,14 @@
-tsc && tsc --p app/tsconfig.json && concurrently \"npm run tsc:w\" \"nodemon server.js\
+#!/bin/sh
+
+tsc &
+./childTsc.sh &
+npm run tsc:w &
+./foreverStart.sh
+ret4=$?   # get value returned by b.sh
+wait %3   # Wait for a.sh to finish
+ret3=$?   # get value returned by b.sh
+wait %2   # Wait for a.sh to finish
+ret2=$?   # get value returned by b.sh
+wait %1   # Wait for a.sh to finish
+ret1=$?   # get value returned by a.sh
+echo "$ret1: $ret2: $ret3: $ret4"
