@@ -1,6 +1,6 @@
 import * as path from 'path';
 // import * as express from 'express';
-import API from './aPI/aPI';
+import Api from './api';
 import {Express, RequestHandler, Router, Request, Response, NextFunction} from 'express';
 import * as express from 'express';
 import * as logger from 'morgan';
@@ -10,7 +10,7 @@ import * as http from 'http';
 // import * as debug from 'debug';
 
 // Creates and configures an ExpressJS web server.
-export class BackApp {
+export class ApiConfiguration {
 
   // ref to Express instance
   // public express: express.Application;
@@ -53,7 +53,7 @@ export class BackApp {
     //     message: 'Hello World!'
     //   });
     // });
-    this.express.use('/', API);
+    this.express.use('/', Api);
   }
 
   public run() {

@@ -1,8 +1,8 @@
 import * as express from 'express';
-import {BackApp} from './backApp/backApp';
+import {ApiConfiguration} from './api/apiConfiguration';
 require('dotenv').config();
 
-let backApp = new BackApp(express(), normalizePort(process.env.PORT || 3000));
+let backApp = new ApiConfiguration(express(), normalizePort(process.env.PORT || 3000));
 backApp.run();
 
 

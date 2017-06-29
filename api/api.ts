@@ -3,7 +3,7 @@ import * as logger from 'morgan';
 import * as path from 'path';
 import {Terminal} from './terminal/terminal';
 
-export class API {
+export class Api {
   private router: Router
 
   /**
@@ -57,7 +57,7 @@ export class API {
 }
 
 // Create the HeroRouter, and export its configured Expresponses.Router .
-const aPI = new API();
-// aPI.init();
+const api = new Api();
+// api.init();
 
-export default aPI.getRouter();
+export default api.getRouter();
