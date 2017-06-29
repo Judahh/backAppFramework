@@ -23,7 +23,11 @@ export class Terminal {
     Terminal.instance = this;
   }
 
-  private webHooksReceived = (error, result: Array<any>) => {
+  private getWebhooks = () => {
+    this.handler.readArray("webhooks", this.webhooksReceived);
+  }
+
+  private webhooksReceived = (error, result: Array<any>) => {
     if (error) {
       console.error(error);
     } else {
@@ -53,10 +57,10 @@ export class Terminal {
     arch = os.platform() + arch.charAt(0).toUpperCase() + arch.slice(1);
 
     console.log("Starting ngrok...");
-    childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), { cwd: "ngrok/" + arch }, this.getNgrok);
-    this.getNgrok();
+    childProcess.exec('sudo ./ngrok http ' + (process.env.PORT || 3000), { cwd: "ngrok/" + arch }, this.getWebhooks);
+    this.getWebhooks();
 
-    // this.handler.readArray("webhooks", this.webHooksReceived);
+    // this.handler.readArray("webhooks", this.webhooksReceived);
   }
 
   private getNgrok = () => {
@@ -133,7 +137,6 @@ export class Terminal {
       }
     }
     console.log("Pulling code from Github...");
-    process.stdout.write('\x07');
 
     this.removeWebhook();
     // reset any changes that have been made locally
