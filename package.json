@@ -17,7 +17,7 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "./fullStart.sh",
+    "start": "sudo ./fullStart.sh",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "prestart": "sudo npm install nodemon -g && sudo npm install",
