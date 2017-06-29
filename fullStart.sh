@@ -1,0 +1,1 @@
+tsc && tsc --p app/tsconfig.json && concurrently \"npm run tsc:w\" \"nodemon server.js\
