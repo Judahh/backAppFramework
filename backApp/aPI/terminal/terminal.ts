@@ -142,7 +142,7 @@ export class Terminal {
     // reset any changes that have been made locally
     // childProcess.exec('sudo git reset --hard', this.currentReset);
 
-    // childProcess.exec('sudo git reset --hard', { cwd: "app" }, this.childReset);
+    // childProcess.exec('sudo git reset --hard', { cwd: "../backApp" }, this.childReset);
   }
 
   private currentReset = (err, stdout, stderr) => {
@@ -168,14 +168,14 @@ export class Terminal {
     console.log("Child Reset:");
     this.showInfo(stdout, stderr);
     // and ditch any files that have been added locally too
-    childProcess.exec('sudo git clean -df', { cwd: "app" }, this.childClean);
+    childProcess.exec('sudo git clean -df', { cwd: "../backApp" }, this.childClean);
   }
 
   private childClean = (err, stdout, stderr) => {
     console.log("Child Clean:");
     this.showInfo(stdout, stderr);
     // now pull down the latest
-    childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', { cwd: "app" }, this.childPull);
+    childProcess.exec('sudo git pull https://github.com/Judahh/appFramework.git master', { cwd: "../backApp" }, this.childPull);
   }
 
   private childPull = (err, stdout, stderr) => {

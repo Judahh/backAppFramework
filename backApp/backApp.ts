@@ -33,7 +33,8 @@ export class BackApp {
   // Configure Express middleware.
   private configureMiddleware(): void {
     //this.express.use(allowCrossDomain);
-    this.express.use(express.static(path.resolve('app')));
+    this.express.use(express.static(path.resolve('../backApp')));
+    this.express.use(express.static(path.resolve('../app')));
     this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
@@ -66,7 +67,7 @@ export class BackApp {
   }
 
   // private get(request: Request, response: Response){
-  //   response.sendFile(path.resolve('app/index.html'));
+  //   response.sendFile(path.resolve('../backApp/index.html'));
   // }
 
   private onError(error: NodeJS.ErrnoException){
