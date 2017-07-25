@@ -43,6 +43,7 @@
     "@types/morgan": "^1.7.32",
     "@types/node": "^8.0.16",
     "@types/request": "^2.0.0",
+    "@types/electron": "^1.6.10",
     "electron": "^1.6.11",
     "async": "^2.5.0",
     "body-parser": "^1.17.2",
