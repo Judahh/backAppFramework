@@ -2,9 +2,11 @@ import {Router, Request, Response, NextFunction} from 'express';
 import * as logger from 'morgan';
 import * as path from 'path';
 import {Terminal} from './terminal/terminal';
+import {Electron} from './electron/electron';
 
 export class Api {
-  private router: Router
+  private router: Router;
+  private electron: Electron;
 
   /**
    * Initialize the HeroRouter
@@ -52,6 +54,7 @@ export class Api {
     this.router.post('/', this.getPage);
     // this.router.post('/:id', this.getOne);
     this.router.post('/refresh', this.refresh);
+    this.electron=new Electron();
   }
 
 }

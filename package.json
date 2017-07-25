@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Judahh APP project",
-  "main": "electron.js",
+  "main": "server.js",
   "keywords": [
     "judahh",
     "app"
@@ -18,7 +18,7 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "tsc && concurrently \"npm run tsc:w\" \"nodemon server.js\"",
+    "start": "electron .",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "prestart": "sudo npm install nodemon -g && sudo npm install",
