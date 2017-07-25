@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Judahh APP project",
-  "main":"electronMain.js",
+  "main": "electron.js",
   "keywords": [
     "judahh",
     "app"
