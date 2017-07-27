@@ -6,7 +6,9 @@ export class Electron {
     private mainWindow: any;
 
     constructor() {
-        this.init();
+        if(app!=undefined){
+            this.init();
+        }
     }
 
     private createWindow() {
