@@ -14,7 +14,7 @@ export class Api {
   constructor() {
     this.router = Router();
     this.init();
-    Terminal.getInstance().startNgrok();
+    // Terminal.getInstance().startNgrok();
   }
 
   public getRouter(){
@@ -40,7 +40,7 @@ export class Api {
    * GET all Heroes.
    */
   public refresh(request: Request, response: Response, nextFunction: NextFunction) {
-    Terminal.getInstance().upgrade(request.body.pusher,request.body.repository);
+    // Terminal.getInstance().upgrade(request.body.pusher,request.body.repository);
   }
 
   /**
