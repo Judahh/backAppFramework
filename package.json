@@ -38,21 +38,20 @@
   },
   "dependencies": {
     "@types/body-parser": "1.16.4",
-    "@types/mongodb": "^2.2.7",
+    "@types/mongodb": "^2.2.9",
     "@types/mongoose": "^4.7.19",
     "@types/morgan": "^1.7.32",
     "@types/request": "^2.0.0",
     "@types/node": "^7.0.18",
-    "electron": "^1.6.11",
     "async": "^2.5.0",
     "body-parser": "^1.17.2",
     "compression": "^1.7.0",
     "concurrently": "^3.5.0",
     "dotenv": "^4.0.0",
-    "express": "4.15.3",
+    "express": "4.15.4",
     "is-online": "^7.0.0",
-    "mongodb": "^2.2.30",
-    "mongoose": "^4.11.4",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.6",
     "morgan": "^1.8.2",
     "node-local-tunnel": "^0.1.8",
     "node-webhooks": "^1.2.4",
@@ -63,5 +62,7 @@
     "typescript": "2.4.2",
     "underscore": "^1.8.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "electron": "1.7.5"
+  }
 }
