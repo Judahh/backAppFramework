@@ -22,10 +22,10 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "ntsc && concurrently \"nodemon server.js\"",
+    "start": "node server.js && concurrently \"ntsc -w\"",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
-    "prestart": "npm install nodemon -g && npm install",
+    "prestart": "npm install",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
     "ntsc": "ntsc",
@@ -67,6 +67,5 @@
     "underscore": "^1.8.3",
     "electron": "1.7.5"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
