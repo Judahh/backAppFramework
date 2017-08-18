@@ -22,7 +22,7 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "node server.js && concurrently \"ntsc -w\"",
+    "start": "ntsc && node server.js && concurrently \"ntsc -w\"",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "prestart": "npm install",
