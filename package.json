@@ -4,6 +4,10 @@
   "author": "Judah <judahholanda7@gmail.com>",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "8.1.2",
+    "npm": "5.3.0"
+  },
   "description": "Judahh APP project",
   "main": "server.js",
   "keywords": [
@@ -60,9 +64,9 @@
     "q": "^1.5.0",
     "request": "^2.81.0",
     "typescript": "2.4.2",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "electron": "1.7.5"
   },
   "devDependencies": {
-    "electron": "1.7.5"
   }
 }
