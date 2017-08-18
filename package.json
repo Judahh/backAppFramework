@@ -22,7 +22,7 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "ntsc && concurrently \"npm run ntsc:w\" \"nodemon server.js\"",
+    "start": "ntsc && concurrently \"nodemon server.js\"",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "prestart": "npm install nodemon -g && npm install",
