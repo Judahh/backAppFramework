@@ -55,6 +55,7 @@ export class Api {
     // this.router.post('/:id', this.getOne);
     this.router.post('/refresh', this.refresh);
     this.electron=new Electron();
+    
   }
 
 }

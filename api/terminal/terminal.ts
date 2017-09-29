@@ -14,8 +14,9 @@ export class Terminal {
   private static instance: Terminal = new Terminal();
 
   constructor() {
-    this.handler = Handler.getInstance();
-    this.webhook = new Webhook();
+    // remover comments do handler e do webhook
+    // this.handler = Handler.getInstance();
+    // this.webhook = new Webhook();
     if (Terminal.instance) {
       throw new Error("The Read is a singleton class and cannot be created!");
     }
@@ -61,6 +62,11 @@ export class Terminal {
     this.getWebhooks();
 
     // this.handler.readArray("webhooks", this.webhooksReceived);
+  }
+
+  public startX() {
+    console.info("Starting STARTX...");
+    childProcess.exec('startx ');
   }
 
   private getNgrok = () => {
