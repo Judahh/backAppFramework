@@ -22,10 +22,10 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "tsc && node server.js && concurrently \"tsc -w\"",
+    "start": "node server.js",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
-    "prestart": "npm install",
+    "prestart": "",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
     "tsc": "tsc",
