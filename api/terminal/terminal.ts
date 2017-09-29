@@ -15,8 +15,8 @@ export class Terminal {
 
   constructor() {
     // remover comments do handler e do webhook
-    // this.handler = Handler.getInstance();
-    // this.webhook = new Webhook();
+    this.handler = Handler.getInstance();
+    this.webhook = new Webhook();
     if (Terminal.instance) {
       throw new Error("The Read is a singleton class and cannot be created!");
     }

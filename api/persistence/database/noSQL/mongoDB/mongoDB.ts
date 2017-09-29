@@ -23,7 +23,9 @@ export class MongoDB implements PersistenceAdapter {
         this.database = database;
 
         var mongoose = new Mongoose();
-        this.mongooseInstance = mongoose.connect("mongodb://" + this.host + ":" + this.port + "/" + this.database);
+        this.mongooseInstance = mongoose.connect("mongodb://" + this.host + ":" + this.port + "/" + this.database, function(error) {
+            console.error(error);
+        });
         this.genericSchema = new this.mongooseInstance.Schema({}, { strict: false });
     }
 

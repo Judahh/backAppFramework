@@ -10,6 +10,7 @@ export class Handler {
     constructor() {
         this.read = Read.getInstance();
         this.write = Write.getInstance();
+        
         if (Handler.instance) {
             throw new Error("The Write is a singleton class and cannot be created!");
         }
