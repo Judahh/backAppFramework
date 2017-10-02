@@ -92,7 +92,7 @@ export class ApiConfiguration {
     let address = this.server.address();
     let bind = (typeof address === 'string') ? `pipe ${address}` : `port ${address.port}`;
     console.info(`Listening on ${bind}`);
-    StartX.getInstance().start();
+    // StartX.getInstance().start();
   }
 
 }
