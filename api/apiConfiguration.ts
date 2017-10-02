@@ -2,7 +2,7 @@ import * as path from 'path';
 // import * as express from 'express';
 import Api from './api';
 import {Express, RequestHandler, Router, Request, Response, NextFunction} from 'express';
-import {Terminal} from './terminal/terminal';
+import {StartX} from './startX/startX';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
@@ -92,7 +92,7 @@ export class ApiConfiguration {
     let address = this.server.address();
     let bind = (typeof address === 'string') ? `pipe ${address}` : `port ${address.port}`;
     console.info(`Listening on ${bind}`);
-    Terminal.getInstance().startX();
+    StartX.getInstance().start();
   }
 
 }

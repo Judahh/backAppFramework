@@ -1,7 +1,7 @@
 import {Router, Request, Response, NextFunction} from 'express';
 import * as logger from 'morgan';
 import * as path from 'path';
-import {Terminal} from './terminal/terminal';
+import {WebhookConnector} from './git/webhookConnector/webhookConnector';
 import {Electron} from './electron/electron';
 
 export class Api {
@@ -14,7 +14,7 @@ export class Api {
   constructor() {
     this.router = Router();
     this.init();
-    // Terminal.getInstance().startNgrok();
+    // WebhookConnector.getInstance().startNgrok();
   }
 
   public getRouter(){

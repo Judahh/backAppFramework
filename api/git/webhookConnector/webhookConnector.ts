@@ -1,26 +1,26 @@
 import * as childProcess from 'child_process';
 import "./../util/utils"
 import { Webhook } from "./../webhook/webhook";
-import { Handler } from "./../persistence/handler/handler";
+import { Handler } from "./../../persistence/handler/handler";
 import * as os from 'os';
 // import * as webhook from 'node-webhooks';
 // var Webhook = require('node-webhooks');
 // import * as Webhook from 'node-webhooks';
 import * as request from 'request';
 
-export class Terminal {
+export class WebhookConnector {
   private webhook: Webhook;
   private handler: Handler;
-  private static instance: Terminal = new Terminal();
+  private static instance: WebhookConnector = new WebhookConnector();
 
   constructor() {
     this.handler = Handler.getInstance();
     this.webhook = new Webhook();
-    if (Terminal.instance) {
+    if (WebhookConnector.instance) {
       throw new Error("The Read is a singleton class and cannot be created!");
     }
 
-    Terminal.instance = this;
+    WebhookConnector.instance = this;
   }
 
   private getWebhooks = () => {
@@ -41,8 +41,8 @@ export class Terminal {
     }
   }
 
-  public static getInstance(): Terminal {
-    return Terminal.instance;
+  public static getInstance(): WebhookConnector {
+    return WebhookConnector.instance;
   }
   /**
    * GET all Heroes.
@@ -61,11 +61,6 @@ export class Terminal {
     this.getWebhooks();
 
     // this.handler.readArray("webhooks", this.webhooksReceived);
-  }
-
-  public startX() {
-    console.info("Starting STARTX...");
-    childProcess.exec('startx ');
   }
 
   private getNgrok = () => {
@@ -98,7 +93,7 @@ export class Terminal {
             if (this.webhook.getLink() != newLink) {
               console.log(this.webhook.getLink() + "!=" + newLink);
               this.webhook.setLink(newLink);
-              // Terminal.webhookLink = element.public_url + "/refresh";
+              // WebhookConnector.webhookLink = element.public_url + "/refresh";
               this.createWebhook();
             }
           }
@@ -188,7 +183,7 @@ export class Terminal {
     this.showInfo(stdout, stderr);
 
     // and npm install with --production
-    // childProcess.exec('sudo npm install', Terminal.install);
+    // childProcess.exec('sudo npm install', WebhookConnector.install);
     // process.exit();
     // and run tsc
     // childProcess.exec('sudo tsc', Page.execCallback);
