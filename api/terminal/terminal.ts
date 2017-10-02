@@ -14,7 +14,6 @@ export class Terminal {
   private static instance: Terminal = new Terminal();
 
   constructor() {
-    // remover comments do handler e do webhook
     this.handler = Handler.getInstance();
     this.webhook = new Webhook();
     if (Terminal.instance) {
