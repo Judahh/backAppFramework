@@ -1,6 +1,6 @@
 import * as path from 'path';
 // import * as express from 'express';
-import Api from './api';
+import SimpleApi from './simpleApi';
 import {Express, RequestHandler, Router, Request, Response, NextFunction} from 'express';
 import {StartX} from './startX/startX';
 import * as express from 'express';
@@ -54,7 +54,7 @@ export class ApiConfiguration {
     //     message: 'Hello World!'
     //   });
     // });
-    this.express.use('/', Api);
+    this.express.use('/', SimpleApi);
   }
 
   public run() {

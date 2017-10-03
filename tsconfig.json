@@ -10,13 +10,20 @@
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true,
     "typeRoots": [
-      "../node_modules/@types"
+      "../node_modules/@types",
+      "node_modules/@types"
     ],
     "types": [
-
       "node"
     ]
   },
+  "include": [ 
+    "../api/*",
+    "../api",
+    "../api/**/*",
+    "**/*",
+    "*"
+  ],
   "exclude": [ 
     "node_modules"
   ]
