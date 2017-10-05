@@ -1,7 +1,7 @@
 import * as childProcess from 'child_process';
 import "./../util/utils"
 import { Webhook } from "./../webhook/webhook";
-import { Handler } from "./../../persistence/handler/handler";
+import { Handler } from "flexiblepersistence";
 import * as os from 'os';
 // import * as webhook from 'node-webhooks';
 // var Webhook = require('node-webhooks');

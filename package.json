@@ -47,6 +47,8 @@
     "@types/morgan": "^1.7.33",
     "@types/node": "^8.0.24",
     "@types/request": "^2.0.3",
+    "basicutil": "^1.0.3",
+    "flexiblepersistence": "^1.0.0",
     "async": "^2.5.0",
     "body-parser": "^1.18.1",
     "compression": "^1.7.0",

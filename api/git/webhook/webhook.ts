@@ -1,6 +1,4 @@
-import { Handler } from "./../../persistence/handler/handler";
-import { Event } from "./../../persistence/event/event";
-import { Operation } from "./../../persistence/event/operation";
+import { Handler, Event, Operation } from "flexiblepersistence";
 require('dotenv').config();
 
 export class Webhook {
