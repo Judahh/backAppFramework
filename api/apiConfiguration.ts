@@ -1,6 +1,6 @@
 import * as path from 'path';
 // import * as express from 'express';
-import SimpleApi from './simpleApi';
+// import SimpleApi from './simpleApi';
 import {Express, RequestHandler, Router, Request, Response, NextFunction} from 'express';
 import {StartX} from './startX/startX';
 import * as express from 'express';
@@ -19,9 +19,11 @@ export class ApiConfiguration {
   private port: number|string|boolean;
   private server: http.Server;
   private router: Router;
+  private api: any;
 
   //Run configuration methods on the Express instance.
-  constructor(express: Express, port: number|string|boolean) {
+  constructor(express: Express, port: number|string|boolean, api:any) {
+    this.api = api;
     this.express=express;
     this.port=port;
     this.configureMiddleware();
@@ -54,7 +56,7 @@ export class ApiConfiguration {
     //     message: 'Hello World!'
     //   });
     // });
-    this.express.use('/', SimpleApi);
+    this.express.use('/', this.api.getRouter());
   }
 
   public run() {

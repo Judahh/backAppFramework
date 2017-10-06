@@ -1,5 +1,5 @@
 import * as childProcess from 'child_process';
-import "./../util/utils"
+import "./../../util/utils"
 import { Webhook } from "./../webhook/webhook";
 import { Handler } from "flexiblepersistence";
 import * as os from 'os';
@@ -14,6 +14,7 @@ export class WebhookConnector {
   private static instance: WebhookConnector = new WebhookConnector();
 
   constructor() {
+    console.log("The Read is a singleton class and cannot be created!");
     this.handler = Handler.getInstance();
     this.webhook = new Webhook();
     if (WebhookConnector.instance) {
