@@ -2,7 +2,7 @@
   "name": "backapi",
   "productName": "backApi",
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "private": false,
   "engines": {
     "node": "8.1.2",
@@ -41,18 +41,12 @@
   },
   "dependencies": {
     "@types/body-parser": "1.16.5",
-    "@types/mongodb": "^2.2.11",
-    "@types/mongoose": "^4.7.21",
     "@types/morgan": "^1.7.33",
     "@types/node": "^8.0.24",
     "@types/request": "^2.0.3",
-    "async": "^2.5.0",
     "basicutil": "1.0.12",
     "simpleutils": "1.0.1",
-    "webhookconnector": "1.0.1",
     "body-parser": "^1.18.1",
-    "compression": "^1.7.0",
-    "concurrently": "^3.5.0",
     "dotenv": "^4.0.0",
     "electron": "^1.8.1",
     "express": "4.15.4",
@@ -61,18 +55,11 @@
     "gulp-mocha": "^4.3.1",
     "gulp-typescript": "^3.2.2",
     "gulpclass": "^0.1.2",
-    "is-online": "^7.0.0",
-    "mongodb": "^2.2.31",
-    "mongoose": "^4.11.12",
     "morgan": "^1.8.2",
-    "node-local-tunnel": "^0.1.8",
-    "node-webhooks": "^1.2.4",
     "path": "0.12.7",
-    "q": "^1.5.0",
     "request": "^2.82.0",
     "run-sequence": "^2.2.0",
-    "typescript": "2.5.3",
-    "underscore": "^1.8.3"
+    "typescript": "2.5.3"
   },
   "devDependencies": {}
 }
