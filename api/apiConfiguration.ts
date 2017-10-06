@@ -1,8 +1,8 @@
 import * as path from 'path';
 // import * as express from 'express';
 // import SimpleApi from './simpleApi';
-import {Express, RequestHandler, Router, Request, Response, NextFunction} from 'express';
-import {StartX} from './startX/startX';
+import { Express, RequestHandler, Router, Request, Response, NextFunction } from 'express';
+import { StartX } from './startX/startX';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
@@ -16,28 +16,33 @@ export class ApiConfiguration {
   // ref to Express instance
   // public express: express.Application;
   private express: Express;
-  private port: number|string|boolean;
+  private port: number | string | boolean;
   private server: http.Server;
   private router: Router;
   private api: any;
+  private arrayPath: Array<String>;
 
   //Run configuration methods on the Express instance.
-  constructor(express: Express, port: number|string|boolean, api:any) {
+  constructor(express: Express, port: number | string | boolean, api: any, arrayPath: Array<String>) {
+    this.arrayPath = arrayPath;
     this.api = api;
-    this.express=express;
-    this.port=port;
+    this.express = express;
+    this.port = port;
     this.configureMiddleware();
     this.configureRoutes();
     this.router = Router();
   }
- 
-//   
+
+  //   
 
   // Configure Express middleware.
   private configureMiddleware(): void {
     //this.express.use(allowCrossDomain);
-    this.express.use(express.static(path.resolve('../backApp')));
-    this.express.use(express.static(path.resolve('../app')));
+    this.arrayPath.forEach(pathString => {
+      this.express.use(express.static(path.resolve(pathString)));
+    });
+    // this.express.use(express.static(path.resolve('backApp')));
+    // this.express.use(express.static(path.resolve('app')));
     this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
@@ -49,7 +54,7 @@ export class ApiConfiguration {
      * working so far. This function will change when we start to add more
      * API endpoints */
     // let router = express.Router();
-    
+
     // placeholder route handler
     // router.get('/', (req, res, next) => {
     //   res.json({
@@ -60,23 +65,23 @@ export class ApiConfiguration {
   }
 
   public run() {
-      // this.express.listen(this.port);  
-      console.info('ts-express:server');
-      this.server = http.createServer(this.express);
-      this.server.listen(this.port);
-      this.server.on('error', () => this.onError);
-      this.server.on('listening', () => this.onListening());
-      // this.router.get('/', this.get);
+    // this.express.listen(this.port);  
+    console.info('ts-express:server');
+    this.server = http.createServer(this.express);
+    this.server.listen(this.port);
+    this.server.on('error', () => this.onError);
+    this.server.on('listening', () => this.onListening());
+    // this.router.get('/', this.get);
   }
 
   // private get(request: Request, response: Response){
   //   response.sendFile(path.resolve('../backApp/index.html'));
   // }
 
-  private onError(error: NodeJS.ErrnoException){
+  private onError(error: NodeJS.ErrnoException) {
     if (error.syscall !== 'listen') throw error;
     let bind = (typeof this.port === 'string') ? 'Pipe ' + this.port : 'Port ' + this.port;
-    switch(error.code) {
+    switch (error.code) {
       case 'EACCES':
         console.error(`${bind} requires elevated privileges`);
         process.exit(1);
@@ -90,7 +95,7 @@ export class ApiConfiguration {
     }
   }
 
-  private onListening(){
+  private onListening() {
     let address = this.server.address();
     let bind = (typeof address === 'string') ? `pipe ${address}` : `port ${address.port}`;
     console.info(`Listening on ${bind}`);

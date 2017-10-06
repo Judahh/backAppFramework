@@ -1,28 +1,27 @@
 {
-  "name": "backApi",
+  "name": "backapi",
   "productName": "backApi",
-  "author": "Judah <judahholanda7@gmail.com>",
-  "version": "0.1.0",
-  "private": true,
+  "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
+  "version": "0.9.2",
+  "private": false,
   "engines": {
     "node": "8.1.2",
     "npm": "5.3.0"
   },
   "description": "Judahh APP project",
-  "main": "server.js",
+  "main": "index.js",
   "keywords": [
     "judahh",
     "app"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/Judahh/appFramework"
+    "url": "git+https://github.com/Judahh/backApi.git"
   },
-  "homepage": "https://judahh.com",
-  "license": "MIT",
+  "homepage": "https://github.com/Judahh/backApi#readme",
+  "license": "BSD-3-Clause",
   "angular-cli": {},
   "scripts": {
-    "start": "node ./../api/server.js",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "prestart": "",
@@ -48,14 +47,16 @@
     "@types/node": "^8.0.24",
     "@types/request": "^2.0.3",
     "async": "^2.5.0",
-    "basicutil": "^1.0.10",
+    "basicutil": "1.0.12",
+    "simpleutils": "1.0.1",
+    "webhookconnector": "1.0.1",
     "body-parser": "^1.18.1",
     "compression": "^1.7.0",
     "concurrently": "^3.5.0",
     "dotenv": "^4.0.0",
     "electron": "^1.8.1",
     "express": "4.15.4",
-    "flexiblepersistence": "^1.0.0",
+    "flexiblepersistence": "1.0.1",
     "gulp": "^3.9.1",
     "gulp-mocha": "^4.3.1",
     "gulp-typescript": "^3.2.2",

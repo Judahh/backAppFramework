@@ -18,13 +18,6 @@
       "node"
     ]
   },
-  "include": [ 
-    "../api/*",
-    "../api",
-    "../api/**/*",
-    "**/*",
-    "*"
-  ],
   "exclude": [ 
     "node_modules"
   ]
