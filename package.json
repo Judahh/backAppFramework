@@ -1,8 +1,8 @@
 {
-  "name": "backapi",
+  "name": "backapijh",
   "productName": "backApi",
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
-  "version": "0.9.7",
+  "version": "0.2.3",
   "private": false,
   "engines": {
     "node": "8.1.2",
