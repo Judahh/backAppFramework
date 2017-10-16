@@ -13,8 +13,8 @@ export class Electron {
 
     private createWindow() {
         // Create the browser window.
-        //var appIcon = new Tray('../favicon.png');
-        var appIcon = nativeImage.createFromPath(__dirname + '/favicon.png');
+        //let appIcon = new Tray('../favicon.png');
+        let appIcon = nativeImage.createFromPath(__dirname + '/favicon.png');
 
         //   mainWindow = new BrowserWindow({width: 800, height: 600})
 

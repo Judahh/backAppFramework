@@ -2,7 +2,7 @@ import * as childProcess from 'child_process';
 import "basicutil"
 import * as os from 'os';
 // import * as webhook from 'node-webhooks';
-// var Webhook = require('node-webhooks');
+// let Webhook = require('node-webhooks');
 // import * as Webhook from 'node-webhooks';
 import * as request from 'request';
 
