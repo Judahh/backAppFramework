@@ -2,7 +2,7 @@
   "name": "backapijh",
   "productName": "backApi",
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
-  "version": "0.2.5",
+  "version": "0.2.8",
   "private": false,
   "engines": {
     "node": "8.1.2",
@@ -45,9 +45,9 @@
     "@types/node": "^8.0.24",
     "@types/request": "^2.0.3",
     "basicutil": "1.0.13",
-    "simpleutils": "1.0.2",
     "body-parser": "^1.18.1",
     "dotenv": "^4.0.0",
+    "ejs": "^2.5.7",
     "electron": "^1.8.1",
     "express": "4.15.4",
     "flexiblepersistence": "1.0.2",
@@ -59,6 +59,7 @@
     "path": "0.12.7",
     "request": "^2.82.0",
     "run-sequence": "^2.2.0",
+    "simpleutils": "1.0.2",
     "typescript": "2.5.3"
   },
   "devDependencies": {}

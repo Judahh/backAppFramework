@@ -43,6 +43,9 @@ export class ApiConfiguration {
     });
     // this.express.use(express.static(path.resolve('backApp')));
     // this.express.use(express.static(path.resolve('app')));
+    // this.express.engine('html', require('ejs').renderFile);
+    // this.express.set('views', __dirname);
+    // this.express.set('view engine', 'html');
     this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
