@@ -3,6 +3,7 @@ import * as path from 'path';
 // import SimpleApi from './simpleApi';
 import { Express, RequestHandler, Router, Request, Response, NextFunction } from 'express';
 import { StartX } from './startX/startX';
+import * as io from 'socket.io';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
@@ -21,6 +22,8 @@ export class ApiConfiguration {
   private router: Router;
   private api: any;
   private arrayPath: Array<String>;
+  private io;
+
 
   //Run configuration methods on the Express instance.
   constructor(express: Express, port: number | string | boolean, api: any, arrayPath: Array<String>) {
@@ -53,17 +56,6 @@ export class ApiConfiguration {
 
   // Configure API endpoints.
   private configureRoutes(): void {
-    /* This is just to get up and running, and to make sure what we've got is
-     * working so far. This function will change when we start to add more
-     * API endpoints */
-    // let router = express.Router();
-
-    // placeholder route handler
-    // router.get('/', (req, res, next) => {
-    //   res.json({
-    //     message: 'Hello World!'
-    //   });
-    // });
     this.express.use('/', this.api.getRouter());
   }
 
@@ -71,7 +63,10 @@ export class ApiConfiguration {
     // this.express.listen(this.port);  
     console.info('ts-express:server');
     this.server = http.createServer(this.express);
+    this.io=io(this.server);
+    this.api.setIo(this.io);
     this.server.listen(this.port);
+    this.api.afterListen();
     this.server.on('error', () => this.onError);
     this.server.on('listening', () => this.onListening());
     // this.router.get('/', this.get);
