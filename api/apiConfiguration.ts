@@ -9,6 +9,7 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as allowCrossDomain from "./middleware/allowCrossDomain";
 import * as http from 'http';
+import { BasicApi } from './basicApi';
 // import * as debug from 'debug';
 
 // Creates and configures an ExpressJS web server.
@@ -20,7 +21,7 @@ export class ApiConfiguration {
   private port: number | string | boolean;
   private server: http.Server;
   private router: Router;
-  private api: any;
+  private api: BasicApi;
   private arrayPath: Array<String>;
   private io;
 
