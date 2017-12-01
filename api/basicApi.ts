@@ -21,7 +21,6 @@ export class BasicApi {
     this.arraySocketExternal = new Array<any>();
     this.arraySocketClient = new Array<any>();
     this.router = Router();
-    this.init();
     // this.electron=new Electron();
   }
 
@@ -75,8 +74,4 @@ export class BasicApi {
     let _self = this;
     this.io.on('connection', (socket) => { _self.addSocket(socket); });
   }
-
-  public init() {
-  }
-
 }
