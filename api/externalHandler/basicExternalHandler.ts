@@ -3,8 +3,8 @@ import * as ioClient from 'socket.io-client';
 
 export class BasicExternalHandler {
     protected identification: any;
-    private arraySocket: Array<BasicSocket>;
-    private arraySocketClient: Array<BasicSocket>;
+    protected arraySocket: Array<BasicSocket>;
+    protected arraySocketClient: Array<BasicSocket>;
 
     constructor() {
         this.arraySocket = new Array<BasicSocket>();
