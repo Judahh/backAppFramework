@@ -29,7 +29,7 @@ export class BasicExternalHandler {
         this.configSocket(basicSocket);
     }
 
-    public configSocket(basicSocket) { }
+    public configSocket(basicSocket: BasicSocket) { }
 
     public init() { }
 }

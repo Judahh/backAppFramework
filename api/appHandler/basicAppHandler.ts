@@ -55,7 +55,7 @@ export class BasicAppHandler {
         this.configSocket(basicSocket);
     }
 
-    public configSocket(basicSocket) { }
+    public configSocket(basicSocket: BasicSocket) { }
 
     public init() { }
 
