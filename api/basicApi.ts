@@ -1,44 +1,30 @@
+import { BasicAppHandler } from './appHandler/basicAppHandler'
+import { BasicExternalHandler } from './externalHandler/basicExternalHandler'
 import { Electron } from './electron/electron';
 import { ApiConfiguration } from './apiConfiguration';
-import { Router, Request, Response, NextFunction } from 'express';
-import * as ioClient from 'socket.io-client';
-
 
 export class BasicApi {
-  protected router: Router;
   protected electron: Electron;
   protected io;
-  protected arraySocketApp: Array<any>;
   protected arraySocketExternal: Array<any>;
   protected arraySocketClient: Array<any>;
-  // private gstreamer: Gstreamer;
+  protected appHandler: BasicAppHandler;
+  protected externalHandler: BasicExternalHandler;
 
-  /**
-   * Initialize the HeroRouter
-   */
-  constructor() {
-    this.arraySocketApp = new Array<any>();
+  constructor(appHandler: BasicAppHandler, externalHandler: BasicExternalHandler) {
     this.arraySocketExternal = new Array<any>();
     this.arraySocketClient = new Array<any>();
-    this.router = Router();
+    this.appHandler = appHandler;
+    this.externalHandler = externalHandler;
     // this.electron=new Electron();
   }
 
-  public connectToServer(serverAddress) {
-    let socketClient = ioClient(serverAddress);
-    socketClient.on('connect', () => { console.log('CONNECTED'); });
-    socketClient.on('disconnect', () => { console.log('Disconnected'); });
-    this.arraySocketClient.push(socketClient);
-  }
-
-
   public getRouter() {
-    return this.router;
+    return this.appHandler.getRouter();
   }
 
   public addSocket(socket) {
     this.inspectSocket(socket);
-
   }
 
   private inspectSocket(socket) {
@@ -46,24 +32,14 @@ export class BasicApi {
     socket.on('identification', (identification) => {
       switch (identification.type) {
         case 'app':
-          this.arraySocketApp.push(socket);
-          this.configSocketApp(socket);
+          this.appHandler.addSocket(socket);
           break;
 
         default:
-          this.arraySocketExternal.push(socket);
-          this.configSocketExternal(socket);
+          this.externalHandler.addSocket(socket);
           break;
       }
     });
-  }
-
-  public configSocketApp(socket) {
-
-  }
-
-  public configSocketExternal(socket) {
-
   }
 
   public setIo(io) {
