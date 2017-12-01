@@ -32,11 +32,11 @@ export class BasicApi {
     socket.on('identification', (identification) => {
       switch (identification.type) {
         case 'app':
-          this.appHandler.addSocket(socket);
+          this.appHandler.addSocket(socket, identification);
           break;
 
         default:
-          this.externalHandler.addSocket(socket);
+          this.externalHandler.addSocket(socket, identification);
           break;
       }
     });

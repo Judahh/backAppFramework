@@ -1,16 +1,17 @@
 import { Router, Request, Response, NextFunction } from 'express';
+import { BasicSocket } from './../socket/basicSocket'
 import * as path from 'path';
 
 export class BasicAppHandler {
     protected router: Router;
-    private arraySocket: Array<any>;
+    private arraySocket: Array<BasicSocket>;
 
     constructor() {
         this.router = Router();
-        this.arraySocket = new Array<any>();
+        this.arraySocket = new Array<BasicSocket>();
 
         let _self = this;
-        
+
         this.router.get('/', (request: Request, response: Response, nextFunction: NextFunction) => { _self.getPage(request, response, nextFunction); });
         this.router.get('/refresh', (request: Request, response: Response, nextFunction: NextFunction) => { _self.refresh(request, response, nextFunction); });
 
@@ -48,16 +49,15 @@ export class BasicAppHandler {
         // WebhookConnector.getInstance().upgrade(request.body);
     }
 
-    public addSocket(socket) {
-        this.arraySocket.push(socket);
-        this.configSocket(socket);
+    public addSocket(socket, identification) {
+        let basicSocket = new BasicSocket(identification, socket);
+        this.arraySocket.push(basicSocket);
+        this.configSocket(basicSocket);
     }
 
-    public configSocket(socket) { }
+    public configSocket(basicSocket) { }
 
-    public init() {
-
-    }
+    public init() { }
 
     public getRouter() {
         return this.router;

@@ -1,29 +1,35 @@
+import { BasicSocket } from './../socket/basicSocket'
 import * as ioClient from 'socket.io-client';
 
 export class BasicExternalHandler {
-    private arraySocket: Array<any>;
-    private arraySocketClient: Array<any>;
+    protected identification: any;
+    private arraySocket: Array<BasicSocket>;
+    private arraySocketClient: Array<BasicSocket>;
 
     constructor() {
-        this.arraySocket = new Array<any>();
-        this.arraySocketClient = new Array<any>();
+        this.arraySocket = new Array<BasicSocket>();
+        this.arraySocketClient = new Array<BasicSocket>();
         this.init();
     }
 
-    public addSocket(socket) {
-        this.arraySocket.push(socket);
-        this.configSocket(socket);
-    }
+
 
     public connectToServer(serverAddress) {
         let socketClient = ioClient(serverAddress);
         socketClient.on('connect', () => { console.log('CONNECTED'); });
         socketClient.on('disconnect', () => { console.log('Disconnected'); });
-        this.arraySocketClient.push(socketClient);
+        let basicSocket = new BasicSocket({ type: 'server', address: serverAddress }, socketClient);
+        this.arraySocketClient.push(basicSocket);
     }
 
-    public configSocket(socket) { }
 
-    public init() {
+    public addSocket(socket, identification) {
+        let basicSocket = new BasicSocket(identification, socket);
+        this.arraySocket.push(basicSocket);
+        this.configSocket(basicSocket);
     }
+
+    public configSocket(basicSocket) { }
+
+    public init() { }
 }
