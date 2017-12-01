@@ -1,23 +1,35 @@
 import { Electron } from './electron/electron';
 import { ApiConfiguration } from './apiConfiguration';
 import { Router, Request, Response, NextFunction } from 'express';
+import * as ioClient from 'socket.io-client';
 
 
 export class BasicApi {
   protected router: Router;
   protected electron: Electron;
   protected io;
-  protected arraySocket: Array<any>;
+  protected arraySocketApp: Array<any>;
+  protected arraySocketExternal: Array<any>;
+  protected arraySocketClient: Array<any>;
   // private gstreamer: Gstreamer;
 
   /**
    * Initialize the HeroRouter
    */
   constructor() {
-    this.arraySocket = new Array<any>();
+    this.arraySocketApp = new Array<any>();
+    this.arraySocketExternal = new Array<any>();
+    this.arraySocketClient = new Array<any>();
     this.router = Router();
     this.init();
     // this.electron=new Electron();
+  }
+
+  public connectToServer(serverAddress) {
+    let socketClient = ioClient(serverAddress);
+    socketClient.on('connect', () => { console.log('CONNECTED'); });
+    socketClient.on('disconnect', () => { console.log('Disconnected'); });
+    this.arraySocketClient.push(socketClient);
   }
 
 
@@ -26,11 +38,32 @@ export class BasicApi {
   }
 
   public addSocket(socket) {
-    this.arraySocket.push(socket);
-    this.configSocket(socket);
+    this.inspectSocket(socket);
+
   }
 
-  public configSocket(socket) {
+  private inspectSocket(socket) {
+    socket.emit('getIdentification', {});
+    socket.on('identification', (identification) => {
+      switch (identification.type) {
+        case 'app':
+          this.arraySocketApp.push(socket);
+          this.configSocketApp(socket);
+          break;
+
+        default:
+          this.arraySocketExternal.push(socket);
+          this.configSocketExternal(socket);
+          break;
+      }
+    });
+  }
+
+  public configSocketApp(socket) {
+
+  }
+
+  public configSocketExternal(socket) {
 
   }
 
