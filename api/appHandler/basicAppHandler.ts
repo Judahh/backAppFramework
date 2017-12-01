@@ -4,7 +4,7 @@ import * as path from 'path';
 
 export class BasicAppHandler {
     protected router: Router;
-    private arraySocket: Array<BasicSocket>;
+    protected arraySocket: Array<BasicSocket>;
 
     constructor() {
         this.router = Router();
