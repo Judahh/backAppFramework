@@ -7,13 +7,14 @@ export class BasicApi {
   protected router: Router;
   protected electron: Electron;
   protected io;
-  protected socket;
+  protected arraySocket: Array<any>;
   // private gstreamer: Gstreamer;
 
   /**
    * Initialize the HeroRouter
    */
   constructor() {
+    this.arraySocket = new Array<any>();
     this.router = Router();
     this.init();
     // this.electron=new Electron();
@@ -24,8 +25,13 @@ export class BasicApi {
     return this.router;
   }
 
-  public setSocket(socket) {
-    this.socket = socket;
+  public addSocket(socket) {
+    this.arraySocket.push(socket);
+    this.configSocket(socket);
+  }
+
+  public configSocket(socket) {
+
   }
 
   public setIo(io) {
@@ -34,7 +40,7 @@ export class BasicApi {
 
   public afterListen() {
     let _self = this;
-    this.io.on('connection', (socket) => { _self.setSocket(socket); });
+    this.io.on('connection', (socket) => { _self.addSocket(socket); });
   }
 
   public init() {
