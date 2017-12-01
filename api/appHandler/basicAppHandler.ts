@@ -8,7 +8,18 @@ export class BasicAppHandler {
     constructor() {
         this.router = Router();
         this.arraySocket = new Array<any>();
+
+        let _self = this;
+        
+        this.router.get('/', (request: Request, response: Response, nextFunction: NextFunction) => { _self.getPage(request, response, nextFunction); });
+        this.router.get('/refresh', (request: Request, response: Response, nextFunction: NextFunction) => { _self.refresh(request, response, nextFunction); });
+
+        this.router.post('/', (request: Request, response: Response, nextFunction: NextFunction) => { _self.getPage(request, response, nextFunction); });
+        this.router.post('/refresh', (request: Request, response: Response, nextFunction: NextFunction) => { _self.refresh(request, response, nextFunction); });
+
         this.init();
+
+        this.pageRouting();
     }
 
     public pageRouting() {
@@ -42,17 +53,10 @@ export class BasicAppHandler {
         this.configSocket(socket);
     }
 
-    public configSocket(socket){}
+    public configSocket(socket) { }
 
     public init() {
-        let _self = this;
-        this.router.get('/', (request: Request, response: Response, nextFunction: NextFunction) => { _self.getPage(request, response, nextFunction); });
-        this.router.get('/refresh', (request: Request, response: Response, nextFunction: NextFunction) => { _self.refresh(request, response, nextFunction); });
 
-        this.router.post('/', (request: Request, response: Response, nextFunction: NextFunction) => { _self.getPage(request, response, nextFunction); });
-        this.router.post('/refresh', (request: Request, response: Response, nextFunction: NextFunction) => { _self.refresh(request, response, nextFunction); });
-
-        this.pageRouting();
     }
 
     public getRouter() {
