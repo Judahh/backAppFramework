@@ -17,7 +17,7 @@ export class BasicExternalHandler {
         socketClient.on('connect', () => { console.log('CONNECTED'); });
         socketClient.on('disconnect', () => { console.log('Disconnected'); });
         socketClient.on('getIdentification', () => { socketClient.emit('identification', { type: 'server' }) });
-        let basicSocket = new BasicSocket({ type: 'server', address: serverAddress }, socketClient);
+        let basicSocket = new BasicSocket({ type: 'client', address: serverAddress }, socketClient);
         this.arraySocketClient.push(basicSocket);
         
     }

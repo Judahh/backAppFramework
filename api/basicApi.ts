@@ -35,7 +35,6 @@ export class BasicApi {
           this.appHandler.addSocket(socket, identification);
           break;
 
-        case 'server':
         default:
           this.externalHandler.addSocket(socket, identification);
           break;
