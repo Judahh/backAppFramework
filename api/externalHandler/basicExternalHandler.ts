@@ -12,16 +12,15 @@ export class BasicExternalHandler {
         this.init();
     }
 
-
-
     public connectToServer(serverAddress) {
         let socketClient = ioClient(serverAddress);
         socketClient.on('connect', () => { console.log('CONNECTED'); });
         socketClient.on('disconnect', () => { console.log('Disconnected'); });
+        socketClient.on('getIdentification', () => { socketClient.emit('identification', { type: 'server' }) });
         let basicSocket = new BasicSocket({ type: 'server', address: serverAddress }, socketClient);
         this.arraySocketClient.push(basicSocket);
+        
     }
-
 
     public addSocket(socket, identification) {
         let basicSocket = new BasicSocket(identification, socket);
