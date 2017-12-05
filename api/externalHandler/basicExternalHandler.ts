@@ -12,14 +12,22 @@ export class BasicExternalHandler {
         this.init();
     }
 
-    public connectToServer(serverAddress) {
+    public connectToServer(serverAddress, identification?:any) {
         let socketClient = ioClient(serverAddress);
         socketClient.on('connect', () => { console.log('CONNECTED'); });
         socketClient.on('disconnect', () => { console.log('Disconnected'); });
-        socketClient.on('getIdentification', () => { socketClient.emit('identification', { type: 'server' }) });
-        let basicSocket = new BasicSocket({ type: 'client', address: serverAddress }, socketClient);
+
+        if (identification == undefined || identification == null) {
+            identification = {}
+        }
+
+        identification['type'] = 'external';
+        identification['serverAddress'] = serverAddress;
+
+        socketClient.on('getIdentification', () => { socketClient.emit('identification', identification) });
+        let basicSocket = new BasicSocket(identification, socketClient);
         this.arraySocketClient.push(basicSocket);
-        
+
     }
 
     public addSocket(socket, identification) {
