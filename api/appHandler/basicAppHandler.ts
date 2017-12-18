@@ -49,8 +49,7 @@ export class BasicAppHandler {
         // WebhookConnector.getInstance().upgrade(request.body);
     }
 
-    public addSocket(socket, identification) {
-        let basicSocket = new BasicSocket(identification, socket);
+    public addSocket(basicSocket: BasicSocket) {
         this.arraySocket.push(basicSocket);
         this.configSocket(basicSocket);
     }

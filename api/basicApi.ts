@@ -1,7 +1,9 @@
 import { BasicAppHandler } from './appHandler/basicAppHandler'
 import { BasicExternalHandler } from './externalHandler/basicExternalHandler'
+import { BasicSocket } from './socket/basicSocket'
 import { Electron } from './electron/electron';
 import { ApiConfiguration } from './apiConfiguration';
+const IV_LENGTH = 16; // For AES, this is always 16
 
 export class BasicApi {
   protected electron: Electron;
@@ -28,15 +30,22 @@ export class BasicApi {
   }
 
   private inspectSocket(socket) {
-    socket.emit('getIdentification', {});
-    socket.on('identification', (identification) => {
+    let basicSocket = new BasicSocket(socket);
+    let key = BasicSocket.generateKey(32);
+    
+    basicSocket.emit('getIdentification', key);
+
+    basicSocket.setKey(key);
+
+    basicSocket.on('identification', (identification) => {
+      basicSocket.setIdentification(identification);
       switch (identification.type) {
         case 'app':
-          this.appHandler.addSocket(socket, identification);
+          this.appHandler.addSocket(basicSocket);
           break;
 
         default:
-          this.externalHandler.addSocket(socket, identification);
+          this.externalHandler.addSocket(basicSocket);
           break;
       }
     });

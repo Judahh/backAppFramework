@@ -24,14 +24,20 @@ export class BasicExternalHandler {
         identification['type'] = 'external';
         identification['serverAddress'] = serverAddress;
 
-        socketClient.on('getIdentification', () => { socketClient.emit('identification', identification) });
-        let basicSocket = new BasicSocket(identification, socketClient);
+        let basicSocket = new BasicSocket(socketClient);
+
+        basicSocket.setIdentification(identification);
+
+        basicSocket.on('getIdentification', (key) => { 
+            basicSocket.setKey(key);
+            basicSocket.emit('identification', identification);
+        });
+        
         this.arraySocketClient.push(basicSocket);
 
     }
 
-    public addSocket(socket, identification) {
-        let basicSocket = new BasicSocket(identification, socket);
+    public addSocket(basicSocket: BasicSocket) {
         this.arraySocket.push(basicSocket);
         this.configSocket(basicSocket);
     }
