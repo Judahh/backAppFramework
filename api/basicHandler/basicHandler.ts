@@ -3,7 +3,7 @@ import { BasicHardwareHandler } from './../hardwareHandler/basicHardwareHandler'
 
 export class BasicHandler {
     protected arraySocket: Array<BasicSocket>;
-    protected hardwareHandler: BasicHardwareHandler
+    protected hardwareHandler;
 
     constructor(hardwareHandler: BasicHardwareHandler) {
         this.arraySocket = new Array<BasicSocket>();
