@@ -63,6 +63,9 @@ export class BasicSocket {
         let _self = this;
         if (_self.key === undefined || messageName === 'disconnect') {
             _self.socket.emit(messageName, message);
+            if (messageName === 'disconnect') {
+                _self.key = undefined;
+            }
         } else {
             _self.socket.emit(messageName, _self.encrypt(message));
         }
@@ -74,6 +77,9 @@ export class BasicSocket {
         this.socket.on(messageName, (message) => {
             if (_self.key === undefined || messageName === 'disconnect') {
                 callback(message);
+                if (messageName === 'disconnect') {
+                    _self.key = undefined;
+                }
             } else {
                 callback(_self.decrypt(message));
             }
