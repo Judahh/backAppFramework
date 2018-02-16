@@ -72,7 +72,7 @@ export class BasicSocket {
     public on(messageName, callback) {
         let _self = this;
         this.socket.on(messageName, (message) => {
-            if (_self.key == undefined) {
+            if (_self.key === undefined || messageName === 'disconnect') {
                 callback(message);
             } else {
                 callback(_self.decrypt(message));
