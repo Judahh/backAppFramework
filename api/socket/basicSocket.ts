@@ -61,10 +61,7 @@ export class BasicSocket {
 
     public emit(messageName, message) {
         let _self = this;
-        if (_self.key == undefined) {
-            // _self.subscribe(() => {
-            //     _self.socket.emit(messageName, _self.encrypt(message));
-            // });
+        if (_self.key === undefined || messageName === 'disconnect') {
             _self.socket.emit(messageName, message);
         } else {
             _self.socket.emit(messageName, _self.encrypt(message));
