@@ -22,12 +22,12 @@ export class ApiConfiguration {
   private server: http.Server;
   private router: Router;
   private api: BasicApi;
-  private arrayPath: Array<String>;
+  private arrayPath: Array<string>;
   private io;
 
 
   //Run configuration methods on the Express instance.
-  constructor(express: Express, port: number | string | boolean, api: any, arrayPath: Array<String>) {
+  constructor(express: Express, port: number | string | boolean, api: any, arrayPath: Array<string>) {
     this.arrayPath = arrayPath;
     this.api = api;
     this.express = express;

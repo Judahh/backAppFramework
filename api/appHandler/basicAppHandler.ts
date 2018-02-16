@@ -49,8 +49,19 @@ export class BasicAppHandler {
         // WebhookConnector.getInstance().upgrade(request.body);
     }
 
+    protected serverConnected(basicSocket) {
+        console.log('CONNECTED');
+    }
+
+    protected serverDisconnected(basicSocket, reason) {
+        console.log('DISCONNECTED', reason);
+    }
+
     public addSocket(basicSocket: BasicSocket) {
+        let _self = this;
         this.arraySocket.push(basicSocket);
+        this.serverConnected(basicSocket);
+        basicSocket.on('disconnect', (reason) => { _self.serverDisconnected(basicSocket, reason); });
         this.configSocket(basicSocket);
     }
 

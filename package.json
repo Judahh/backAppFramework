@@ -2,12 +2,8 @@
   "name": "backapijh",
   "productName": "backApi",
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
-  "version": "0.2.39-beta7",
+  "version": "0.2.40",
   "private": false,
-  "engines": {
-    "node": "9.2.0",
-    "npm": "5.5.1"
-  },
   "description": "Judahh APP project",
   "main": "index.js",
   "keywords": [
@@ -42,27 +38,28 @@
   "dependencies": {
     "@types/body-parser": "1.16.8",
     "@types/morgan": "^1.7.35",
-    "@types/node": "^8.0.57",
-    "@types/request": "^2.0.8",
+    "@types/node": "^9.4.6",
+    "@types/request": "^2.47.0",
+    "@types/vinyl": "2.0.2",
     "basicutil": "1.0.14",
     "body-parser": "^1.18.2",
-    "dotenv": "^4.0.0",
+    "dotenv": "^5.0.0",
     "ejs": "^2.5.7",
-    "electron": "^1.8.1",
+    "electron": "^1.8.2",
     "express": "4.16.2",
     "gulp": "^3.9.1",
-    "gulp-mocha": "^4.3.1",
-    "gulp-typescript": "^3.2.3",
+    "gulp-mocha": "^5.0.0",
+    "gulp-typescript": "^4.0.1",
     "gulpclass": "^0.1.2",
     "morgan": "^1.9.0",
     "path": "0.12.7",
     "request": "^2.83.0",
-    "run-sequence": "^2.2.0",
+    "run-sequence": "^2.2.1",
     "simpleutils": "1.0.3",
-    "typescript": "2.6.2",
     "socket.io": "2.0.4",
     "socket.io-client": "2.0.4",
-    "uuid": "3.1.0"
+    "typescript": "2.7.2",
+    "uuid": "3.2.1"
   },
   "devDependencies": {}
 }

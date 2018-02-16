@@ -9,7 +9,7 @@ export class Server {
     /**
      * Initialize the HeroRouter
      */
-    constructor(api: any, arrayPath: Array<String>, port?: number) {
+    constructor(api: any, arrayPath: Array<string>, port?: number) {
         this.apiConfiguration = new ApiConfiguration(express(), Util.normalizePort(process.env.PORT || port || 3000), api, arrayPath);
     }
 
