@@ -35,6 +35,7 @@ export class BasicSocket {
     }
 
     public encrypt(object: Object) {
+        // console.log("encrypt");
         let objectText: string = JSON.stringify(object);
         let objectBuffer: Buffer = new Buffer(objectText);
         let iv = crypto.randomBytes(IV_LENGTH);
@@ -47,6 +48,7 @@ export class BasicSocket {
     }
 
     public decrypt(objectText: string) {
+        // console.log("decrypt");
         let textParts = objectText.split(':');
         let iv = new Buffer(textParts.shift(), 'hex');
         let encryptedText = new Buffer(textParts.join(':'), 'hex');
@@ -63,28 +65,27 @@ export class BasicSocket {
         let _self = this;
         if (_self.key === undefined || messageName === 'disconnect') {
             _self.socket.emit(messageName, message);
-            if (messageName === 'disconnect') {
-                _self.key = undefined;
-            }
         } else {
             _self.socket.emit(messageName, _self.encrypt(message));
         }
-
     }
 
     public on(messageName, callback) {
         let _self = this;
         this.socket.on(messageName, (message) => {
+            if (!this.isFunction(message.split)) {
+                _self.key = undefined;
+            }
             if (_self.key === undefined || messageName === 'disconnect') {
                 callback(message);
-                if (messageName === 'disconnect') {
-                    _self.key = undefined;
-                }
             } else {
                 callback(_self.decrypt(message));
             }
-
         });
+    }
+
+    public isFunction(functionToCheck) { //temp
+        return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
     }
 
     // public subscribe(callback) {

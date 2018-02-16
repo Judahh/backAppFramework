@@ -1,14 +1,15 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { BasicSocket } from './../socket/basicSocket'
+import { BasicHandler } from '../basicHandler/basicHandler';
+import { BasicHardwareHandler } from './../hardwareHandler/basicHardwareHandler';
 import * as path from 'path';
 
-export class BasicAppHandler {
+export class BasicAppHandler extends BasicHandler{
     protected router: Router;
-    protected arraySocket: Array<BasicSocket>;
 
-    constructor() {
+    constructor(hardwareHandler: BasicHardwareHandler) {
+        super(hardwareHandler);
         this.router = Router();
-        this.arraySocket = new Array<BasicSocket>();
 
         let _self = this;
 
@@ -48,26 +49,6 @@ export class BasicAppHandler {
     public refresh(request: Request, response: Response, nextFunction: NextFunction) {
         // WebhookConnector.getInstance().upgrade(request.body);
     }
-
-    protected serverConnected(basicSocket) {
-        console.log('CONNECTED');
-    }
-
-    protected serverDisconnected(basicSocket, reason) {
-        console.log('DISCONNECTED', reason);
-    }
-
-    public addSocket(basicSocket: BasicSocket) {
-        let _self = this;
-        this.arraySocket.push(basicSocket);
-        this.serverConnected(basicSocket);
-        basicSocket.on('disconnect', (reason) => { _self.serverDisconnected(basicSocket, reason); });
-        this.configSocket(basicSocket);
-    }
-
-    public configSocket(basicSocket: BasicSocket) { }
-
-    public init() { }
 
     public getRouter() {
         return this.router;
