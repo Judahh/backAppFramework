@@ -36,14 +36,13 @@ export class BasicExternalHandler extends BasicHandler {
         basicSocket.on('getIdentification', (key) => {
             basicSocket.setKey(key);
             basicSocket.emit('identification', identification);
+            this.configSocketClient(basicSocket);
+            this.clientConnected(basicSocket);
         });
 
         this.arraySocketClient.push(basicSocket);
 
         basicSocket.on('disconnect', (reason) => { _self.onClientDisconnected(basicSocket, reason); });
-        
-        this.configSocketClient(basicSocket);
-        this.clientConnected(basicSocket);
     }
 
     private onClientDisconnected(basicSocket, reason) {
