@@ -38,7 +38,7 @@ export class BasicHandler {
         this.configSocket(basicSocket);
     }
 
-    public configSocket(basicSocket: BasicSocket) { }
+    protected configSocket(basicSocket: BasicSocket) { }
 
     protected init() { }
 }

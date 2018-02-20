@@ -24,17 +24,17 @@ export class BasicAppHandler extends BasicHandler{
         this.pageRouting();
     }
 
-    public pageRouting() {
+    private pageRouting() {
         this.router.get('/:page', this.getNewPage);
         this.router.post('/:page', this.getNewPage);
     }
 
-    public getPage(request: Request, response: Response, nextFunction: NextFunction) {
+    private getPage(request: Request, response: Response, nextFunction: NextFunction) {
         response.sendFile(path.resolve('index.html'));
         console.info('getPage');
     }
 
-    public getNewPage(request: Request, response: Response, nextFunction: NextFunction) {
+    private getNewPage(request: Request, response: Response, nextFunction: NextFunction) {
         // response.sendFile(path.resolve('index.html'));
         // response.send(request.baseUrl);
         console.info('request.baseUrl:' + request.path);
@@ -46,7 +46,7 @@ export class BasicAppHandler extends BasicHandler{
         console.info('getNewPage');
     }
 
-    public refresh(request: Request, response: Response, nextFunction: NextFunction) {
+    protected refresh(request: Request, response: Response, nextFunction: NextFunction) {
         // WebhookConnector.getInstance().upgrade(request.body);
     }
 

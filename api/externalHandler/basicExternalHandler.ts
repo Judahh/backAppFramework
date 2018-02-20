@@ -41,6 +41,7 @@ export class BasicExternalHandler extends BasicHandler {
         this.arraySocketClient.push(basicSocket);
         this.clientConnected(basicSocket);
         basicSocket.on('disconnect', (reason) => { _self.onClientDisconnected(basicSocket, reason); });
+        this.configSocketClient(basicSocket);
     }
 
     private onClientDisconnected(basicSocket, reason) {
@@ -58,4 +59,6 @@ export class BasicExternalHandler extends BasicHandler {
     protected clientDisconnected(basicSocket, reason) {
         console.log('DISCONNECTED', reason);
     }
+
+    protected configSocketClient(basicSocket: BasicSocket) { }
 }
