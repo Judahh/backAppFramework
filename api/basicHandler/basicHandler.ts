@@ -33,9 +33,9 @@ export class BasicHandler {
 
     public addSocket(basicSocket: BasicSocket) {
         let _self = this;
-        this.onServerConnected(basicSocket);
         basicSocket.on('disconnect', (reason) => { _self.onServerDisconnected(basicSocket, reason); });
         this.configSocket(basicSocket);
+        this.onServerConnected(basicSocket);
     }
 
     protected configSocket(basicSocket: BasicSocket) { }

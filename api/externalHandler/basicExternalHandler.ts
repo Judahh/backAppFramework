@@ -40,9 +40,9 @@ export class BasicExternalHandler extends BasicHandler {
             this.clientConnected(basicSocket);
         });
 
-        this.arraySocketClient.push(basicSocket);
-
         basicSocket.on('disconnect', (reason) => { _self.onClientDisconnected(basicSocket, reason); });
+
+        this.arraySocketClient.push(basicSocket);
     }
 
     private onClientDisconnected(basicSocket, reason) {
