@@ -1,10 +1,10 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { BasicSocket } from './../socket/basicSocket'
+import { BasicSocket } from 'basicSocket'
 import { BasicHandler } from '../basicHandler/basicHandler';
 import { BasicHardwareHandler } from './../hardwareHandler/basicHardwareHandler';
 import * as path from 'path';
 
-export class BasicAppHandler extends BasicHandler{
+export class BasicAppHandler extends BasicHandler {
     protected router: Router;
 
     constructor(hardwareHandler: BasicHardwareHandler) {
@@ -22,6 +22,14 @@ export class BasicAppHandler extends BasicHandler{
         this.init();
 
         this.pageRouting();
+    }
+
+    public getRouter() {
+        return this.router;
+    }
+
+    protected refresh(request: Request, response: Response, nextFunction: NextFunction) {
+        // WebhookConnector.getInstance().upgrade(request.body);
     }
 
     private pageRouting() {
@@ -45,13 +53,4 @@ export class BasicAppHandler extends BasicHandler{
         response.redirect('/');
         console.info('getNewPage');
     }
-
-    protected refresh(request: Request, response: Response, nextFunction: NextFunction) {
-        // WebhookConnector.getInstance().upgrade(request.body);
-    }
-
-    public getRouter() {
-        return this.router;
-    }
-
 }

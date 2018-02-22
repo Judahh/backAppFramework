@@ -1,4 +1,4 @@
-import { BasicSocket } from './../socket/basicSocket'
+import { BasicSocket } from 'basicSocket'
 import { BasicHandler } from './../basicHandler/basicHandler'
 import { BasicHardwareHandler } from './../hardwareHandler/basicHardwareHandler';
 import * as ioClient from 'socket.io-client';
@@ -19,10 +19,21 @@ export class BasicExternalHandler extends BasicHandler {
         socketClient.on('connect', () => { _self.onClientConnected(socketClient, serverAddress, identification); });
     }
 
+    protected clientConnected(basicSocket) {
+        console.log('CONNECTED');
+    }
+
+    protected clientDisconnected(basicSocket, reason) {
+        console.log('DISCONNECTED', reason);
+    }
+
+    // tslint:disable-next-line:no-empty
+    protected configSocketClient(basicSocket: BasicSocket) { }
+
     private onClientConnected(socketClient, serverAddress, identification?: any) {
         let _self = this;
 
-        if (identification == undefined || identification == null) {
+        if (identification === undefined || identification === null) {
             identification = {}
         }
 
@@ -46,20 +57,10 @@ export class BasicExternalHandler extends BasicHandler {
     }
 
     private onClientDisconnected(basicSocket, reason) {
-        var index = this.arraySocket.indexOf(basicSocket);
+        let index = this.arraySocket.indexOf(basicSocket);
         if (index > -1) {
             this.arraySocket.splice(index, 1);
         }
         this.clientDisconnected(basicSocket, reason);
     }
-
-    protected clientConnected(basicSocket) {
-        console.log('CONNECTED');
-    }
-
-    protected clientDisconnected(basicSocket, reason) {
-        console.log('DISCONNECTED', reason);
-    }
-
-    protected configSocketClient(basicSocket: BasicSocket) { }
 }

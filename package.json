@@ -2,7 +2,7 @@
   "name": "backapijh",
   "productName": "backApi",
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
-  "version": "0.2.48",
+  "version": "0.2.49",
   "private": false,
   "description": "Judahh APP project",
   "main": "index.js",
@@ -42,6 +42,7 @@
     "@types/request": "^2.47.0",
     "@types/vinyl": "2.0.2",
     "basicutil": "1.0.14",
+    "basicsocket": "0.1.0",
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.0",
     "ejs": "^2.5.7",
@@ -57,9 +58,7 @@
     "run-sequence": "^2.2.1",
     "simpleutils": "1.0.3",
     "socket.io": "2.0.4",
-    "socket.io-client": "2.0.4",
-    "typescript": "2.7.2",
-    "uuid": "3.2.1"
+    "typescript": "2.7.2"
   },
   "devDependencies": {}
 }
