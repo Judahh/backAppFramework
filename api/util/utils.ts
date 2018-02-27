@@ -1,13 +1,16 @@
 declare global {
+    // tslint:disable-next-line:no-shadowed-variable
     interface Array<T> {
         type: any;
         getType(): string;
     }
 
+    // tslint:disable-next-line:no-shadowed-variable
     interface JQueryStatic {
         cache;
     }
 
+    // tslint:disable-next-line:no-shadowed-variable
     interface String {
         replaceAll(search: string, replacement: string): string;
     }

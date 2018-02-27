@@ -1,9 +1,7 @@
 export class BasicHardwareHandler {
-    constructor() {
+    // tslint:disable-next-line:no-empty
+    constructor() { }
 
-    }
-
-    protected init() {
-
-    }
+    // tslint:disable-next-line:no-empty
+    protected init() { }
 }

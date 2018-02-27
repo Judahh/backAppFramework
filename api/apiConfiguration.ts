@@ -7,7 +7,7 @@ import * as io from 'socket.io';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
-import * as allowCrossDomain from "./middleware/allowCrossDomain";
+import * as allowCrossDomain from './middleware/allowCrossDomain';
 import * as http from 'http';
 import { BasicApi } from './basicApi';
 // import * as debug from 'debug';
@@ -26,7 +26,8 @@ export class ApiConfiguration {
   private io;
 
 
-  //Run configuration methods on the Express instance.
+  // Run configuration methods on the Express instance.
+  // tslint:disable-next-line:no-shadowed-variable
   constructor(express: Express, port: number | string | boolean, api: any, arrayPath: Array<string>) {
     this.arrayPath = arrayPath;
     this.api = api;
@@ -37,16 +38,22 @@ export class ApiConfiguration {
     this.router = Router();
   }
 
-  //   
+  public run() {
+    this.server = http.createServer(this.express);
+    this.io = io(this.server);
+    this.api.setIo(this.io);
+    this.server.listen(this.port);
+    this.api.afterListen();
+    this.server.on('error', () => this.onError);
+    this.server.on('listening', () => this.onListening());
+  }
 
   // Configure Express middleware.
   private configureMiddleware(): void {
-    //this.express.use(allowCrossDomain);
+    // this.express.use(allowCrossDomain);
     this.arrayPath.forEach(pathString => {
       this.express.use(express.static(path.resolve(pathString)));
     });
-    // this.express.use(express.static(path.resolve('backApp')));
-    // this.express.use(express.static(path.resolve('app')));
     // this.express.engine('html', require('ejs').renderFile);
     // this.express.set('views', __dirname);
     // this.express.set('view engine', 'html');
@@ -60,25 +67,14 @@ export class ApiConfiguration {
     this.express.use('/', this.api.getRouter());
   }
 
-  public run() {
-    // this.express.listen(this.port);  
-    console.info('ts-express:server');
-    this.server = http.createServer(this.express);
-    this.io=io(this.server);
-    this.api.setIo(this.io);
-    this.server.listen(this.port);
-    this.api.afterListen();
-    this.server.on('error', () => this.onError);
-    this.server.on('listening', () => this.onListening());
-    // this.router.get('/', this.get);
-  }
-
   // private get(request: Request, response: Response){
   //   response.sendFile(path.resolve('../backApp/index.html'));
   // }
 
   private onError(error: NodeJS.ErrnoException) {
-    if (error.syscall !== 'listen') throw error;
+    if (error.syscall !== 'listen') {
+      throw error;
+    }
     let bind = (typeof this.port === 'string') ? 'Pipe ' + this.port : 'Port ' + this.port;
     switch (error.code) {
       case 'EACCES':
@@ -97,10 +93,8 @@ export class ApiConfiguration {
   private onListening() {
     let address = this.server.address();
     let bind = (typeof address === 'string') ? `pipe ${address}` : `port ${address.port}`;
-    console.info(`Listening on ${bind}`);
+    console.log(`Listening on ${bind}`);
     // StartX.getInstance().start();
   }
 
 }
-
-// export default new API().express;

@@ -24,8 +24,9 @@ export class Electron {
     private icon: string;
 
     constructor(touch?, touchSimulate?, frame?, kiosk?, node?, width?, height?, fullscreen?, useContentSize?,
+        // tslint:disable-next-line:no-shadowed-variable
         autoHideMenuBar?, title?, consoleVar?, url?, zoom?, overlayScrollbars?, development?, icon?) {
-        if (app != undefined) {
+        if (app !== undefined) {
             this.touch = touch === '1' ? 1 : 0;
             this.touchSimulate = touchSimulate === '1' ? 1 : 0;
             this.frame = frame === '1' ? 1 : 0;
@@ -68,7 +69,7 @@ export class Electron {
 
     private createWindow() {
         // Create the browser window.
-        //let appIcon = new Tray('../favicon.png');
+        // let appIcon = new Tray('../favicon.png');
         let appIcon = nativeImage.createFromPath(path.resolve(this.icon));
         // console.log(path.resolve(this.icon));
 
@@ -86,12 +87,12 @@ export class Electron {
             kiosk: !!(this.kiosk),
             webPreferences: {
                 nodeIntegration: !!(this.node),
-                zoomFactor: this.zoom//,
+                zoomFactor: this.zoom // ,
                 //   overlayScrollbars: !!(this.overlayScrollbars)
             }
         });
 
-        this.mainWindow.loadURL(this.url);//TODO: remover 3000
+        this.mainWindow.loadURL(this.url);
 
         // Open the DevTools.
         if (this.console) {

@@ -12,4 +12,8 @@ import { Router, Request, Response, NextFunction } from 'express';
 import { Electron } from './api/electron/electron';
 import { Server } from './server';
 
-export { Server, Router, Request, Response, NextFunction, Electron, ApiConfiguration, BasicApi, BasicAppHandler, BasicExternalHandler, BasicHardwareHandler, BasicSocket, Observer, express, path }
+export {
+    Server, Router, Request, Response, NextFunction, Electron,
+    ApiConfiguration, BasicApi, BasicAppHandler, BasicExternalHandler,
+    BasicHardwareHandler, BasicSocket, Observer, express, path
+}

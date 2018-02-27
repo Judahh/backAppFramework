@@ -13,11 +13,19 @@ export class BasicAppHandler extends BasicHandler {
 
         let _self = this;
 
-        this.router.get('/', (request: Request, response: Response, nextFunction: NextFunction) => { _self.getPage(request, response, nextFunction); });
-        this.router.get('/refresh', (request: Request, response: Response, nextFunction: NextFunction) => { _self.refresh(request, response, nextFunction); });
+        this.router.get('/', (request: Request, response: Response, nextFunction: NextFunction) => {
+            _self.getPage(request, response, nextFunction);
+        });
+        this.router.get('/refresh', (request: Request, response: Response, nextFunction: NextFunction) => {
+            _self.refresh(request, response, nextFunction);
+        });
 
-        this.router.post('/', (request: Request, response: Response, nextFunction: NextFunction) => { _self.getPage(request, response, nextFunction); });
-        this.router.post('/refresh', (request: Request, response: Response, nextFunction: NextFunction) => { _self.refresh(request, response, nextFunction); });
+        this.router.post('/', (request: Request, response: Response, nextFunction: NextFunction) => {
+            _self.getPage(request, response, nextFunction);
+        });
+        this.router.post('/refresh', (request: Request, response: Response, nextFunction: NextFunction) => {
+            _self.refresh(request, response, nextFunction);
+        });
 
         this.init();
 
@@ -39,18 +47,18 @@ export class BasicAppHandler extends BasicHandler {
 
     private getPage(request: Request, response: Response, nextFunction: NextFunction) {
         response.sendFile(path.resolve('index.html'));
-        console.info('getPage');
+        console.log('getPage');
     }
 
     private getNewPage(request: Request, response: Response, nextFunction: NextFunction) {
         // response.sendFile(path.resolve('index.html'));
         // response.send(request.baseUrl);
-        console.info('request.baseUrl:' + request.path);
+        console.log('request.baseUrl:' + request.path);
         // if (request.path.indexOf('undefined') == -1) {
         // console.log('COOKIE:'+request.path.substr(1));
         response.cookie('page', request.path.substr(1));
         // }
         response.redirect('/');
-        console.info('getNewPage');
+        console.log('getNewPage');
     }
 }
