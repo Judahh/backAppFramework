@@ -58,10 +58,10 @@ export class ApiConfiguration {
     // this.express.engine('html', require('ejs').renderFile);
     // this.express.set('views', __dirname);
     // this.express.set('view engine', 'html');
-    this.express.use(compression({threshold: 0}))
     this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
-    this.express.use(bodyParser.urlencoded({ extended: false }));
+    this.express.use(bodyParser.urlencoded({ extended: true }));
+    this.express.use(compression({threshold: 0}));
   }
 
   // Configure API endpoints.
