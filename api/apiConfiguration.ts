@@ -5,6 +5,7 @@ import { Express, RequestHandler, Router, Request, Response, NextFunction } from
 import { StartX } from './startX/startX';
 import * as io from 'socket.io';
 import * as express from 'express';
+import * as compression from 'compression';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as allowCrossDomain from './middleware/allowCrossDomain';
@@ -57,6 +58,7 @@ export class ApiConfiguration {
     // this.express.engine('html', require('ejs').renderFile);
     // this.express.set('views', __dirname);
     // this.express.set('view engine', 'html');
+    this.express.use(compression({threshold: 0}))
     this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
