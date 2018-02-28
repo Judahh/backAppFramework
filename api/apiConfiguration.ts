@@ -5,10 +5,11 @@ import { Express, RequestHandler, Router, Request, Response, NextFunction } from
 import { StartX } from './startX/startX';
 import * as io from 'socket.io';
 import * as express from 'express';
-import * as compression from 'compression';
+// import * as compression from 'compression';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
-import * as allowCrossDomain from './middleware/allowCrossDomain';
+// import * as allowCrossDomain from './middleware/allowCrossDomain';
+import * as compress from './middleware/compress';
 import * as http from 'http';
 import { BasicApi } from './basicApi';
 // import * as debug from 'debug';
@@ -58,10 +59,11 @@ export class ApiConfiguration {
     // this.express.engine('html', require('ejs').renderFile);
     // this.express.set('views', __dirname);
     // this.express.set('view engine', 'html');
+    // this.express.use(compression({threshold: 0}));
+    this.express.use('*.js', compress);
     this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
-    this.express.use(compression({threshold: 0}));
   }
 
   // Configure API endpoints.
