@@ -53,6 +53,8 @@ export class ApiConfiguration {
   // Configure Express middleware.
   private configureMiddleware(): void {
     // this.express.use(allowCrossDomain);
+    this.express.get('*.js', compress);
+    this.express.post('*.js', compress);
     this.arrayPath.forEach(pathString => {
       this.express.use(express.static(path.resolve(pathString)));
     });
@@ -60,7 +62,6 @@ export class ApiConfiguration {
     // this.express.set('views', __dirname);
     // this.express.set('view engine', 'html');
     // this.express.use(compression({threshold: 0}));
-    this.express.use('*.js', compress);
     this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
@@ -70,10 +71,6 @@ export class ApiConfiguration {
   private configureRoutes(): void {
     this.express.use('/', this.api.getRouter());
   }
-
-  // private get(request: Request, response: Response){
-  //   response.sendFile(path.resolve('../backApp/index.html'));
-  // }
 
   private onError(error: NodeJS.ErrnoException) {
     if (error.syscall !== 'listen') {
