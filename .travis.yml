@@ -4,5 +4,4 @@ node_js:
 install:
   - npm install -g npm
   - npm install
-  - npm run tsc
 script: tsc
