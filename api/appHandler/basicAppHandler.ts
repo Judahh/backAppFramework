@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { BasicSocket } from 'basicSocket'
+import { BasicSocket } from 'basicsocket'
 import { BasicHandler } from '../basicHandler/basicHandler';
 import { BasicHardwareHandler } from './../hardwareHandler/basicHardwareHandler';
 import * as path from 'path';

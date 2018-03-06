@@ -1,4 +1,4 @@
-import { BasicSocket } from 'basicSocket'
+import { BasicSocket } from 'basicsocket'
 import { BasicHandler } from './../basicHandler/basicHandler'
 import { BasicHardwareHandler } from './../hardwareHandler/basicHardwareHandler';
 import * as ioClient from 'socket.io-client';

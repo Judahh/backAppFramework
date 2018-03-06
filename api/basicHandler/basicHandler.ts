@@ -1,4 +1,4 @@
-import { BasicSocket } from 'basicSocket';
+import { BasicSocket } from 'basicsocket';
 import { BasicHardwareHandler } from './../hardwareHandler/basicHardwareHandler';
 
 export class BasicHandler {

@@ -1,6 +1,6 @@
 import { BasicAppHandler } from './appHandler/basicAppHandler'
 import { BasicExternalHandler } from './externalHandler/basicExternalHandler'
-import { BasicSocket } from 'basicSocket'
+import { BasicSocket } from 'basicsocket'
 import { Electron } from './electron/electron';
 import { ApiConfiguration } from './apiConfiguration';
 const IV_LENGTH = 16; // For AES, this is always 16
