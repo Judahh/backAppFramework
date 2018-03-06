@@ -3,4 +3,5 @@ node_js:
   - "9"
 install:
   - npm install -g npm
-  - npm run tsc
+  - npm install
+script: tsc
