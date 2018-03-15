@@ -53,8 +53,11 @@ export class ApiConfiguration {
   // Configure Express middleware.
   private configureMiddleware(): void {
     // this.express.use(allowCrossDomain);
-    this.express.get('*.js', compress);
-    this.express.post('*.js', compress);
+    if (JSON.parse(process.env.JS_COMPRESSION)) {
+      console.log('Using Compression')
+      this.express.get('*.js', compress);
+      this.express.post('*.js', compress);
+    }
     this.arrayPath.forEach(pathString => {
       this.express.use(express.static(path.resolve(pathString)));
     });
