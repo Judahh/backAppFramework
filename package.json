@@ -30,7 +30,7 @@
     "clean": "shx rm -Rf build/"
   },
   "dependencies": {
-    "basicutil": "1.0.15",
+    "basicutil": "1.0.16",
     "basicsocket": "0.1.4",
     "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
@@ -40,7 +40,7 @@
     "path": "0.12.7",
     "request": "^2.87.0",
     "run-sequence": "^2.2.1",
-    "simpleutils": "1.0.5",
+    "simpleutils": "1.0.6",
     "socket.io": "2.1.1",
     "typescript": "3.0.1"
   },
