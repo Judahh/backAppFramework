@@ -15,5 +15,5 @@ import { Server } from './server';
 export {
     Server, Router, Request, Response, NextFunction, Electron,
     ApiConfiguration, BasicApi, BasicAppHandler, BasicExternalHandler,
-    BasicHardwareHandler, BasicSocket, Observer, express, path
+    BasicHardwareHandler, BasicSocket, Observer, express, path, Util
 }
