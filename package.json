@@ -30,7 +30,7 @@
     "clean": "shx rm -Rf build/"
   },
   "dependencies": {
-    "basicutil": "1.0.16",
+    "basicutil": "1.0.17",
     "basicsocket": "0.1.4",
     "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
