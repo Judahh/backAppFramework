@@ -1,15 +1,15 @@
-import { BasicSocket } from 'basicsocket'
+import { Socket } from 'basicsocket'
 import { BasicHandler } from './../basicHandler/basicHandler'
 import { BasicHardwareHandler } from './../hardwareHandler/basicHardwareHandler';
 import * as ioClient from 'socket.io-client';
 
 export class BasicExternalHandler extends BasicHandler {
     protected identification: any;
-    protected arraySocketClient: Array<BasicSocket>;
+    protected arraySocketClient: Array<Socket>;
 
     constructor(hardwareHandler: BasicHardwareHandler) {
         super(hardwareHandler);
-        this.arraySocketClient = new Array<BasicSocket>();
+        this.arraySocketClient = new Array<Socket>();
         this.init();
     }
 
@@ -19,16 +19,16 @@ export class BasicExternalHandler extends BasicHandler {
         socketClient.on('connect', () => { _self.onClientConnected(socketClient, serverAddress, identification); });
     }
 
-    protected clientConnected(basicSocket) {
+    protected clientConnected(socket: Socket) {
         console.log('CONNECTED');
     }
 
-    protected clientDisconnected(basicSocket, reason) {
+    protected clientDisconnected(socket: Socket, reason) {
         console.log('DISCONNECTED', reason);
     }
 
     // tslint:disable-next-line:no-empty
-    protected configSocketClient(basicSocket: BasicSocket) { }
+    protected configSocketClient(socket: Socket) { }
 
     private onClientConnected(socketClient, serverAddress, identification?: any) {
         let _self = this;
@@ -40,27 +40,28 @@ export class BasicExternalHandler extends BasicHandler {
         identification['type'] = 'external';
         identification['serverAddress'] = serverAddress;
 
-        let basicSocket = new BasicSocket(socketClient);
+        let socket = new Socket(socketClient);
+        let basicSocket = socket.getBasicSocket();
 
         basicSocket.setIdentification(identification);
 
         basicSocket.on('getIdentification', (key) => {
             basicSocket.setKey(key);
             basicSocket.emit('identification', identification);
-            this.configSocketClient(basicSocket);
-            this.clientConnected(basicSocket);
+            this.configSocketClient(socket);
+            this.clientConnected(socket);
         });
 
-        basicSocket.on('disconnect', (reason) => { _self.onClientDisconnected(basicSocket, reason); });
+        basicSocket.on('disconnect', (reason) => { _self.onClientDisconnected(socket, reason); });
 
-        this.arraySocketClient.push(basicSocket);
+        this.arraySocketClient.push(socket);
     }
 
-    private onClientDisconnected(basicSocket, reason) {
-        let index = this.arraySocket.indexOf(basicSocket);
+    private onClientDisconnected(socket: Socket, reason) {
+        let index = this.arraySocket.indexOf(socket);
         if (index > -1) {
             this.arraySocket.splice(index, 1);
         }
-        this.clientDisconnected(basicSocket, reason);
+        this.clientDisconnected(socket, reason);
     }
 }

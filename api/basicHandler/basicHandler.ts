@@ -1,46 +1,47 @@
-import { BasicSocket } from 'basicsocket';
+import { Socket } from 'basicsocket';
 import { BasicHardwareHandler } from './../hardwareHandler/basicHardwareHandler';
 
 export class BasicHandler {
-    protected arraySocket: Array<BasicSocket>;
+    protected arraySocket: Array<Socket>;
     protected hardwareHandler;
 
     constructor(hardwareHandler: BasicHardwareHandler) {
-        this.arraySocket = new Array<BasicSocket>();
+        this.arraySocket = new Array<Socket>();
         this.hardwareHandler = hardwareHandler;
     }
 
-    public addSocket(basicSocket: BasicSocket) {
+    public addSocket(socket: Socket) {
         let _self = this;
-        basicSocket.on('disconnect', (reason) => { _self.onServerDisconnected(basicSocket, reason); });
-        this.configSocket(basicSocket);
-        this.onServerConnected(basicSocket);
+        let basicSocket = socket.getBasicSocket();
+        basicSocket.on('disconnect', (reason) => { _self.onServerDisconnected(socket, reason); });
+        this.configSocket(socket);
+        this.onServerConnected(socket);
     }
 
     // tslint:disable-next-line:no-empty
-    protected configSocket(basicSocket: BasicSocket) { }
+    protected configSocket(socket: Socket) { }
 
     // tslint:disable-next-line:no-empty
     protected init() { }
 
-    protected serverConnected(basicSocket) {
+    protected serverConnected(socket: Socket) {
         console.log('CONNECTED');
     }
 
-    protected serverDisconnected(basicSocket, reason) {
+    protected serverDisconnected(socket: Socket, reason) {
         console.log('DISCONNECTED', reason);
     }
 
-    private onServerConnected(basicSocket) {
-        this.arraySocket.push(basicSocket);
-        this.serverConnected(basicSocket);
+    private onServerConnected(socket: Socket) {
+        this.arraySocket.push(socket);
+        this.serverConnected(socket);
     }
 
-    private onServerDisconnected(basicSocket, reason) {
-        let index = this.arraySocket.indexOf(basicSocket);
+    private onServerDisconnected(socket: Socket, reason) {
+        let index = this.arraySocket.indexOf(socket);
         if (index > -1) {
             this.arraySocket.splice(index, 1);
         }
-        this.serverDisconnected(basicSocket, reason);
+        this.serverDisconnected(socket, reason);
     }
 }

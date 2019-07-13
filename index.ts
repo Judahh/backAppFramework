@@ -7,7 +7,7 @@ import { BasicApi } from './api/basicApi';
 import { BasicAppHandler } from './api/appHandler/basicAppHandler';
 import { BasicExternalHandler } from './api/externalHandler/basicExternalHandler';
 import { BasicHardwareHandler } from './api/hardwareHandler/basicHardwareHandler';
-import { BasicSocket } from 'basicsocket';
+import { Socket } from 'basicsocket';
 import { Router, Request, Response, NextFunction } from 'express';
 import { Electron } from './api/electron/electron';
 import { Server } from './server';
@@ -15,5 +15,5 @@ import { Server } from './server';
 export {
     Server, Router, Request, Response, NextFunction, Electron,
     ApiConfiguration, BasicApi, BasicAppHandler, BasicExternalHandler,
-    BasicHardwareHandler, BasicSocket, Observer, express, path, Util
+    BasicHardwareHandler, Socket, Observer, express, path, Util
 }
