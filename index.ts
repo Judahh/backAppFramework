@@ -1,7 +1,6 @@
 import * as express from 'express';
 import * as path from 'path';
 import { Util } from 'basicutil';
-import { Observer } from './api/util/observer/observer'
 import { ApiConfiguration } from './api/apiConfiguration';
 import { BasicApi } from './api/basicApi';
 import { BasicAppHandler } from './api/appHandler/basicAppHandler';
@@ -15,5 +14,5 @@ import { Server } from './server';
 export {
     Server, Router, Request, Response, NextFunction, Electron,
     ApiConfiguration, BasicApi, BasicAppHandler, BasicExternalHandler,
-    BasicHardwareHandler, Socket, Observer, express, path, Util
+    BasicHardwareHandler, Socket, express, path, Util
 }
