@@ -12,6 +12,7 @@ import * as bodyParser from 'body-parser';
 import * as compress from './middleware/compress';
 import * as http from 'http';
 import { BasicApi } from './basicApi';
+import { Util } from 'basicutil';
 // import * as debug from 'debug';
 
 // Creates and configures an ExpressJS web server.
@@ -20,21 +21,19 @@ export class ApiConfiguration {
   // ref to Express instance
   // public express: express.Application;
   private express: Express;
-  private port: number | string | boolean;
   private server: http.Server;
   private router: Router;
   private api: BasicApi;
-  private arrayPath: Array<string>;
+  private packageJSON: any;
   private io;
 
 
   // Run configuration methods on the Express instance.
   // tslint:disable-next-line:no-shadowed-variable
-  constructor(express: Express, port: number | string | boolean, api: any, arrayPath: Array<string>) {
-    this.arrayPath = arrayPath;
+  constructor(express: Express, api: any, packageJSON: any) {
+    this.packageJSON = packageJSON;
     this.api = api;
     this.express = express;
-    this.port = port;
     this.configureMiddleware();
     this.configureRoutes();
     this.router = Router();
@@ -44,7 +43,7 @@ export class ApiConfiguration {
     this.server = http.createServer(this.express);
     this.io = io(this.server);
     this.api.setIo(this.io);
-    this.server.listen(this.port);
+    this.server.listen(Util.getInstance().normalizePort(this.packageJSON.env.port || 3000));
     this.api.afterListen();
     this.server.on('error', () => this.onError);
     this.server.on('listening', () => this.onListening());
@@ -53,12 +52,12 @@ export class ApiConfiguration {
   // Configure Express middleware.
   private configureMiddleware(): void {
     // this.express.use(allowCrossDomain);
-    if (JSON.parse(process.env.JS_COMPRESSION)) {
+    if (this.packageJSON.env.js.compression) {
       console.log('Using Compression')
       this.express.get('*.js', compress);
       this.express.post('*.js', compress);
     }
-    this.arrayPath.forEach(pathString => {
+    this.packageJSON.arrayPath.forEach(pathString => {
       this.express.use(express.static(path.resolve(pathString)));
     });
     // this.express.engine('html', require('ejs').renderFile);
@@ -79,7 +78,7 @@ export class ApiConfiguration {
     if (error.syscall !== 'listen') {
       throw error;
     }
-    let bind = (typeof this.port === 'string') ? 'Pipe ' + this.port : 'Port ' + this.port;
+    let bind = (typeof this.packageJSON.env.port === 'string') ? 'Pipe ' + this.packageJSON.env.port : 'Port ' + this.packageJSON.env.port;
     switch (error.code) {
       case 'EACCES':
         console.error(`${bind} requires elevated privileges`);
