@@ -11,6 +11,7 @@ import * as bodyParser from 'body-parser';
 // import * as allowCrossDomain from './middleware/allowCrossDomain';
 import * as compress from './middleware/compress';
 import * as http from 'http';
+import * as staticFile from 'connect-static-file';
 import { BasicApi } from './basicApi';
 import { Util } from 'basicutil';
 // import * as debug from 'debug';
@@ -57,6 +58,8 @@ export class ApiConfiguration {
       this.express.get('*.js', compress);
       this.express.post('*.js', compress);
     }
+    const manifestFile = 'manifest.json';
+    this.express.use('/' + manifestFile, staticFile(path.resolve(manifestFile), {}));
     this.packageJSON.arrayPath.forEach(pathString => {
       this.express.use(express.static(path.resolve(pathString)));
     });
