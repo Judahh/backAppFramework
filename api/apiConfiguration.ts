@@ -51,7 +51,7 @@ export class ApiConfiguration {
     // this.express.use(allowCrossDomain);
     if (this.packageJSON.env.js.compression) {
       console.log('Using Compression')
-      this.express.use('*.js', compression);
+      this.express.use('*.js', compression({threshold : 0}));
     }
     const manifestFile = 'manifest.json';
     this.express.use('/' + manifestFile, staticFile(path.resolve(manifestFile), {}));
@@ -61,7 +61,6 @@ export class ApiConfiguration {
     // this.express.engine('html', require('ejs').renderFile);
     // this.express.set('views', __dirname);
     // this.express.set('view engine', 'html');
-    // this.express.use(compression({threshold: 0}));
     this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
