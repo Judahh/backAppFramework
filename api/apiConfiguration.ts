@@ -1,15 +1,11 @@
 import * as path from 'path';
-// import * as express from 'express';
-// import SimpleApi from './simpleApi';
-import { Express, RequestHandler, Router, Request, Response, NextFunction } from 'express';
-import { StartX } from './startX/startX';
-import * as io from 'socket.io';
 import * as express from 'express';
-// import * as compression from 'compression';
+import * as io from 'socket.io';
+import * as compression from 'compression';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 // import * as allowCrossDomain from './middleware/allowCrossDomain';
-import * as compress from './middleware/compress';
+// import * as compress from './middleware/compress';
 import * as http from 'http';
 import * as staticFile from 'connect-static-file';
 import { BasicApi } from './basicApi';
@@ -20,10 +16,10 @@ import { Util } from 'basicutil';
 export class ApiConfiguration {
 
   // ref to Express instance
-  // public express: express.Application;
-  private express: Express;
+  // private app: express.Application;
+  private express: express.Express;
   private server: http.Server;
-  private router: Router;
+  private router: express.Router;
   private api: BasicApi;
   private packageJSON: any;
   private io;
@@ -31,13 +27,13 @@ export class ApiConfiguration {
 
   // Run configuration methods on the Express instance.
   // tslint:disable-next-line:no-shadowed-variable
-  constructor(express: Express, api: any, packageJSON: any) {
+  constructor(expressInstance: express.Express, api: any, packageJSON: any) {
     this.packageJSON = packageJSON;
     this.api = api;
-    this.express = express;
+    this.express = expressInstance;
     this.configureMiddleware();
     this.configureRoutes();
-    this.router = Router();
+    this.router = express.Router();
   }
 
   public run() {
@@ -55,8 +51,7 @@ export class ApiConfiguration {
     // this.express.use(allowCrossDomain);
     if (this.packageJSON.env.js.compression) {
       console.log('Using Compression')
-      this.express.get('*.js', compress);
-      this.express.post('*.js', compress);
+      this.express.use('*.js', compression);
     }
     const manifestFile = 'manifest.json';
     this.express.use('/' + manifestFile, staticFile(path.resolve(manifestFile), {}));
