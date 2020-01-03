@@ -4,13 +4,10 @@ import * as io from 'socket.io';
 import * as compression from 'compression';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
-// import * as allowCrossDomain from './middleware/allowCrossDomain';
-// import * as compress from './middleware/compress';
 import * as http from 'http';
 import * as staticFile from 'connect-static-file';
 import { BasicApi } from './basicApi';
 import { Util } from 'basicutil';
-// import * as debug from 'debug';
 
 // Creates and configures an ExpressJS web server.
 export class ApiConfiguration {

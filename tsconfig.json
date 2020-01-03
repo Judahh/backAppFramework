@@ -19,7 +19,7 @@
       "node"
     ]
   },
-  "exclude": [ 
+  "exclude": [
     "node_modules"
   ]
 }
