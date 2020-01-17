@@ -752,10 +752,10 @@ basicsocket@0.2.5:
     node "13.6.0"
     socket.io-client "2.3.0"
 
-basicutil@1.2.9:
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/basicutil/-/basicutil-1.2.9.tgz#d63cb5537d11d38745f517dc6e21d9fbbccab7d9"
-  integrity sha512-1rzI+//qM/3eQqNmxX8XYxBf0+haz6EowUi7+Ohd2YXn314UgxOB1IVBVbowA9eBbJAXRYqxyDU0J/biR1vVVA==
+basicutil@1.2.10:
+  version "1.2.10"
+  resolved "https://registry.yarnpkg.com/basicutil/-/basicutil-1.2.10.tgz#695c641dbe8ef99487171dd40a3e7ccce5aa7578"
+  integrity sha512-bXWlyilFs9q7ft4f4mdCV6J1r12ARpYgt2w89+9s4KV2IGdtllJxrdnjYfyLaqcOOTjSea0BoT7kMykXQaNn+Q==
   dependencies:
     jquery "^3.4.1"
     simpleutils "^1.0.20"
