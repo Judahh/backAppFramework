@@ -430,15 +430,10 @@
   dependencies:
     "@types/express" "*"
 
-"@types/node@*":
-  version "13.1.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.7.tgz#db51d28b8dfacfe4fb2d0da88f5eb0a2eca00675"
-  integrity sha512-HU0q9GXazqiKwviVxg9SI/+t/nAsGkvLDkIdxz+ObejG2nX6Si00TeLqHMoS+a/1tjH7a8YpKVQwtgHuMQsldg==
-
-"@types/node@12.12.6":
-  version "12.12.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.6.tgz#a47240c10d86a9a57bb0c633f0b2e0aea9ce9253"
-  integrity sha512-FjsYUPzEJdGXjwKqSpE0/9QEh6kzhTAeObA54rn6j3rR4C/mzpI9L0KNfoeASSPMMdxIsoJuCLDWcM/rVjIsSA==
+"@types/node@*", "@types/node@14.0.21":
+  version "14.0.21"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.21.tgz#c84005e3f43b7e19a7374d47d5c411039da59231"
+  integrity sha512-kmfWRnh81BrOfQ2Bn3xXCkoB6PLNsJlHhliYvkPa5UL6nmMHkANm358zVpO7TW6CDe9i267pkS/Id65OKL8+Ug==
 
 "@types/node@^12.0.12":
   version "12.12.24"
