@@ -46,7 +46,7 @@
     "ts-jest": "^24.3.0",
     "tslint": "^5.20.1",
     "typescript": "3.7.5",
-    "@types/jquery": "3.3.31",
+    "@types/jquery": "3.5.2",
     "@types/node": "12.12.6",
     "@types/jest": "^24.9.0",
     "@types/body-parser": "1.17.1",
