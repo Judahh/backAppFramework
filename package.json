@@ -48,7 +48,7 @@
     "typescript": "3.7.5",
     "@types/jquery": "3.3.31",
     "@types/node": "12.12.6",
-    "@types/jest": "^24.9.0",
+    "@types/jest": "^26.0.15",
     "@types/body-parser": "1.17.1",
     "@types/morgan": "^1.7.37",
     "@types/request": "^2.48.4"
