@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { Handler } from 'flexiblepersistence';
-import { Journaly } from 'journaly';
-import { DatabaseInitializer, DAOAdapter } from '@flexiblepersistence/postgres';
+import { Journaly, SubjectObserver } from 'journaly';
+import { DatabaseInitializer, DAOAdapter } from '@flexiblepersistence/dao';
 import { PersistenceAdapter } from 'flexiblepersistence';
 // @ts-ignore
 export default abstract class DatabaseHandler {
   // @ts-ignore
-  protected journaly: Journaly<any>;
+  protected journaly: SubjectObserver<any>;
 
-  public getJournaly(): Journaly<any> {
+  public getJournaly(): SubjectObserver<any> {
     return this.journaly;
   }
   public service: {
@@ -42,7 +42,9 @@ export default abstract class DatabaseHandler {
 
   protected constructor(init?: DatabaseInitializer) {
     if (init) {
-      this.journaly = new Journaly<any>(init.hasMemory);
+      this.journaly = Journaly.newJournaly({
+        hasMemory: init.hasMemory,
+      }) as SubjectObserver<any>;
       if (init.eventHandler) this.eventHandler = init.eventHandler;
       if (init.readPool) this.readPool = init.readPool;
       this.initDAO();

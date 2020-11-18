@@ -2,15 +2,15 @@ import express from 'express';
 import cors from 'cors';
 
 import RouterSingleton from './router/routerSingleton';
-import { Journaly } from 'journaly';
+import { SubjectObserver } from 'journaly';
 
 export default class SimpleApp {
   public express: express.Application;
   public router;
 
-  protected journaly: Journaly<any>;
+  protected journaly: SubjectObserver<any>;
 
-  public constructor(router: RouterSingleton, journaly: Journaly<any>) {
+  public constructor(router: RouterSingleton, journaly: SubjectObserver<any>) {
     this.express = express();
     this.middlewares();
     this.router = router;
@@ -23,7 +23,7 @@ export default class SimpleApp {
     this.express.use(cors());
   }
 
-  protected routes(journaly: Journaly<any>): void {
+  protected routes(journaly: SubjectObserver<any>): void {
     this.router.createRoutes(journaly);
     this.express.use(this.router.getRoutes());
   }

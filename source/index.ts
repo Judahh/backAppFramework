@@ -7,10 +7,17 @@ import {
   PersistenceAdapter,
   PersistenceInfo,
   MongoDB,
-  PostgresDB,
 } from 'flexiblepersistence';
 
-import { Journaly } from 'journaly';
+import { DAODB } from '@flexiblepersistence/dao';
+
+import {
+  Journaly,
+  SubjectObserver,
+  SubjectObserverWithMemory,
+  PublisherSubscriber,
+  PublisherSubscriberWithMemory,
+} from 'journaly';
 import { Mixin } from 'ts-mixer';
 import SimpleApp from './simpleApp';
 import DatabaseHandler from './database/databaseHandler';
@@ -53,7 +60,11 @@ export {
   PersistenceAdapter,
   PersistenceInfo,
   MongoDB,
-  PostgresDB,
+  SubjectObserver,
+  SubjectObserverWithMemory,
+  PublisherSubscriber,
+  PublisherSubscriberWithMemory,
+  DAODB,
   Mixin,
   Pool,
 };

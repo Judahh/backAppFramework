@@ -1,16 +1,20 @@
 import { Mixin, settings } from 'ts-mixer';
-import { Journaly } from 'journaly';
+import { Journaly, SubjectObserver } from 'journaly';
 settings.initFunction = 'init';
 
 abstract class ClassA {
-  protected journaly: Journaly<unknown> = new Journaly();
+  protected journaly: SubjectObserver<
+    unknown
+  > = Journaly.newJournaly() as SubjectObserver<unknown>;
   protected name;
   protected test;
 
-  init(test: string, journaly?: Journaly<unknown>): void {
+  init(test: string, journaly?: SubjectObserver<unknown>): void {
     this.name = this.constructor.name;
     this.test = test;
-    this.journaly = journaly ? journaly : new Journaly();
+    this.journaly = journaly
+      ? journaly
+      : (Journaly.newJournaly() as SubjectObserver<unknown>);
   }
 
   getName(): string {
@@ -24,7 +28,7 @@ abstract class ClassA {
 
 class ClassB extends ClassA {
   protected name1;
-  init(test: string, journaly?: Journaly<any>): void {
+  init(test: string, journaly?: SubjectObserver<unknown>): void {
     super.init(test, journaly);
     this.name1 = this.name + 1;
   }
@@ -36,7 +40,7 @@ class ClassB extends ClassA {
 
 class ClassC extends ClassA {
   protected name2;
-  init(test: string, journaly?: Journaly<unknown>): void {
+  init(test: string, journaly?: SubjectObserver<unknown>): void {
     super.init(test, journaly);
     this.name2 = this.name + 1;
   }
@@ -51,7 +55,7 @@ class ClassD extends ClassA {
 }
 
 class ClassE extends Mixin(ClassB, ClassC) {
-  init(test: string, journaly?: Journaly<unknown>): void {
+  init(test: string, journaly?: SubjectObserver<unknown>): void {
     super.init(test, journaly);
     this.name2 = this.name + 1;
   }

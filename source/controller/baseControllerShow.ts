@@ -4,10 +4,11 @@ import ControllerShowAdapter from '../adapter/controllerShowAdapter';
 import BaseControllerDefault from './baseControllerDefault';
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
-export default class BaseControllerShow extends BaseControllerDefault
+export default class BaseControllerShow
+  extends BaseControllerDefault
   implements ControllerShowAdapter {
   protected async selectAll(filter?: unknown): Promise<Array<ServiceModel>> {
-    return (await this.service('selectAll', filter))[0];
+    return await this.service('selectAll', filter);
   }
 
   public async show(req: Request, res: Response): Promise<Response> {

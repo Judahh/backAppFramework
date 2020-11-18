@@ -4,10 +4,11 @@ import ControllerIndexAdapter from '../adapter/controllerIndexAdapter';
 import BaseControllerDefault from './baseControllerDefault';
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
-export default class BaseControllerIndex extends BaseControllerDefault
+export default class BaseControllerIndex
+  extends BaseControllerDefault
   implements ControllerIndexAdapter {
   protected async selectById(id: string): Promise<ServiceModel> {
-    return (await this.service('selectById', id))[0];
+    return await this.service('selectById', id);
   }
 
   public async index(req: Request, res: Response): Promise<Response> {

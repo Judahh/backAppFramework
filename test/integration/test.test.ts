@@ -1,14 +1,23 @@
 import { Utils } from '../../source/index';
 // import dBHandler from './dBHandler';
-import { Handler, Event, Operation } from 'flexiblepersistence';
+import {
+  Handler,
+  Event,
+  Operation,
+  MongoDB,
+  PersistencePromise,
+} from 'flexiblepersistence';
 import { database, eventDatabase } from './databases';
 import TestService from './testService';
 import TestDAO from './testDAO';
 import { Pool } from 'pg';
-import { DAODB } from '@flexiblepersistence/dao';
+// import { DAODB } from '@flexiblepersistence/dao';
 import { ServiceHandler } from '@flexiblepersistence/service';
 
 class Test {
+  constructor(id?) {
+    this.id = id;
+  }
   public id: string | undefined;
 }
 
@@ -16,28 +25,33 @@ test('store person, update, select all, select by id person and delete it', asyn
   const pool = new Pool(database);
   try {
     new TestService(database);
-    new TestDAO(database);
+    new TestDAO({ ...database, pool });
 
     const read = new ServiceHandler(database);
+    const write = new MongoDB(eventDatabase);
 
     await Utils.init(pool);
 
-    const handler = new Handler(eventDatabase, read);
+    const handler = new Handler(write, read);
     await handler.getWrite().clear('events');
 
+    const sentPerson = new Test();
+
     const createdPerson = await handler.addEvent(
-      new Event({ operation: Operation.create, content: new Test() })
-    )[0];
-    console.log('createdPerson:' + createdPerson);
-    const expectedPerson = {
-      id: createdPerson.id,
-    };
-    expect(createdPerson).toStrictEqual({
-      receivedItem: [],
-      result: true,
-      selectedItem: undefined,
-      sentItem: expectedPerson,
-    });
+      new Event({ operation: Operation.create, content: sentPerson })
+    );
+    // console.log('createdPerson:', createdPerson);
+    sentPerson.id = createdPerson.receivedItem.id;
+    const expectedPerson = { id: createdPerson.receivedItem.id };
+    // console.log('expectedPerson:', expectedPerson);
+    expect(createdPerson).toStrictEqual(
+      new PersistencePromise({
+        receivedItem: expectedPerson,
+        result: true,
+        selectedItem: undefined,
+        sentItem: sentPerson,
+      })
+    );
     // const all = (
     //   await journaly.publish('TestService.read')
     // )[0];

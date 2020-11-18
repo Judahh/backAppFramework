@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BaseServiceDefault } from '@flexiblepersistence/service';
 import {
   PersistenceAdapter,
@@ -15,6 +16,7 @@ export default class TestService
       resolve(true);
     });
   }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   getPersistenceInfo() {
     throw new Error('Method not implemented.');
   }
@@ -22,28 +24,25 @@ export default class TestService
     return this.create(input);
   }
   create(input: PersistenceInputCreate | any): Promise<PersistencePromise> {
-    return new Promise<PersistencePromise>(async (resolve, reject) => {
+    return new Promise<PersistencePromise>((resolve, reject) => {
       const type = 'store';
+      console.log('A RECEIVED INPUT: ', input);
       input['item'].id = input['id'];
       console.log('RECEIVED INPUT: ', input);
 
+      this.dAO(type, 'item' in input ? input.item : input)
+        .then((received) => {
+          const object = {
+            receivedItem: received,
+            result: true,
+            sentItem: 'item' in input ? input.item : input,
+          };
 
-        this.dAO(type, 'item' in input ? input.item : input).then(
-          received=>{
-            const object = {
-              receivedItem: received,
-              result: true,
-              sentItem: 'item' in input ? input.item : input,
-            };
-    
-            console.log('received:', object);
-      
-            resolve(new PersistencePromise(object));
-          }
-        ).catch(error=>reject(error));
+          // console.log('received:', object);
 
-
-      
+          resolve(new PersistencePromise(object));
+        })
+        .catch((error) => reject(error));
     });
   }
   nonexistent(
