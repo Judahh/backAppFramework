@@ -7,7 +7,6 @@ import {
   MongoDB,
   PersistencePromise,
 } from 'flexiblepersistence';
-import { database, eventDatabase } from './databases';
 import TestService from './testService';
 import TestDAO from './testDAO';
 import { Pool } from 'pg';
@@ -49,7 +48,7 @@ test('store person, update, select all, select by id person and delete it', asyn
         receivedItem: expectedPerson,
         result: true,
         selectedItem: undefined,
-        sentItem: sentPerson,
+        sentItem: { ...sentPerson },
       })
     );
     // const all = (

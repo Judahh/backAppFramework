@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Request, Response } from 'express';
-import { ServiceModel, ServiceSimpleModel } from '@flexiblepersistence/service';
+import { ServiceModel } from '@flexiblepersistence/service';
 import ControllerIndexAdapter from '../adapter/controllerIndexAdapter';
 import BaseControllerDefault from './baseControllerDefault';
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 // @ts-ignore
 export default class BaseControllerIndex
   extends BaseControllerDefault

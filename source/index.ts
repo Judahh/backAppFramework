@@ -21,7 +21,7 @@ import {
 import { Mixin } from 'ts-mixer';
 import SimpleApp from './simpleApp';
 import DatabaseHandler from './database/databaseHandler';
-import Utils from './utils';
+import { Utils } from '@flexiblepersistence/dao';
 
 import BaseController from './controller/baseController';
 import BaseControllerDefault from './controller/baseControllerDefault';

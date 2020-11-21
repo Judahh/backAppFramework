@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Request, Response } from 'express';
 import { ServiceModel, ServiceSimpleModel } from '@flexiblepersistence/service';
 import BaseControllerDefault from './baseControllerDefault';
 import ControllerStoreAdapter from '../adapter/controllerStoreAdapter';
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
+
 // @ts-ignore
 export default class BaseControllerStore
   extends BaseControllerDefault

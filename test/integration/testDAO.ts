@@ -1,4 +1,4 @@
-import { BaseDAO, DAOSimpleModel } from '@flexiblepersistence/dao';
+import { BaseDAO } from '@flexiblepersistence/dao';
 /* eslint-disable no-unused-vars */
 export default class TestDAO extends BaseDAO {
   protected table = 'tests';
@@ -14,14 +14,5 @@ export default class TestDAO extends BaseDAO {
   constructor(initDefault) {
     super(initDefault);
     // console.log(this);
-  }
-
-  protected generateVectorValues(
-    content: DAOSimpleModel
-  ): Promise<Array<unknown>> {
-    let values;
-    if (content && content.id) values = [content.id];
-    else values = [];
-    return new Promise((resolve) => resolve(values));
   }
 }

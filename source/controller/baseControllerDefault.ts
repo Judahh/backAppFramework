@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Default } from 'default-initializer';
 import { settings } from 'ts-mixer';
 settings.initFunction = 'init';

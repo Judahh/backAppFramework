@@ -11,6 +11,39 @@ import {
 export default class TestService
   extends BaseServiceDefault
   implements PersistenceAdapter {
+  private aggregateFromReceivedArray(receivedItem, realInput) {
+    return realInput.map((value, index) =>
+      this.aggregateFromReceived(receivedItem[index], value)
+    );
+  }
+
+  private aggregateFromReceived(receivedItem, value) {
+    const id = this.getIdFromReceived(receivedItem);
+    if (id)
+      return {
+        ...value,
+        id: id,
+      };
+    return value;
+  }
+
+  private getIdFromReceived(receivedItem) {
+    return receivedItem?.id?.toString() || receivedItem?._id?.toString();
+  }
+
+  private realInput(input) {
+    let realInput = input.item ? input.item : {};
+    if (Array.isArray(realInput))
+      realInput = this.aggregateFromReceivedArray(
+        input['receivedItem'],
+        realInput
+      );
+    else
+      realInput = this.aggregateFromReceived(input['receivedItem'], realInput);
+
+    // console.log(realInput);
+    return realInput;
+  }
   async close(): Promise<boolean> {
     return await new Promise<boolean>(async (resolve) => {
       resolve(true);
@@ -25,17 +58,17 @@ export default class TestService
   }
   create(input: PersistenceInputCreate | any): Promise<PersistencePromise> {
     return new Promise<PersistencePromise>((resolve, reject) => {
-      const type = 'store';
-      console.log('A RECEIVED INPUT: ', input);
-      input['item'].id = input['id'];
-      console.log('RECEIVED INPUT: ', input);
+      const type = 'create';
+      // console.log('A RECEIVED INPUT: ', input);
+      // input['item'].id = input['id'];
+      // console.log('RECEIVED INPUT: ', input);
 
-      this.dAO(type, 'item' in input ? input.item : input)
+      this.dAO(type, this.realInput(input))
         .then((received) => {
           const object = {
             receivedItem: received,
             result: true,
-            sentItem: 'item' in input ? input.item : input,
+            sentItem: this.realInput(input),
           };
 
           // console.log('received:', object);
@@ -80,7 +113,7 @@ export default class TestService
     });
   }
   correct(input: PersistenceInputUpdate): Promise<PersistencePromise> {
-    return this.correct(input);
+    return this.update(input);
   }
   update(input: PersistenceInputUpdate): Promise<PersistencePromise> {
     return new Promise<PersistencePromise>(async (resolve, reject) => {
@@ -104,10 +137,10 @@ export default class TestService
   read(input: PersistenceInputRead | string): Promise<PersistencePromise> {
     return new Promise<PersistencePromise>(async (resolve, reject) => {
       const type: string =
-        typeof input === 'string' || input.id ? 'selectById' : 'selectAll';
+        typeof input === 'string' || input.id ? 'readById' : 'readAll';
       let received;
       try {
-        if (type === 'selectById')
+        if (type === 'readById')
           received = await this.dAO(
             type,
             typeof input === 'string' ? input : input.id

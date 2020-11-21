@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Request, Response } from 'express';
 import { ServiceModel } from '@flexiblepersistence/service';
 import ControllerShowAdapter from '../adapter/controllerShowAdapter';
 import BaseControllerDefault from './baseControllerDefault';
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
+
 // @ts-ignore
 export default class BaseControllerShow
   extends BaseControllerDefault
@@ -14,7 +15,7 @@ export default class BaseControllerShow
   public async show(req: Request, res: Response): Promise<Response> {
     try {
       const object = {};
-      const filter = req.params as {};
+      const filter = req.params as unknown;
       object[this.elements] = await this.selectAll(filter);
       return res.json(object);
     } catch (error) {

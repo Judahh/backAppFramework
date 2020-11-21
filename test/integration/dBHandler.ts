@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Handler } from 'flexiblepersistence';
-import { database, eventDatabase } from './databases';
-import { DatabaseHandler, Utils, Pool } from '../../source/index';
+import { Handler, MongoDB, PersistenceInfo } from 'flexiblepersistence';
+import {
+  DatabaseHandler,
+  Journaly,
+  Pool,
+  SubjectObserver,
+} from '../../source/index';
 import TestService from './testService';
 import TestDAO from './testDAO';
-
-// TODO: ADD: Services
-const postgres = new Pool(database);
-const handler = new Handler(eventDatabase);
+import { eventInfo, readInfo } from './databaseInfos';
+import { ServiceHandler } from '@flexiblepersistence/service';
 
 class DBHandler extends DatabaseHandler {
   protected initDAO(): void {
@@ -61,9 +63,15 @@ class DBHandler extends DatabaseHandler {
   //   return new Promise((resolve) => resolve(true));
   // }
 }
-
+const journaly = Journaly.newJournaly() as SubjectObserver<any>;
+const database = new PersistenceInfo(readInfo, journaly);
+const eventdatabase = new PersistenceInfo(eventInfo, journaly);
 export default DBHandler.getInstance({
-  eventHandler: handler,
-  readPool: postgres,
+  eventHandler: new Handler(
+    new MongoDB(eventdatabase),
+    new ServiceHandler(database)
+  ),
+  readPool: new Pool(database),
   hasMemory: false,
+  journaly: journaly,
 }) as DBHandler;

@@ -35,30 +35,3 @@ new TestDAO({
 });
 const read = new ServiceHandler(new ServiceInfo(database, journaly));
 const handler = new Handler(eventDatabase, read);
-
-class Test {
-  public id: string | undefined;
-}
-
-class Util {
-  public static async init() {
-    await Utils.init(pool);
-
-    try {
-      const createdPerson = (await handler.addEvent(
-        new Event({ operation: Operation.create, content: new Test() })
-      )[0]) as { id: string };
-      console.log('createdPerson:' + createdPerson);
-      const expectedPerson = {
-        id: createdPerson.id,
-      };
-      console.log('expectedPerson:' + expectedPerson);
-    } catch (error) {
-      console.log('FUCK', error);
-    }
-
-    await Utils.end(pool);
-  }
-}
-
-Util.init();
