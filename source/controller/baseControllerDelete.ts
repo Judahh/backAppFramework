@@ -2,22 +2,21 @@
 import { Request, Response } from 'express';
 import BaseControllerDefault from './baseControllerDefault';
 import ControllerDeleteAdapter from '../adapter/controllerDeleteAdapter';
+import { Event, Operation } from 'flexiblepersistence';
 // @ts-ignore
 export default class BaseControllerDelete
   extends BaseControllerDefault
   implements ControllerDeleteAdapter {
-  protected async deleteElement(id: string): Promise<boolean> {
-    return await this.service('delete', id);
+  protected async deleteElement(event: Event): Promise<number | boolean> {
+    return await this.event(event);
   }
 
   public async delete(req: Request, res: Response): Promise<Response> {
-    try {
-      const { id } = req.params;
-      return res.json({ status: await this.deleteElement(id) });
-    } catch (error) {
-      return res
-        .status(this.errorStatus[error.name])
-        .send({ error: error.message });
-    }
+    return this.generateEvent(
+      req,
+      res,
+      Operation.delete,
+      this.deleteElement.bind(this)
+    );
   }
 }

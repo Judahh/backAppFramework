@@ -3,7 +3,7 @@ import { BaseDAO } from '@flexiblepersistence/dao';
 export default class TestDAO extends BaseDAO {
   protected table = 'tests';
 
-  protected values = 'element.ID ';
+  protected values = '*';
 
   protected insert = 'id';
 
