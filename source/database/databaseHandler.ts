@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Handler } from 'flexiblepersistence';
-import { Journaly, SubjectObserver } from 'journaly';
-import { DatabaseInitializer, DAOAdapter } from '@flexiblepersistence/dao';
+import { SubjectObserver } from 'journaly';
+import { DAOAdapter } from '@flexiblepersistence/dao';
 import { PersistenceAdapter } from 'flexiblepersistence';
 import DatabaseHandlerInitializer from './databaseHandlerInitializer';
 // @ts-ignore

@@ -44,6 +44,36 @@ export default class TestService
     // console.log(realInput);
     return realInput;
   }
+  private persistencePromise(input, method, resolve, reject) {
+    // console.log(method);
+    const input1 = !method.includes('create')
+      ? method.includes('ById')
+        ? input.id
+        : input.selectedItem
+      : this.realInput(input);
+    const input2 = this.realInput(input);
+    // console.log(input1);
+    // console.log(input2);
+    this.dAO(method, input1, input2)
+      .then((output) => {
+        const persistencePromise: PersistencePromise = {
+          receivedItem: output,
+          result: output,
+          selectedItem: input.selectedItem,
+          sentItem: input.item, //| input.sentItem,
+        };
+        // console.log(persistencePromise);
+        resolve(persistencePromise);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  }
+  private makePromise(input, method): Promise<PersistencePromise> {
+    return new Promise((resolve, reject) => {
+      this.persistencePromise(input, method, resolve, reject);
+    });
+  }
   async close(): Promise<boolean> {
     return await new Promise<boolean>(async (resolve) => {
       resolve(true);
@@ -56,112 +86,42 @@ export default class TestService
   existent(input: PersistenceInputCreate | any): Promise<PersistencePromise> {
     return this.create(input);
   }
-  create(input: PersistenceInputCreate | any): Promise<PersistencePromise> {
-    return new Promise<PersistencePromise>((resolve, reject) => {
-      const type = 'create';
-      // console.log('A RECEIVED INPUT: ', input);
-      // input['item'].id = input['id'];
-      // console.log('RECEIVED INPUT: ', input);
-
-      this.dAO(type, this.realInput(input))
-        .then((received) => {
-          const object = {
-            receivedItem: received,
-            result: true,
-            sentItem: this.realInput(input),
-          };
-
-          // console.log('received:', object);
-
-          resolve(new PersistencePromise(object));
-        })
-        .catch((error) => reject(error));
-    });
-  }
   nonexistent(
     input: PersistenceInputDelete | string
   ): Promise<PersistencePromise> {
     return this.delete(input);
   }
-  delete(input: PersistenceInputDelete | string): Promise<PersistencePromise> {
-    return new Promise<PersistencePromise>(async (resolve, reject) => {
-      const type = 'delete';
-      let received;
-      try {
-        // if (type === 'selectById')
-        received = await this.dAO(
-          type,
-          typeof input === 'string' ? input : input.id
-        );
-        // else received = await this.dAO(type);
-      } catch (error) {
-        reject(error);
-      }
-
-      resolve(
-        new PersistencePromise({
-          receivedItem:
-            typeof input === 'string'
-              ? received[0]
-              : input.single
-              ? received[0]
-              : received,
-          result: true,
-          selectedItem: typeof input === 'string' ? input : input.id,
-        })
-      );
-    });
-  }
   correct(input: PersistenceInputUpdate): Promise<PersistencePromise> {
     return this.update(input);
   }
-  update(input: PersistenceInputUpdate): Promise<PersistencePromise> {
-    return new Promise<PersistencePromise>(async (resolve, reject) => {
-      const type = 'update';
-      let received;
-      try {
-        received = await this.dAO(type, input.id, input.item);
-      } catch (error) {
-        reject(error);
-      }
-      resolve(
-        new PersistencePromise({
-          receivedItem: input.single ? received[0] : received,
-          result: true,
-          selectedItem: input.id,
-          sentItem: input.item,
-        })
-      );
-    });
+  create(input: PersistenceInputCreate | any): Promise<PersistencePromise> {
+    // console.log(input);
+    return Array.isArray(input.item)
+      ? this.makePromise(input, 'createArray')
+      : this.makePromise(input, 'create');
   }
   read(input: PersistenceInputRead | string): Promise<PersistencePromise> {
-    return new Promise<PersistencePromise>(async (resolve, reject) => {
-      const type: string =
-        typeof input === 'string' || input.id ? 'readById' : 'readAll';
-      let received;
-      try {
-        if (type === 'readById')
-          received = await this.dAO(
-            type,
-            typeof input === 'string' ? input : input.id
-          );
-        else received = await this.dAO(type);
-      } catch (error) {
-        reject(error);
-      }
+    // console.log('read', input);
+    return typeof input === 'string' || input.id
+      ? this.makePromise(input, 'readById')
+      : input.single
+      ? this.makePromise(input, 'read')
+      : this.makePromise(input, 'readArray');
+  }
+  update(input: PersistenceInputUpdate): Promise<PersistencePromise> {
+    return input.id
+      ? this.makePromise(input, 'updateById')
+      : input.single
+      ? this.makePromise(input, 'update')
+      : this.makePromise(input, 'updateArray');
+  }
+  delete(input: PersistenceInputDelete | string): Promise<PersistencePromise> {
+    // console.log('FUCKING DELETE');
 
-      resolve(
-        new PersistencePromise({
-          receivedItem:
-            typeof input === 'string'
-              ? received[0]
-              : input.single
-              ? received[0]
-              : received,
-          result: true,
-          selectedItem: typeof input === 'string' ? input : input.id,
-        })
-      );
-    });
+    return typeof input === 'string' || input.id
+      ? this.makePromise(input, 'deleteById')
+      : input.single
+      ? this.makePromise(input, 'delete')
+      : this.makePromise(input, 'deleteArray');
   }
 }

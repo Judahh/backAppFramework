@@ -1,17 +1,12 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import { Utils } from '../../source/index';
 // import dBHandler from './dBHandler';
-import {
-  Handler,
-  Event,
-  Operation,
-  MongoDB,
-  PersistencePromise,
-} from 'flexiblepersistence';
-import TestService from './testService';
-import TestDAO from './testDAO';
-import { Pool } from 'pg';
-// import { DAODB } from '@flexiblepersistence/dao';
-import { ServiceHandler } from '@flexiblepersistence/service';
+import { Event, Operation } from 'flexiblepersistence';
+
+import DBHandler from './dBHandler';
+import TestController from './testController';
+
+import { Request, Response } from 'express';
 
 class Test {
   constructor(id?) {
@@ -20,54 +15,63 @@ class Test {
   public id: string | undefined;
 }
 
+let superC;
+
+const mockResponse = {
+  received: {},
+  error: {},
+  status: (name) => {
+    superC = this;
+    return {
+      superC: superC,
+      send: (error) => {
+        if (this && error) superC.error[name] = error;
+        return this;
+      },
+    };
+  },
+  json: (object) => {
+    superC = this;
+    superC.received = object;
+    return this;
+  },
+};
+
 test('store person, update, select all, select by id person and delete it', async (done) => {
-  const pool = new Pool(database);
+  const pool = DBHandler.getReadPool();
+  await Utils.init(pool);
+  const handler = DBHandler.getEventHandler();
+  const controller = new TestController({
+    journaly: DBHandler.getJournaly(),
+    handler,
+  });
   try {
-    new TestService(database);
-    new TestDAO({ ...database, pool });
-
-    const read = new ServiceHandler(database);
-    const write = new MongoDB(eventDatabase);
-
-    await Utils.init(pool);
-
-    const handler = new Handler(write, read);
     await handler.getWrite().clear('events');
 
     const sentPerson = new Test();
 
-    const createdPerson = await handler.addEvent(
-      new Event({ operation: Operation.create, content: sentPerson })
+    const store = await controller.store(
+      {
+        body: sentPerson,
+      } as Request,
+      (mockResponse as unknown) as Response
     );
-    // console.log('createdPerson:', createdPerson);
-    sentPerson.id = createdPerson.receivedItem.id;
-    const expectedPerson = { id: createdPerson.receivedItem.id };
+    const storedPerson = store['received'];
+    // console.log('storedPerson:', storedPerson);
+
+    sentPerson.id = store['received'].id;
+    const expectedPerson = { test: { id: storedPerson.test.id } };
     // console.log('expectedPerson:', expectedPerson);
-    expect(createdPerson).toStrictEqual(
-      new PersistencePromise({
-        receivedItem: expectedPerson,
-        result: true,
-        selectedItem: undefined,
-        sentItem: { ...sentPerson },
-      })
-    );
-    // const all = (
-    //   await journaly.publish('TestService.read')
-    // )[0];
 
-    // expect(all).toStrictEqual([expectedPerson]);
-    // const one = (
-    //   await journaly
-    //     .publish('TestService.selectById', createdPerson.id)
-    // )[0];
-
-    // expect(one).toStrictEqual(expectedPerson);
+    expect(storedPerson).toStrictEqual(expectedPerson);
   } catch (error) {
     console.error(error);
+    await handler.getWrite().clear('events');
     await Utils.end(pool);
     expect(error).toBe(null);
     done();
   }
+  await handler.getWrite().clear('events');
   await Utils.end(pool);
   done();
 });

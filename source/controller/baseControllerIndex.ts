@@ -8,7 +8,7 @@ export default class BaseControllerIndex
   extends BaseControllerDefault
   implements ControllerIndexAdapter {
   protected async selectById(id: string): Promise<ServiceModel> {
-    return await this.service('selectById', id);
+    return await this.service('readById', id);
   }
 
   public async index(req: Request, res: Response): Promise<Response> {

@@ -9,7 +9,7 @@ export default class BaseControllerShow
   extends BaseControllerDefault
   implements ControllerShowAdapter {
   protected async selectAll(filter?: unknown): Promise<Array<ServiceModel>> {
-    return await this.service('selectAll', filter);
+    return await this.service('readAll', filter);
   }
 
   public async show(req: Request, res: Response): Promise<Response> {
