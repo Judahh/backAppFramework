@@ -9,6 +9,7 @@ import DatabaseHandlerInitializer from './databaseHandlerInitializer';
 export default abstract class DatabaseHandler {
   // @ts-ignore
   protected journaly: SubjectObserver<any>;
+  protected init?: DatabaseHandlerInitializer;
 
   public getJournaly(): SubjectObserver<any> {
     return this.journaly;
@@ -50,6 +51,7 @@ export default abstract class DatabaseHandler {
 
   protected constructor(init?: DatabaseHandlerInitializer) {
     if (init) {
+      this.init = init;
       this.journaly = init.journaly;
       if (init.eventHandler) this.eventHandler = init.eventHandler;
       if (init.readPool) this.readPool = init.readPool;
@@ -59,6 +61,10 @@ export default abstract class DatabaseHandler {
   }
   protected abstract initDAO(): void;
   protected abstract initService(): void;
+
+  public getInit(): DatabaseHandlerInitializer | undefined {
+    return this.init;
+  }
 
   public getEventHandler(): Handler {
     return this.eventHandler;

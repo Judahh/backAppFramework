@@ -2,20 +2,23 @@ import express from 'express';
 import cors from 'cors';
 
 import RouterSingleton from './router/routerSingleton';
-import { SubjectObserver } from 'journaly';
+import DatabaseHandlerInitializer from './database/databaseHandlerInitializer';
 
 export default class SimpleApp {
   public express: express.Application;
-  public router;
+  public router: RouterSingleton;
 
-  protected journaly: SubjectObserver<any>;
+  protected initDefault?: DatabaseHandlerInitializer;
 
-  public constructor(router: RouterSingleton, journaly: SubjectObserver<any>) {
+  public constructor(
+    router: RouterSingleton,
+    initDefault?: DatabaseHandlerInitializer
+  ) {
     this.express = express();
     this.middlewares();
     this.router = router;
-    this.journaly = journaly;
-    this.routes(journaly);
+    this.initDefault = initDefault;
+    this.routes(initDefault);
   }
 
   protected middlewares(): void {
@@ -23,8 +26,8 @@ export default class SimpleApp {
     this.express.use(cors());
   }
 
-  protected routes(journaly: SubjectObserver<any>): void {
-    this.router.createRoutes(journaly);
+  protected routes(initDefault?: DatabaseHandlerInitializer): void {
+    this.router.createRoutes(initDefault);
     this.express.use(this.router.getRoutes());
   }
 }

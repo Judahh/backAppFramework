@@ -4,7 +4,7 @@ import { ServiceModel, ServiceSimpleModel } from '@flexiblepersistence/service';
 import { Default } from 'default-initializer';
 import { Handler, Event, Operation } from 'flexiblepersistence';
 import { settings } from 'ts-mixer';
-import BaseControllerDefaultInitializer from './baseControllerDefaultInitializer';
+import DatabaseHandlerInitializer from '../database/databaseHandlerInitializer';
 settings.initFunction = 'init';
 export default class BaseControllerDefault extends Default {
   protected errorStatus: {
@@ -15,15 +15,15 @@ export default class BaseControllerDefault extends Default {
 
   protected nameService: string | undefined;
 
-  protected handler: Handler | undefined;
+  protected eventHandler: Handler | undefined;
 
-  constructor(initDefault: BaseControllerDefaultInitializer) {
+  constructor(initDefault: DatabaseHandlerInitializer) {
     super(initDefault);
   }
 
-  init(initDefault: BaseControllerDefaultInitializer): void {
+  init(initDefault: DatabaseHandlerInitializer): void {
     super.init(initDefault);
-    this.handler = initDefault.handler;
+    this.eventHandler = initDefault.eventHandler;
     // console.log(this.handler);
   }
 
@@ -31,8 +31,8 @@ export default class BaseControllerDefault extends Default {
   protected async event(event: Event): Promise<any> {
     return new Promise(async (resolve, reject) => {
       if (!this.journaly) reject(new Error('No journaly connected!'));
-      if (this.handler) {
-        this.handler
+      if (this.eventHandler) {
+        this.eventHandler
           .addEvent(event)
           .then((value) => resolve(value))
           .catch((error) => reject(error));

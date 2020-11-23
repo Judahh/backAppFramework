@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Router } from 'express';
-import { SubjectObserver } from 'journaly';
+import DatabaseHandlerInitializer from '../database/databaseHandlerInitializer';
 // @ts-ignore
 export default class RouterSingleton {
   // @ts-ignore
-  public abstract createRoutes(journaly: SubjectObserver<any>): void;
+  public abstract createRoutes(initDefault?: DatabaseHandlerInitializer): void;
   protected static _instance: RouterSingleton;
 
   protected routes: Router;
