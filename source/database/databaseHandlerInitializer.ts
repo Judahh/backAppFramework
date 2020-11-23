@@ -1,3 +1,4 @@
+// file deepcode ignore no-any: any needed
 import { DatabaseInitializer } from '@flexiblepersistence/dao';
 import { SubjectObserver } from 'journaly';
 

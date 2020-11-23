@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// file deepcode ignore no-any: any needed
 import { Handler } from 'flexiblepersistence';
 import { SubjectObserver } from 'journaly';
 import { DAOAdapter } from '@flexiblepersistence/dao';

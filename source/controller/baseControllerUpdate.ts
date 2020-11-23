@@ -11,7 +11,7 @@ export default class BaseControllerUpdate
   implements ControllerUpdateAdapter {
   protected async updateElement(
     event: Event
-  ): Promise<Array<ServiceModel> | ServiceModel> {
+  ): Promise<ServiceModel[] | ServiceModel> {
     return await this.event(event);
   }
 

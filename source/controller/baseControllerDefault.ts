@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+// file deepcode ignore no-any: any needed
+// file deepcode ignore object-literal-shorthand: argh
 import { Request, Response } from 'express';
 import { ServiceModel, ServiceSimpleModel } from '@flexiblepersistence/service';
 import { Default } from 'default-initializer';
@@ -46,7 +48,7 @@ export default class BaseControllerDefault extends Default {
     operation: Operation,
     useFunction: (
       event: Event
-    ) => Promise<Array<ServiceModel> | ServiceModel | number | boolean>,
+    ) => Promise<ServiceModel[] | ServiceModel | number | boolean>,
     singleDefault?: boolean
   ): Promise<Response> {
     try {

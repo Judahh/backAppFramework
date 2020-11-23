@@ -9,7 +9,7 @@ import { Event, Operation } from 'flexiblepersistence';
 export default class BaseControllerShow
   extends BaseControllerDefault
   implements ControllerShowAdapter {
-  protected async selectAll(event: Event): Promise<Array<ServiceModel>> {
+  protected async selectAll(event: Event): Promise<ServiceModel[]> {
     return await this.event(event);
   }
 
