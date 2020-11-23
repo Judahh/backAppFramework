@@ -77,7 +77,7 @@ export default class TestService
     });
   }
   async close(): Promise<boolean> {
-    return await new Promise<boolean>(async (resolve) => {
+    return new Promise<boolean>(async (resolve) => {
       resolve(true);
     });
   }
