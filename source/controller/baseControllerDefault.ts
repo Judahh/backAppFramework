@@ -55,7 +55,7 @@ export default class BaseControllerDefault extends Default {
       const content = req.body as ServiceSimpleModel;
       const object = {};
       const filter = req.params?.filter as unknown;
-      const name = req.params?.name as string;
+      const name = this.constructor.name.replace('Controller', '');
       let single;
       if (singleDefault !== undefined) single = singleDefault;
       else single = (req.params?.single as unknown) as boolean;
