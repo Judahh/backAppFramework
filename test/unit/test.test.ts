@@ -2,8 +2,8 @@ import { Mixin, settings } from 'ts-mixer';
 settings.initFunction = 'init';
 
 abstract class ClassA {
-  public name;
-  public test;
+  name;
+  test;
 
   constructor(test: string) {
     this.name = this.constructor.name;
@@ -15,7 +15,7 @@ abstract class ClassA {
 }
 
 class ClassB extends ClassA {
-  public name1;
+  name1;
   init(): void {
     super.init();
     this.name1 = this.name + 1;
@@ -23,7 +23,7 @@ class ClassB extends ClassA {
 }
 
 class ClassC extends ClassA {
-  public name2;
+  name2;
   init(): void {
     super.init();
     this.name2 = this.name + 2;
@@ -31,7 +31,7 @@ class ClassC extends ClassA {
 }
 
 class ClassD extends ClassA {
-  public name3;
+  name3;
   init(): void {
     super.init();
     this.name3 = this.name + 3;

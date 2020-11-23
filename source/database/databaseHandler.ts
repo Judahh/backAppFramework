@@ -12,16 +12,16 @@ export default abstract class DatabaseHandler {
   protected journaly: SubjectObserver<any>;
   protected init?: DatabaseHandlerInitializer;
 
-  public getJournaly(): SubjectObserver<any> {
+  getJournaly(): SubjectObserver<any> {
     return this.journaly;
   }
-  public service: {
+  service: {
     [name: string]: PersistenceAdapter;
   } = {
     // test: exampleService,
   };
 
-  public dAO: {
+  dAO: {
     [name: string]: DAOAdapter;
   } = {
     // test: exampleDAO
@@ -63,21 +63,20 @@ export default abstract class DatabaseHandler {
   protected abstract initDAO(): void;
   protected abstract initService(): void;
 
-  public getInit(): DatabaseHandlerInitializer | undefined {
-    return this.init;
+  getInit(): DatabaseHandlerInitializer {
+    if (this.init) return this.init;
+    throw new Error('DatabaseHandler must have a init.');
   }
 
-  public getEventHandler(): Handler {
+  getEventHandler(): Handler {
     return this.eventHandler;
   }
 
-  public getReadPool(): any {
+  getReadPool(): any {
     return this.readPool;
   }
 
-  public static getInstance(
-    init?: DatabaseHandlerInitializer
-  ): DatabaseHandler {
+  static getInstance(init?: DatabaseHandlerInitializer): DatabaseHandler {
     if (!this._instance) {
       // @ts-ignore
       this._instance = new this(init);

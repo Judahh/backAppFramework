@@ -9,10 +9,10 @@ export default class BaseControllerIndex
   extends BaseControllerDefault
   implements ControllerIndexAdapter {
   protected async select(event: Event): Promise<ServiceModel> {
-    return await this.event(event);
+    return this.event(event);
   }
 
-  public async index(req: Request, res: Response): Promise<Response> {
+  async index(req: Request, res: Response): Promise<Response> {
     return this.generateEvent(
       req,
       res,

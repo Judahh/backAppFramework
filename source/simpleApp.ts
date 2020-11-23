@@ -5,12 +5,12 @@ import RouterSingleton from './router/routerSingleton';
 import DatabaseHandlerInitializer from './database/databaseHandlerInitializer';
 
 export default class SimpleApp {
-  public express: express.Application;
-  public router: RouterSingleton;
+  express: express.Application;
+  router: RouterSingleton;
 
   protected initDefault?: DatabaseHandlerInitializer;
 
-  public constructor(
+  constructor(
     router: RouterSingleton,
     initDefault?: DatabaseHandlerInitializer
   ) {

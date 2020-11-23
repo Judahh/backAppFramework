@@ -8,10 +8,10 @@ export default class BaseControllerDelete
   extends BaseControllerDefault
   implements ControllerDeleteAdapter {
   protected async deleteElement(event: Event): Promise<number | boolean> {
-    return await this.event(event);
+    return this.event(event);
   }
 
-  public async delete(req: Request, res: Response): Promise<Response> {
+  async delete(req: Request, res: Response): Promise<Response> {
     return this.generateEvent(
       req,
       res,

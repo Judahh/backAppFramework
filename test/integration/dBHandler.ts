@@ -29,7 +29,7 @@ class DBHandler extends DatabaseHandler {
     });
   }
 
-  // public async migrate(): Promise<boolean> {
+  // async migrate(): Promise<boolean> {
   //   try {
   //     const events = await this.eventHandler.readArray('events', {});
   //     await Utils.dropTables(this.getReadPool());

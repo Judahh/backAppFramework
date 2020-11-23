@@ -5,7 +5,7 @@ import DatabaseHandlerInitializer from '../database/databaseHandlerInitializer';
 // @ts-ignore
 export default class RouterSingleton {
   // @ts-ignore
-  public abstract createRoutes(initDefault?: DatabaseHandlerInitializer): void;
+  abstract createRoutes(initDefault?: DatabaseHandlerInitializer): void;
   protected static _instance: RouterSingleton;
 
   protected routes: Router;
@@ -14,14 +14,14 @@ export default class RouterSingleton {
     this.routes = Router();
   }
 
-  public static getInstance(): RouterSingleton {
+  static getInstance(): RouterSingleton {
     if (!this._instance) {
       this._instance = new this();
     }
     return this._instance;
   }
 
-  public getRoutes(): Router {
+  getRoutes(): Router {
     return this.routes;
   }
 }

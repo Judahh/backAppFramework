@@ -12,10 +12,10 @@ export default class BaseControllerUpdate
   protected async updateElement(
     event: Event
   ): Promise<ServiceModel[] | ServiceModel> {
-    return await this.event(event);
+    return this.event(event);
   }
 
-  public async update(req: Request, res: Response): Promise<Response> {
+  async update(req: Request, res: Response): Promise<Response> {
     return this.generateEvent(
       req,
       res,

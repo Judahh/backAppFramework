@@ -12,10 +12,10 @@ export default class BaseControllerStore
   // @ts-ignore
   protected async storeElement(event: Event): Promise<ServiceModel> {
     // console.log('storeElement:', event);
-    return await this.event(event);
+    return this.event(event);
   }
 
-  public async store(req: Request, res: Response): Promise<Response> {
+  async store(req: Request, res: Response): Promise<Response> {
     return this.generateEvent(
       req,
       res,

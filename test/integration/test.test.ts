@@ -11,8 +11,8 @@ class Test {
   constructor(id?) {
     this.id = id;
   }
-  public id: string | undefined;
-  public name: string | undefined;
+  id: string | undefined;
+  name: string | undefined;
 }
 
 let superC;
@@ -41,10 +41,7 @@ test('store person, update, select all, select by id person and delete it', asyn
   const pool = DBHandler.getReadPool();
   await Utils.init(pool);
   const handler = DBHandler.getEventHandler();
-  const controller = new TestController({
-    journaly: DBHandler.getJournaly(),
-    handler,
-  });
+  const controller = new TestController(DBHandler.getInit());
   try {
     await handler.getWrite().clear('events');
 

@@ -10,10 +10,10 @@ export default class BaseControllerShow
   extends BaseControllerDefault
   implements ControllerShowAdapter {
   protected async selectAll(event: Event): Promise<ServiceModel[]> {
-    return await this.event(event);
+    return this.event(event);
   }
 
-  public async show(req: Request, res: Response): Promise<Response> {
+  async show(req: Request, res: Response): Promise<Response> {
     return this.generateEvent(
       req,
       res,
