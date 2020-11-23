@@ -2,10 +2,15 @@
   "name": "backapijh",
   "productName": "backApi",
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
-  "version": "0.3.10",
+  "version": "0.5.0",
   "private": false,
-  "description": "Judahh APP project",
-  "main": "index.js",
+  "description": "Judahh BACK API project",
+  "main": "dist/source/index.js",
+  "module": "dist/source/index.js",
+  "types": "dist/source/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "judahh",
     "app"
@@ -15,42 +20,54 @@
     "url": "git+https://github.com/Judahh/backApi.git"
   },
   "homepage": "https://github.com/Judahh/backApi#readme",
-  "license": "BSD-3-Clause",
-  "angular-cli": {},
+  "license": "MIT",
+  "config": {
+    "jest": "--coverage --passWithNoTests --ci --verbose --forceExit --detectOpenHandles --colors",
+    "integration_config": "-i -c integration.config.json",
+    "unit_coverall": "tests/unit/coverage/lcov.info",
+    "integration_coverall": "tests/integration/coverage/lcov.info",
+    "path_dist": "dist",
+    "path_source": "src",
+    "path_server": "src/server"
+  },
   "scripts": {
     "postinstall": "",
     "prepublish": "",
-    "build": "tsc",
+    "build": "rm -rf dist/ && tsc",
+    "test": "jest --passWithNoTests --ci --verbose --forceExit --detectOpenHandles",
+    "integration": "jest -i -c integration.config.json --passWithNoTests  --ci --verbose --forceExit --detectOpenHandles",
+    "start": "node dist/source/server.js",
     "prestart": "",
-    "lint": "tslint \"src/**/*.ts\"",
-    "test": "jest --passWithNoTests",
     "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "ntsc": "ntsc",
-    "ntsc:w": "ntsc -w",
-    "clean": "shx rm -Rf build/"
+    "tsc:w": "tsc -w"
   },
   "dependencies": {
-    "socket.io": "2.3.0",
-    "basicsocket": "0.2.5",
-    "basicutil": "1.2.10",
-    "body-parser": "^1.19.0",
-    "compression": "1.7.4",
-    "connect-static-file": "^2.0.0",
-    "electron": "^7.1.9",
-    "express": "4.17.1",
-    "morgan": "^1.9.1"
+    "@flexiblepersistence/service": "latest",
+    "@flexiblepersistence/dao": "latest",
+    "default-initializer": "latest",
+    "cors": "latest",
+    "express": "latest",
+    "journaly": "latest",
+    "flexiblepersistence": "latest",
+    "ts-mixer": "latest",
+    "pg": "latest"
   },
   "devDependencies": {
-    "jest": "^24.9.0",
-    "ts-jest": "^24.3.0",
-    "tslint": "^5.20.1",
-    "typescript": "3.7.5",
-    "@types/jquery": "3.3.31",
-    "@types/node": "12.12.6",
-    "@types/jest": "^24.9.0",
-    "@types/body-parser": "1.17.1",
-    "@types/morgan": "^1.7.37",
-    "@types/request": "^2.48.4"
+    "@types/cors": "latest",
+    "@types/express": "latest",
+    "@types/jest": "latest",
+    "@types/node": "latest",
+    "@types/pg": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-filenames": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-prettier": "latest",
+    "jest": "latest",
+    "prettier": "latest",
+    "ts-jest": "latest",
+    "typescript": "latest"
   }
 }
