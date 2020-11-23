@@ -68,7 +68,7 @@ test('store person, update, select all, select by id person and delete it', asyn
 
     const index = await controller.index(
       ({
-        params: { name: 'Test', filter: {} },
+        params: { filter: {} },
       } as unknown) as Request,
       (mockResponse as unknown) as Response
     );
@@ -94,7 +94,7 @@ test('store person, update, select all, select by id person and delete it', asyn
 
     const show = await controller.show(
       ({
-        params: { name: 'Test', filter: {} },
+        params: { filter: {} },
       } as unknown) as Request,
       (mockResponse as unknown) as Response
     );
@@ -112,7 +112,6 @@ test('store person, update, select all, select by id person and delete it', asyn
       ({
         body: sentPerson3,
         params: {
-          name: 'Test',
           filter: { id: storedPerson2.test.id },
           single: false,
         },
@@ -131,7 +130,7 @@ test('store person, update, select all, select by id person and delete it', asyn
 
     const show2 = await controller.show(
       ({
-        params: { name: 'Test', filter: {} },
+        params: { filter: {} },
       } as unknown) as Request,
       (mockResponse as unknown) as Response
     );
@@ -148,7 +147,6 @@ test('store person, update, select all, select by id person and delete it', asyn
     const deleted = await controller.delete(
       ({
         params: {
-          name: 'Test',
           filter: { id: storedPerson2.test.id },
         },
       } as unknown) as Request,
@@ -165,7 +163,7 @@ test('store person, update, select all, select by id person and delete it', asyn
 
     const show3 = await controller.show(
       ({
-        params: { name: 'Test', filter: {} },
+        params: { filter: {} },
       } as unknown) as Request,
       (mockResponse as unknown) as Response
     );

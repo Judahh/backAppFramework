@@ -37,6 +37,7 @@ import RouterSingleton from './router/routerSingleton';
 
 import { Pool } from 'pg';
 import DatabaseHandlerInitializer from './database/databaseHandlerInitializer';
+import BasicService from './service/basicService';
 
 export {
   SimpleApp,
@@ -44,6 +45,7 @@ export {
   DatabaseHandlerInitializer,
   Utils,
   Journaly,
+  BasicService,
   BaseController,
   BaseControllerDefault,
   BaseControllerDelete,
