@@ -21,7 +21,7 @@ export default class BasicService
 
   protected aggregateFromReceived(receivedItem, value) {
     const id = this.getIdFromReceived(receivedItem);
-    if (id)
+    if (id && !value.id)
       return {
         ...value,
         id: id,

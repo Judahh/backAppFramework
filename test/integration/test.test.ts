@@ -37,7 +37,7 @@ const mockResponse = {
   },
 };
 
-test('store person, update, select all, select by id person and delete it', async (done) => {
+test('store test, update, select all, select by id test and delete it', async (done) => {
   const pool = DBHandler.getReadPool();
   await Utils.init(pool);
   const handler = DBHandler.getEventHandler();
@@ -45,26 +45,26 @@ test('store person, update, select all, select by id person and delete it', asyn
   try {
     await handler.getWrite().clear('events');
 
-    const sentPerson = new Test();
-    const sentPerson2 = new Test();
+    const sentTest = new Test();
+    const sentTest2 = new Test();
 
     const store = await controller.store(
       ({
-        body: sentPerson,
+        body: sentTest,
       } as unknown) as Request,
       (mockResponse as unknown) as Response
     );
     // console.log('store:', store);
-    const storedPerson = store['received'];
-    // console.log('storedPerson:', storedPerson);
+    const storedTest = store['received'];
+    // console.log('storedTest:', storedTest);
 
-    sentPerson.id = storedPerson.id;
-    const expectedPerson = {
-      test: { id: storedPerson.test.id, name: null },
+    sentTest.id = storedTest.id;
+    const expectedTest = {
+      test: { id: storedTest.test.id, name: null },
     };
-    // console.log('expectedPerson:', expectedPerson);
+    // console.log('expectedTest:', expectedTest);
 
-    expect(storedPerson).toStrictEqual(expectedPerson);
+    expect(storedTest).toStrictEqual(expectedTest);
 
     const index = await controller.index(
       ({
@@ -73,24 +73,24 @@ test('store person, update, select all, select by id person and delete it', asyn
       (mockResponse as unknown) as Response
     );
     // console.log('show:', show);
-    const indexPerson = index['received'];
-    expect(indexPerson).toStrictEqual(expectedPerson);
+    const indexTest = index['received'];
+    expect(indexTest).toStrictEqual(expectedTest);
 
     const store2 = await controller.store(
       ({
-        body: sentPerson2,
+        body: sentTest2,
       } as unknown) as Request,
       (mockResponse as unknown) as Response
     );
     // console.log('store:', store);
-    const storedPerson2 = store2['received'];
-    // console.log('storedPerson:', storedPerson);
+    const storedTest2 = store2['received'];
+    // console.log('storedTest:', storedTest);
 
-    sentPerson2.id = storedPerson2.id;
-    const expectedPerson2 = { test: { id: storedPerson2.test.id, name: null } };
-    // console.log('expectedPerson:', expectedPerson);
+    sentTest2.id = storedTest2.id;
+    const expectedTest2 = { test: { id: storedTest2.test.id, name: null } };
+    // console.log('expectedTest:', expectedTest);
 
-    expect(storedPerson2).toStrictEqual(expectedPerson2);
+    expect(storedTest2).toStrictEqual(expectedTest2);
 
     const show = await controller.show(
       ({
@@ -99,34 +99,34 @@ test('store person, update, select all, select by id person and delete it', asyn
       (mockResponse as unknown) as Response
     );
 
-    const showPerson = show['received'];
-    // console.log('showPerson:', showPerson);
-    const expectedPersons = {
-      test: [storedPerson.test, storedPerson2.test],
+    const showTest = show['received'];
+    // console.log('showTest:', showTest);
+    const expectedTests = {
+      test: [storedTest.test, storedTest2.test],
     };
-    expect(showPerson).toStrictEqual(expectedPersons);
+    expect(showTest).toStrictEqual(expectedTests);
 
-    const sentPerson3 = { name: 'Test' };
+    const sentTest3 = { name: 'Test' };
 
     const update = await controller.update(
       ({
-        body: sentPerson3,
+        body: sentTest3,
         params: {
-          filter: { id: storedPerson2.test.id },
+          filter: { id: storedTest2.test.id },
           single: false,
         },
       } as unknown) as Request,
       (mockResponse as unknown) as Response
     );
-    // console.log('storedPerson2:', storedPerson2);
+    // console.log('storedTest2:', storedTest2);
 
-    const updatedPerson = update['received'];
-    // console.log('updatedPerson:', updatedPerson);
-    const expectedUpdatedPerson = {
-      test: { id: storedPerson2.test.id, name: sentPerson3.name },
+    const updatedTest = update['received'];
+    // console.log('updatedTest:', updatedTest);
+    const expectedUpdatedTest = {
+      test: { id: storedTest2.test.id, name: sentTest3.name },
     };
-    // console.log('expectedUpdatedPerson:', expectedUpdatedPerson);
-    expect(updatedPerson).toStrictEqual(expectedUpdatedPerson);
+    // console.log('expectedUpdatedTest:', expectedUpdatedTest);
+    expect(updatedTest).toStrictEqual(expectedUpdatedTest);
 
     const show2 = await controller.show(
       ({
@@ -135,31 +135,31 @@ test('store person, update, select all, select by id person and delete it', asyn
       (mockResponse as unknown) as Response
     );
 
-    const showPerson2 = show2['received'];
-    // console.log('showPerson2:', showPerson2);
-    const expectedPersons2 = {
-      test: [storedPerson.test, updatedPerson.test],
+    const showTest2 = show2['received'];
+    // console.log('showTest2:', showTest2);
+    const expectedTests2 = {
+      test: [storedTest.test, updatedTest.test],
     };
-    // console.log('expectedPersons2:', expectedPersons2);
+    // console.log('expectedTests2:', expectedTests2);
 
-    expect(showPerson2).toStrictEqual(expectedPersons2);
+    expect(showTest2).toStrictEqual(expectedTests2);
 
     const deleted = await controller.delete(
       ({
         params: {
-          filter: { id: storedPerson2.test.id },
+          filter: { id: storedTest2.test.id },
         },
       } as unknown) as Request,
       (mockResponse as unknown) as Response
     );
 
-    const deletedPerson = deleted['received'];
-    // console.log('deletedPerson:', deletedPerson);
-    const expectedDeletedPerson = {
+    const deletedTest = deleted['received'];
+    // console.log('deletedTest:', deletedTest);
+    const expectedDeletedTest = {
       test: true,
     };
-    // console.log('expectedDeletedPerson:', expectedDeletedPerson);
-    expect(deletedPerson).toStrictEqual(expectedDeletedPerson);
+    // console.log('expectedDeletedTest:', expectedDeletedTest);
+    expect(deletedTest).toStrictEqual(expectedDeletedTest);
 
     const show3 = await controller.show(
       ({
@@ -168,12 +168,12 @@ test('store person, update, select all, select by id person and delete it', asyn
       (mockResponse as unknown) as Response
     );
 
-    const showPerson3 = show3['received'];
-    // console.log('showPerson3:', showPerson3);
-    const expectedPersons3 = {
-      test: [storedPerson.test],
+    const showTest3 = show3['received'];
+    // console.log('showTest3:', showTest3);
+    const expectedTests3 = {
+      test: [storedTest.test],
     };
-    expect(showPerson3).toStrictEqual(expectedPersons3);
+    expect(showTest3).toStrictEqual(expectedTests3);
   } catch (error) {
     console.error(error);
     await handler.getWrite().clear('events');
