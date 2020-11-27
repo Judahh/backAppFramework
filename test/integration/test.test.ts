@@ -38,8 +38,8 @@ const mockResponse = {
 };
 
 test('store test, update, select all, select by id test and delete it', async (done) => {
-  const pool = DBHandler.getReadPool();
-  await Utils.init(pool);
+  // const pool = DBHandler.getReadPool();
+  // await Utils.init(pool);
   // const handler = DBHandler.getHandler();
   // const controller = new TestController(DBHandler.getInit());
   // try {

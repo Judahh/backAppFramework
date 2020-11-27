@@ -45,15 +45,15 @@ export default class BasicService extends BaseServiceDefault {
   }
   protected persistencePromise(input, method, resolve, reject) {
     // console.log(input);
-    const input1 = !method.includes('create')
-      ? method.includes('ById')
-        ? input.id
-        : input.selectedItem
-      : this.realInput(input);
-    const input2 = this.realInput(input);
+    // const input1 = !method.includes('create')
+    //   ? method.includes('ById')
+    //     ? input.id
+    //     : input.selectedItem
+    //   : this.realInput(input);
+    // const input2 = this.realInput(input);
     // console.log(input1);
     // console.log(input2);
-    this.dAO(method, input1, input2)
+    this.persistencePublish(method, input)
       .then((output) => {
         const persistencePromise: PersistencePromise = {
           receivedItem: output,

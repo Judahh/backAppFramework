@@ -15,20 +15,6 @@ import { eventInfo, readInfo } from './databaseInfos';
 import { ServiceHandler } from '@flexiblepersistence/service';
 
 class DBHandler extends DatabaseHandler {
-  protected initDAO(): void {
-    // @ts-ignore
-    this.dAO['test'] = new TestDAO({
-      pool: this.getReadPool(),
-      journaly: this.journaly,
-    });
-  }
-  protected initService(): void {
-    // @ts-ignore
-    this.service['test'] = new TestService({
-      journaly: this.journaly,
-    });
-  }
-
   // async migrate(): Promise<boolean> {
   //   try {
   //     const events = await this.handler.readArray('events', {});
@@ -61,7 +47,6 @@ class DBHandler extends DatabaseHandler {
   //   } catch (error) {
   //     return new Promise((resolve, reject) => reject(error));
   //   }
-
   //   return new Promise((resolve) => resolve(true));
   // }
 }
