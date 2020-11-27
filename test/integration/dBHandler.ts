@@ -4,10 +4,10 @@
 // file deepcode ignore object-literal-shorthand: argh
 import { Handler, MongoDB, PersistenceInfo } from 'flexiblepersistence';
 import {
-  DatabaseHandler,
   Journaly,
-  Pool,
   SubjectObserver,
+  DatabaseHandler,
+  DAODB,
 } from '../../source/index';
 import TestService from './testService';
 import TestDAO from './testDAO';
@@ -31,7 +31,7 @@ class DBHandler extends DatabaseHandler {
 
   // async migrate(): Promise<boolean> {
   //   try {
-  //     const events = await this.eventHandler.readArray('events', {});
+  //     const events = await this.handler.readArray('events', {});
   //     await Utils.dropTables(this.getReadPool());
   //     await Utils.init(this.getReadPool());
   //     for (const event of events.receivedItem) {
@@ -65,15 +65,26 @@ class DBHandler extends DatabaseHandler {
   //   return new Promise((resolve) => resolve(true));
   // }
 }
+
 const journaly = Journaly.newJournaly() as SubjectObserver<any>;
 const database = new PersistenceInfo(readInfo, journaly);
 const eventdatabase = new PersistenceInfo(eventInfo, journaly);
+
+const dAO = new DAODB(database, {
+  test: new TestDAO(),
+});
+
+const read = new ServiceHandler(
+  database,
+  {
+    test: new TestService(),
+  },
+  dAO
+);
+const write = new MongoDB(eventdatabase);
+// console.log(journaly.getSubjects());
+const handler = new Handler(write, read);
 export default DBHandler.getInstance({
-  eventHandler: new Handler(
-    new MongoDB(eventdatabase),
-    new ServiceHandler(database)
-  ),
-  readPool: new Pool(database),
-  hasMemory: false,
+  handler: handler,
   journaly: journaly,
 }) as DBHandler;

@@ -17,15 +17,15 @@ export default class BaseControllerDefault extends Default {
 
   protected nameService: string | undefined;
 
-  protected eventHandler: Handler | undefined;
+  protected handler: Handler | undefined;
 
-  constructor(initDefault: DatabaseHandlerInitializer) {
+  constructor(initDefault?: DatabaseHandlerInitializer) {
     super(initDefault);
   }
 
-  init(initDefault: DatabaseHandlerInitializer): void {
+  init(initDefault?: DatabaseHandlerInitializer): void {
     super.init(initDefault);
-    this.eventHandler = initDefault.eventHandler;
+    if (initDefault) this.handler = initDefault.handler;
     // console.log(this.handler);
   }
 
@@ -33,8 +33,8 @@ export default class BaseControllerDefault extends Default {
   protected async event(event: Event): Promise<any> {
     return new Promise(async (resolve, reject) => {
       if (!this.journaly) reject(new Error('No journaly connected!'));
-      if (this.eventHandler) {
-        this.eventHandler
+      if (this.handler) {
+        this.handler
           .addEvent(event)
           .then((value) => resolve(value))
           .catch((error) => reject(error));

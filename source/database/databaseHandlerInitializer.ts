@@ -1,9 +1,7 @@
 // file deepcode ignore no-any: any needed
-import { DatabaseInitializer } from '@flexiblepersistence/dao';
-import { SubjectObserver } from 'journaly';
+import { Handler, DefaultInitializer } from 'flexiblepersistence';
 
-export default interface DatabaseHandlerInitializer
-  extends DatabaseInitializer {
+export default interface DatabaseHandlerInitializer extends DefaultInitializer {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  journaly: SubjectObserver<any>;
+  handler?: Handler;
 }

@@ -3,16 +3,13 @@
 // file deepcode ignore object-literal-shorthand: argh
 import { BaseServiceDefault } from '@flexiblepersistence/service';
 import {
-  PersistenceAdapter,
   PersistenceInputCreate,
   PersistencePromise,
   PersistenceInputDelete,
   PersistenceInputUpdate,
   PersistenceInputRead,
 } from 'flexiblepersistence';
-export default class BasicService
-  extends BaseServiceDefault
-  implements PersistenceAdapter {
+export default class BasicService extends BaseServiceDefault {
   protected aggregateFromReceivedArray(receivedItem, realInput) {
     return realInput.map((value, index) =>
       this.aggregateFromReceived(receivedItem[index], value)

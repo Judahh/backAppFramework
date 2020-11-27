@@ -2,23 +2,19 @@ import express from 'express';
 import cors from 'cors';
 
 import RouterSingleton from './router/routerSingleton';
+import DatabaseHandler from './database/databaseHandler';
 import DatabaseHandlerInitializer from './database/databaseHandlerInitializer';
 
 export default class SimpleApp {
   express: express.Application;
   router: RouterSingleton;
-
-  protected initDefault?: DatabaseHandlerInitializer;
-
-  constructor(
-    router: RouterSingleton,
-    initDefault?: DatabaseHandlerInitializer
-  ) {
+  databaseHandler: DatabaseHandler;
+  constructor(router: RouterSingleton, databaseHandler: DatabaseHandler) {
     this.express = express();
     this.middlewares();
     this.router = router;
-    this.initDefault = initDefault;
-    this.routes(initDefault);
+    this.databaseHandler = databaseHandler;
+    this.routes(databaseHandler.getInit());
   }
 
   protected middlewares(): void {
