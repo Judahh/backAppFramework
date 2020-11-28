@@ -1,7 +1,9 @@
 import { BaseDAO } from '@flexiblepersistence/dao';
 /* eslint-disable no-unused-vars */
 export default class TestDAO extends BaseDAO {
-  protected table = 'tests';
+  generateName(): void {
+    this.setName('tests');
+  }
 
   protected values = '*';
 

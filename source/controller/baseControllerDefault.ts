@@ -13,9 +13,6 @@ export default class BaseControllerDefault extends Default {
     [error: string]: number;
   } = { Error: 400, error: 403, TypeError: 403, RemoveError: 400 };
   // @ts-ignore
-  protected abstract elements: string;
-
-  protected nameService: string | undefined;
 
   protected handler: Handler | undefined;
 
@@ -40,6 +37,10 @@ export default class BaseControllerDefault extends Default {
           .catch((error) => reject(error));
       } else reject(new Error('No handler connected!'));
     });
+  }
+
+  protected generateName() {
+    this.setName(this.getClassName().replace('Controller', this.getType()));
   }
 
   protected async generateEvent(
@@ -69,8 +70,8 @@ export default class BaseControllerDefault extends Default {
 
       // console.log('Event', event);
 
-      if (this.element)
-        object[this.element] = (await useFunction(event))['receivedItem'];
+      if (this.getName())
+        object[this.getName()] = (await useFunction(event))['receivedItem'];
       else throw new Error('Element is not specified.');
       return res.json(object);
     } catch (error) {

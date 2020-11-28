@@ -57,13 +57,11 @@ test('store test, update, select all, select by id test and delete it', async (d
       (mockResponse as unknown) as Response
     );
     // console.log('store:', store);
-    const storedTest = store['received'];
+    const storedTest = store['received'].Test;
     // console.log('storedTest:', storedTest);
 
     sentTest.id = storedTest.id;
-    const expectedTest = {
-      test: { id: storedTest.test.id, name: null },
-    };
+    const expectedTest = { id: storedTest.id, name: null };
     // console.log('expectedTest:', expectedTest);
 
     expect(storedTest).toStrictEqual(expectedTest);
@@ -75,7 +73,7 @@ test('store test, update, select all, select by id test and delete it', async (d
       (mockResponse as unknown) as Response
     );
     // console.log('show:', show);
-    const indexTest = index['received'];
+    const indexTest = index['received'].Test;
     expect(indexTest).toStrictEqual(expectedTest);
 
     const store2 = await controller.store(
@@ -85,11 +83,11 @@ test('store test, update, select all, select by id test and delete it', async (d
       (mockResponse as unknown) as Response
     );
     // console.log('store:', store);
-    const storedTest2 = store2['received'];
-    // console.log('storedTest:', storedTest);
+    const storedTest2 = store2['received'].Test;
+    // console.log('storedTest2:', storedTest);
 
     sentTest2.id = storedTest2.id;
-    const expectedTest2 = { test: { id: storedTest2.test.id, name: null } };
+    const expectedTest2 = { id: storedTest2.id, name: null };
     // console.log('expectedTest:', expectedTest);
 
     expect(storedTest2).toStrictEqual(expectedTest2);
@@ -101,11 +99,9 @@ test('store test, update, select all, select by id test and delete it', async (d
       (mockResponse as unknown) as Response
     );
 
-    const showTest = show['received'];
+    const showTest = show['received'].Test;
     // console.log('showTest:', showTest);
-    const expectedTests = {
-      test: [storedTest.test, storedTest2.test],
-    };
+    const expectedTests = [storedTest, storedTest2];
     expect(showTest).toStrictEqual(expectedTests);
 
     const sentTest3 = { name: 'Test' };
@@ -114,7 +110,7 @@ test('store test, update, select all, select by id test and delete it', async (d
       ({
         body: sentTest3,
         params: {
-          filter: { id: storedTest2.test.id },
+          filter: { id: storedTest2.id },
           single: false,
         },
       } as unknown) as Request,
@@ -122,11 +118,9 @@ test('store test, update, select all, select by id test and delete it', async (d
     );
     // console.log('storedTest2:', storedTest2);
 
-    const updatedTest = update['received'];
+    const updatedTest = update['received'].Test;
     // console.log('updatedTest:', updatedTest);
-    const expectedUpdatedTest = {
-      test: { id: storedTest2.test.id, name: sentTest3.name },
-    };
+    const expectedUpdatedTest = { id: storedTest2.id, name: sentTest3.name };
     // console.log('expectedUpdatedTest:', expectedUpdatedTest);
     expect(updatedTest).toStrictEqual(expectedUpdatedTest);
 
@@ -137,11 +131,9 @@ test('store test, update, select all, select by id test and delete it', async (d
       (mockResponse as unknown) as Response
     );
 
-    const showTest2 = show2['received'];
+    const showTest2 = show2['received'].Test;
     // console.log('showTest2:', showTest2);
-    const expectedTests2 = {
-      test: [storedTest.test, updatedTest.test],
-    };
+    const expectedTests2 = [storedTest, updatedTest];
     // console.log('expectedTests2:', expectedTests2);
 
     expect(showTest2).toStrictEqual(expectedTests2);
@@ -149,17 +141,15 @@ test('store test, update, select all, select by id test and delete it', async (d
     const deleted = await controller.delete(
       ({
         params: {
-          filter: { id: storedTest2.test.id },
+          filter: { id: storedTest2.id },
         },
       } as unknown) as Request,
       (mockResponse as unknown) as Response
     );
 
-    const deletedTest = deleted['received'];
+    const deletedTest = deleted['received'].Test;
     // console.log('deletedTest:', deletedTest);
-    const expectedDeletedTest = {
-      test: true,
-    };
+    const expectedDeletedTest = true;
     // console.log('expectedDeletedTest:', expectedDeletedTest);
     expect(deletedTest).toStrictEqual(expectedDeletedTest);
 
@@ -170,11 +160,9 @@ test('store test, update, select all, select by id test and delete it', async (d
       (mockResponse as unknown) as Response
     );
 
-    const showTest3 = show3['received'];
+    const showTest3 = show3['received'].Test;
     // console.log('showTest3:', showTest3);
-    const expectedTests3 = {
-      test: [storedTest.test],
-    };
+    const expectedTests3 =  [storedTest];
     expect(showTest3).toStrictEqual(expectedTests3);
   } catch (error) {
     console.error(error);
