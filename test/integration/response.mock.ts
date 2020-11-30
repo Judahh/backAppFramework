@@ -1,21 +1,23 @@
-let superC;
-
-export const mockResponse = {
-  received: {},
-  error: {},
-  status: (name) => {
-    superC = this;
+class MockResponse {
+  received = {};
+  error = {};
+  status(name): { send: any } {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const _self = this;
     return {
       send: (error) => {
-        superC.error = {};
-        if (this && error) superC.error[name] = error;
+        _self.error = {};
+        if (this && error) _self.error[name] = error;
         return this;
       },
     };
-  },
-  json: (object) => {
-    superC = this;
-    superC.received = object;
+  }
+  json(object): MockResponse {
+    this.received = object;
     return this;
-  },
-};
+  }
+}
+
+const mockResponse = new MockResponse();
+
+export { mockResponse };
