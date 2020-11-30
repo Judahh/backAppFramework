@@ -2141,10 +2141,11 @@ flatted@^2.0.0:
   integrity sha512-r5wGx7YeOwNWNlCA0wQ86zKyDLMQr+/RB8xy74M4hTphfmjlijTSSXGuH8rnvKZnfT9i+75zmd8jcKdMR4O6jA==
 
 flexiblepersistence@latest:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/flexiblepersistence/-/flexiblepersistence-1.1.4.tgz#8196be3955637e70cc3023eeb9d0082a3eeba81d"
-  integrity sha512-9pcobeLSVjcoLvsFNYDvjcDoRsk6LgbYDZWKPGC9kArV5MqTMD93mz8PNxHeGS1T+vm149GyLDsIQmKqj7/NAg==
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/flexiblepersistence/-/flexiblepersistence-1.1.8.tgz#c236064c56555b553d856687fefc2338532e9bc6"
+  integrity sha512-r1WppcujkA+qZutSJ1etWdY4LOggNEWR5tvQ+RW0b/iskdFAUJmd3p6ErYXrRg+q43hMFu2n02EQ+CL6O7ed+w==
   dependencies:
+    default-initializer latest
     journaly latest
     mongoose latest
     pg latest
