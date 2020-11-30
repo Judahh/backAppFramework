@@ -1,6 +1,7 @@
 class MockResponse {
   received = {};
   error = {};
+  //  deepcode ignore no-any: any to simplify
   status(name): { send: any } {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const _self = this;
