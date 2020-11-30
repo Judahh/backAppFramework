@@ -296,13 +296,13 @@
     strip-json-comments "^3.1.1"
 
 "@flexiblepersistence/dao@latest":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@flexiblepersistence/dao/-/dao-0.1.3.tgz#808feb39d7799f4a047d28d29a392266f398fbd7"
-  integrity sha512-rh96XB88Soh/RASbao/ysCunEp9KMJ69XG+x2d/fs7LyLoyiwmxrNqbjqtbKLdNN1/n6d/bk4S96839Tp8f1Eg==
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@flexiblepersistence/dao/-/dao-0.1.5.tgz#3cbdbae43ff160a036b55a62667ea75bc0897487"
+  integrity sha512-a2gsIKsKkjRPFr/AutPSyX4TXayy+47npfWYud1lD+XhGkkobpjhxLV8qtlNG+HDW3/VXiHL9qRVxiSe6zHsiw==
   dependencies:
     bignumber.js latest
-    default-initializer latest
     journaly latest
+    mongodb latest
     pg latest
     ts-mixer latest
 
@@ -3509,7 +3509,7 @@ mkdirp@^0.5.1:
   dependencies:
     minimist "^1.2.5"
 
-mongodb@3.6.3:
+mongodb@3.6.3, mongodb@latest:
   version "3.6.3"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.3.tgz#eddaed0cc3598474d7a15f0f2a5b04848489fd05"
   integrity sha512-rOZuR0QkodZiM+UbQE5kDsJykBqWi0CL4Ec2i1nrGrUI3KO11r6Fbxskqmq3JK2NH7aW4dcccBuUujAP0ERl5w==
