@@ -10,6 +10,7 @@ import {
 } from 'flexiblepersistence';
 
 import { DAODB } from '@flexiblepersistence/dao';
+import { SequelizeDB } from '@flexiblepersistence/sequelize';
 
 import {
   Journaly,
@@ -20,7 +21,6 @@ import {
 } from 'journaly';
 import { Mixin } from 'ts-mixer';
 import SimpleApp from './simpleApp';
-import DatabaseHandler from './database/databaseHandler';
 import { Utils } from '@flexiblepersistence/dao';
 
 import BaseController from './controller/baseController';
@@ -36,8 +36,9 @@ import BaseControllerUpdate from './controller/baseControllerUpdate';
 import RouterSingleton from './router/routerSingleton';
 
 import { Pool } from 'pg';
-import DatabaseHandlerInitializer from './database/databaseHandlerInitializer';
 import BasicService from './service/basicService';
+import DatabaseHandler from './database/databaseHandler';
+import DatabaseHandlerInitializer from './database/databaseHandlerInitializer';
 
 export {
   SimpleApp,
@@ -69,6 +70,7 @@ export {
   PublisherSubscriber,
   PublisherSubscriberWithMemory,
   DAODB,
+  SequelizeDB,
   Mixin,
   Pool,
 };

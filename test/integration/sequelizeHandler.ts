@@ -7,12 +7,13 @@ import {
   Journaly,
   SubjectObserver,
   DatabaseHandler,
-  DAODB,
+  SequelizeDB,
 } from '../../source/index';
 import TestService from './testService';
-import TestDAO from './testDAO';
 import { eventInfo, readInfo } from './databaseInfos';
 import { ServiceHandler } from '@flexiblepersistence/service';
+import TestModel from './testModel';
+import { SequelizePersistenceInfo } from '@flexiblepersistence/sequelize';
 
 class DBHandler extends DatabaseHandler {
   // async migrate(): Promise<boolean> {
@@ -52,19 +53,19 @@ class DBHandler extends DatabaseHandler {
 }
 
 const journaly = Journaly.newJournaly() as SubjectObserver<any>;
-const database = new PersistenceInfo(readInfo, journaly);
+const database = new SequelizePersistenceInfo(readInfo, journaly, {
+  logging: false,
+});
 const eventdatabase = new PersistenceInfo(eventInfo, journaly);
 
-const dAO = new DAODB(database, {
-  test: new TestDAO(),
-});
+const sequelize = new SequelizeDB(database, { test: new TestModel() });
 
 const read = new ServiceHandler(
   database,
   {
     test: new TestService(),
   },
-  dAO
+  sequelize
 );
 const write = new MongoDB(eventdatabase);
 // console.log(journaly.getSubjects());

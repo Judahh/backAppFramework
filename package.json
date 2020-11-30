@@ -2,7 +2,7 @@
   "name": "backapijh",
   "productName": "backApi",
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "private": false,
   "description": "Judahh BACK API project",
   "main": "dist/source/index.js",
@@ -43,14 +43,14 @@
   },
   "dependencies": {
     "@flexiblepersistence/service": "latest",
+    "@flexiblepersistence/sequelize": "latest",
     "@flexiblepersistence/dao": "latest",
-    "default-initializer": "latest",
     "cors": "latest",
     "express": "latest",
-    "journaly": "latest",
     "flexiblepersistence": "latest",
-    "ts-mixer": "latest",
-    "pg": "latest"
+    "journaly": "latest",
+    "pg": "latest",
+    "ts-mixer": "latest"
   },
   "devDependencies": {
     "@types/cors": "latest",

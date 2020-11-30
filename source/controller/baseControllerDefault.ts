@@ -13,19 +13,16 @@ export default class BaseControllerDefault extends Default {
     [error: string]: number;
   } = { Error: 400, error: 403, TypeError: 403, RemoveError: 400 };
   // @ts-ignore
-  protected abstract elements: string;
 
-  protected nameService: string | undefined;
+  protected handler: Handler | undefined;
 
-  protected eventHandler: Handler | undefined;
-
-  constructor(initDefault: DatabaseHandlerInitializer) {
+  constructor(initDefault?: DatabaseHandlerInitializer) {
     super(initDefault);
   }
 
-  init(initDefault: DatabaseHandlerInitializer): void {
+  init(initDefault?: DatabaseHandlerInitializer): void {
     super.init(initDefault);
-    this.eventHandler = initDefault.eventHandler;
+    if (initDefault) this.handler = initDefault.handler;
     // console.log(this.handler);
   }
 
@@ -33,13 +30,17 @@ export default class BaseControllerDefault extends Default {
   protected async event(event: Event): Promise<any> {
     return new Promise(async (resolve, reject) => {
       if (!this.journaly) reject(new Error('No journaly connected!'));
-      if (this.eventHandler) {
-        this.eventHandler
+      if (this.handler) {
+        this.handler
           .addEvent(event)
           .then((value) => resolve(value))
           .catch((error) => reject(error));
       } else reject(new Error('No handler connected!'));
     });
+  }
+
+  protected generateName() {
+    this.setName(this.getClassName().replace('Controller', this.getType()));
   }
 
   protected async generateEvent(
@@ -69,8 +70,8 @@ export default class BaseControllerDefault extends Default {
 
       // console.log('Event', event);
 
-      if (this.element)
-        object[this.element] = (await useFunction(event))['receivedItem'];
+      if (this.getName())
+        object[this.getName()] = (await useFunction(event))['receivedItem'];
       else throw new Error('Element is not specified.');
       return res.json(object);
     } catch (error) {

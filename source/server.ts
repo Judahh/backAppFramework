@@ -4,7 +4,7 @@ import RouterSingleton from './router/routerSingleton';
 // Sample
 const app = new App(
   RouterSingleton.getInstance(),
-  databaseHandler.getInstance().getInit()
+  databaseHandler.getInstance()
 ).express;
 
 // databaseHandler.getInstance().migrate();

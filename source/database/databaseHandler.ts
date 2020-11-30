@@ -1,79 +1,37 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // file deepcode ignore no-any: any needed
-import { Handler } from 'flexiblepersistence';
+import { Handler, PersistenceAdapter } from 'flexiblepersistence';
 import { SubjectObserver } from 'journaly';
-import { DAOAdapter } from '@flexiblepersistence/dao';
-import { PersistenceAdapter } from 'flexiblepersistence';
 import DatabaseHandlerInitializer from './databaseHandlerInitializer';
 // @ts-ignore
 export default abstract class DatabaseHandler {
   // @ts-ignore
-  protected journaly: SubjectObserver<any>;
   protected init?: DatabaseHandlerInitializer;
 
   getJournaly(): SubjectObserver<any> {
-    return this.journaly;
+    if (this.init && this.init.journaly) return this.init?.journaly;
+    throw new Error('DatabaseHandler must have a init and a handler.');
   }
-  service: {
-    [name: string]: PersistenceAdapter;
-  } = {
-    // test: exampleService,
-  };
 
-  dAO: {
-    [name: string]: DAOAdapter;
-  } = {
-    // test: exampleDAO
-  };
-  // @ts-ignore
-  protected eventHandler: Handler;
-  // @ts-ignore
-  protected readPool: any;
-  // Operation[Operation["existent"] = 0] = "existent";
-  // Operation[Operation["create"] = 1] = "create";
-  // Operation[Operation["read"] = 2] = "read";
-  // Operation[Operation["correct"] = 3] = "correct";
-  // Operation[Operation["update"] = 4] = "update";
-  // Operation[Operation["nonexistent"] = 5] = "nonexistent";
-  // Operation[Operation["delete"] = 6] = "delete";
-  protected operation: {
-    [operation: number]: string;
-  } = {
-    0: 'storeElement',
-    1: 'storeElement',
-    2: 'updateElement',
-    3: 'updateElement',
-    4: 'deleteElement',
-    5: 'deleteElement',
-  };
+  getHandler(): Handler {
+    if (this.init && this.init.handler) return this.init.handler;
+    throw new Error('DatabaseHandler must have a init and a handler.');
+  }
 
   protected static _instance: DatabaseHandler;
 
   protected constructor(init?: DatabaseHandlerInitializer) {
-    if (init) {
-      this.init = init;
-      this.journaly = init.journaly;
-      if (init.eventHandler) this.eventHandler = init.eventHandler;
-      if (init.readPool) this.readPool = init.readPool;
-      this.initDAO();
-      this.initService();
-    }
+    this.init = init;
   }
-  protected abstract initDAO(): void;
-  protected abstract initService(): void;
 
   getInit(): DatabaseHandlerInitializer {
     if (this.init) return this.init;
     throw new Error('DatabaseHandler must have a init.');
   }
 
-  getEventHandler(): Handler {
-    return this.eventHandler;
-  }
-
-  getReadPool(): any {
-    return this.readPool;
+  getReadHandler(): PersistenceAdapter | undefined {
+    return this.getHandler()?.getWrite().getRead()?.getReadDB();
   }
 
   static getInstance(init?: DatabaseHandlerInitializer): DatabaseHandler {
