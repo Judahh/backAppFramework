@@ -6,6 +6,7 @@ const eventInfo = {
 
 const readInfo = {
   database: 'postgres',
+  connectionType: 'postgres',
   host: process.env.POSTGRES_HOST || 'localhost',
   port: process.env.POSTGRES_PORT || 5432,
   username: process.env.POSTGRES_USER || 'postgres',

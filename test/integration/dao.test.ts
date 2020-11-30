@@ -5,38 +5,10 @@ import { DAODB, Utils } from '../../source/index';
 
 import DBHandler from './dBHandler';
 import TestController from './testController';
+import { Test } from './test.class';
+import { mockResponse } from './response.mock';
 
 import { Request, Response } from 'express';
-
-class Test {
-  constructor(id?) {
-    this.id = id;
-  }
-  id: string | undefined;
-  name: string | undefined;
-}
-
-let superC;
-
-const mockResponse = {
-  received: {},
-  error: {},
-  status: (name) => {
-    superC = this;
-    return {
-      send: (error) => {
-        superC.error = {};
-        if (this && error) superC.error[name] = error;
-        return this;
-      },
-    };
-  },
-  json: (object) => {
-    superC = this;
-    superC.received = object;
-    return this;
-  },
-};
 
 test('store test, update, select all, select by id test and delete it', async (done) => {
   const pool = ((DBHandler.getReadHandler() as ServiceHandler)
@@ -162,7 +134,7 @@ test('store test, update, select all, select by id test and delete it', async (d
 
     const showTest3 = show3['received'].Test;
     // console.log('showTest3:', showTest3);
-    const expectedTests3 =  [storedTest];
+    const expectedTests3 = [storedTest];
     expect(showTest3).toStrictEqual(expectedTests3);
   } catch (error) {
     console.error(error);

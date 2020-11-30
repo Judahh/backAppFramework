@@ -10,6 +10,7 @@ import {
 } from 'flexiblepersistence';
 
 import { DAODB } from '@flexiblepersistence/dao';
+import { SequelizeDB } from '@flexiblepersistence/sequelize';
 
 import {
   Journaly,
@@ -69,6 +70,7 @@ export {
   PublisherSubscriber,
   PublisherSubscriberWithMemory,
   DAODB,
+  SequelizeDB,
   Mixin,
   Pool,
 };
