@@ -1,10 +1,10 @@
 {
-  "name": "backapijh",
+  "name": "@flexiblepersistence/backapi",
   "productName": "backApi",
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
-  "version": "0.5.3",
+  "version": "0.1.0",
   "private": false,
-  "description": "Judahh BACK API project",
+  "description": "A simple API framework using Flexible Persistence",
   "main": "dist/source/index.js",
   "module": "dist/source/index.js",
   "types": "dist/source/index.d.ts",
@@ -12,8 +12,11 @@
     "dist"
   ],
   "keywords": [
-    "judahh",
-    "app"
+    "api",
+    "api-framework",
+    "nodejs",
+    "typescript",
+    "javascript"
   ],
   "repository": {
     "type": "git",
@@ -49,7 +52,6 @@
     "express": "latest",
     "flexiblepersistence": "latest",
     "journaly": "latest",
-    "pg": "latest",
     "ts-mixer": "latest"
   },
   "devDependencies": {
@@ -57,7 +59,6 @@
     "@types/express": "latest",
     "@types/jest": "latest",
     "@types/node": "latest",
-    "@types/pg": "latest",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
     "eslint": "latest",
