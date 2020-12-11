@@ -13,8 +13,8 @@ export default class TestDAO extends BaseDAO {
 
   protected updateQuery = '';
 
-  constructor(initDefault?) {
-    super(initDefault);
-    // console.log(this);
-  }
+  // constructor(initDefault?) {
+  //   super(initDefault);
+  //   // console.log(this);
+  // }
 }
