@@ -17,7 +17,7 @@ test('store test, update, select all, select by id test and delete it', async (d
   const handler = DBHandler.getHandler();
   const controller = new TestController(DBHandler.getInit());
   try {
-    await handler.getWrite().clear('events');
+    await handler.getWrite().clear();
 
     const sentTest = new Test();
     const sentTest2 = new Test();
@@ -138,12 +138,12 @@ test('store test, update, select all, select by id test and delete it', async (d
     expect(showTest3).toStrictEqual(expectedTests3);
   } catch (error) {
     console.error(error);
-    await handler.getWrite().clear('events');
+    await handler.getWrite().clear();
     await Utils.end(pool);
     expect(error).toBe(null);
     done();
   }
-  await handler.getWrite().clear('events');
+  await handler.getWrite().clear();
   await Utils.end(pool);
   done();
 });
