@@ -30,8 +30,8 @@
     "unit_coverall": "tests/unit/coverage/lcov.info",
     "integration_coverall": "tests/integration/coverage/lcov.info",
     "path_dist": "dist",
-    "path_source": "src",
-    "path_server": "src/server"
+    "path_source": "source",
+    "path_server": "source/server"
   },
   "scripts": {
     "postinstall": "",
