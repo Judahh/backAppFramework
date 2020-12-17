@@ -48,6 +48,7 @@ export default class BaseControllerDefault extends Default {
     res: Response,
     operation: Operation,
     useFunction: (
+      // eslint-disable-next-line no-unused-vars
       event: Event
     ) => Promise<ServiceModel[] | ServiceModel | number | boolean>,
     singleDefault?: boolean
