@@ -3,8 +3,7 @@
 // file deepcode ignore object-literal-shorthand: argh
 import { Request, Response } from 'express';
 import { ServiceModel, ServiceSimpleModel } from '@flexiblepersistence/service';
-import { Default } from 'default-initializer';
-import { Handler, Event, Operation } from 'flexiblepersistence';
+import { Handler, Event, Operation, Default } from 'flexiblepersistence';
 import { settings } from 'ts-mixer';
 import DatabaseHandlerInitializer from '../database/databaseHandlerInitializer';
 settings.initFunction = 'init';
