@@ -3,8 +3,7 @@
 // file deepcode ignore object-literal-shorthand: argh
 import { Request, Response } from 'express';
 import { ServiceModel, ServiceSimpleModel } from '@flexiblepersistence/service';
-import { Default } from 'default-initializer';
-import { Handler, Event, Operation } from 'flexiblepersistence';
+import { Handler, Event, Operation, Default } from 'flexiblepersistence';
 import { settings } from 'ts-mixer';
 import DatabaseHandlerInitializer from '../database/databaseHandlerInitializer';
 settings.initFunction = 'init';
@@ -43,6 +42,13 @@ export default class BaseControllerDefault extends Default {
     this.setName(this.getClassName().replace('Controller', this.getType()));
   }
 
+  protected generateError(res: Response, error) {
+    if ((error.message as string).includes('does not exist'))
+      error.name = 'NotFound';
+    res.status(this.errorStatus[error.name]).send({ error: error.message });
+    return res;
+  }
+
   protected async generateEvent(
     req: Request,
     res: Response,
@@ -56,16 +62,22 @@ export default class BaseControllerDefault extends Default {
     try {
       const content = req.body as ServiceSimpleModel;
       const object = {};
-      const filter = req.params?.filter as unknown;
+      const { query } = req;
+      let selection;
+      //  deepcode ignore HTTPSourceWithUncheckedType: params do not exist on next
+      if (req['params'] && req['params'].filter)
+        selection = req['params']?.filter;
+      else selection = query as any;
       const name = this.constructor.name.replace('Controller', '');
-      let single;
-      if (singleDefault !== undefined) single = singleDefault;
-      else single = (req.params?.single as unknown) as boolean;
+      let single = (req['params']?.single as unknown) as boolean;
+      // console.log(single);
+      if (singleDefault !== undefined && single === undefined)
+        single = singleDefault;
       const event = new Event({
         operation,
         single: single,
         content: content,
-        selection: filter,
+        selection: selection,
         name: name,
       });
 
@@ -76,9 +88,7 @@ export default class BaseControllerDefault extends Default {
       else throw new Error('Element is not specified.');
       return res.json(object);
     } catch (error) {
-      return res
-        .status(this.errorStatus[error.name])
-        .send({ error: error.message });
+      return this.generateError(res, error);
     }
   }
 }

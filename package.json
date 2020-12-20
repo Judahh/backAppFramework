@@ -2,7 +2,7 @@
   "name": "@flexiblepersistence/backapi",
   "productName": "backApi",
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": false,
   "description": "A simple API framework using Flexible Persistence",
   "main": "dist/source/index.js",
@@ -30,8 +30,8 @@
     "unit_coverall": "tests/unit/coverage/lcov.info",
     "integration_coverall": "tests/integration/coverage/lcov.info",
     "path_dist": "dist",
-    "path_source": "src",
-    "path_server": "src/server"
+    "path_source": "source",
+    "path_server": "source/server"
   },
   "scripts": {
     "postinstall": "",
@@ -48,6 +48,7 @@
     "@flexiblepersistence/service": "latest",
     "@flexiblepersistence/sequelize": "latest",
     "@flexiblepersistence/dao": "latest",
+    "pg": "latest",
     "cors": "latest",
     "express": "latest",
     "flexiblepersistence": "latest",
@@ -55,6 +56,7 @@
     "ts-mixer": "latest"
   },
   "devDependencies": {
+    "sequelize": "latest",
     "@types/express": "latest",
     "@types/jest": "latest",
     "@types/node": "latest",
