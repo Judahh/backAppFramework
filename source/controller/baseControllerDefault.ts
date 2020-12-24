@@ -8,12 +8,32 @@ import { settings } from 'ts-mixer';
 import DatabaseHandlerInitializer from '../database/databaseHandlerInitializer';
 settings.initFunction = 'init';
 export default class BaseControllerDefault extends Default {
-  protected errorStatus: {
+  protected regularErrorStatus: {
     [error: string]: number;
-  } = { Error: 400, error: 403, TypeError: 403, RemoveError: 400 };
+  } = {
+    Error: 400,
+    RemoveError: 400,
+    JsonWebTokenError: 401,
+    Unauthorized: 401,
+    error: 403,
+    TypeError: 403,
+    NotFound: 404,
+    UnknownError: 500,
+  };
   // @ts-ignore
 
   protected handler: Handler | undefined;
+
+  protected errorStatus(
+    error?: string
+  ):
+    | {
+        [error: string]: number;
+      }
+    | number {
+    if (error) return this.regularErrorStatus[error];
+    return this.regularErrorStatus;
+  }
 
   constructor(initDefault?: DatabaseHandlerInitializer) {
     super(initDefault);
@@ -45,7 +65,14 @@ export default class BaseControllerDefault extends Default {
   protected generateError(res: Response, error) {
     if ((error.message as string).includes('does not exist'))
       error.name = 'NotFound';
-    res.status(this.errorStatus[error.name]).send({ error: error.message });
+    if (!this.errorStatus() || this.errorStatus(error.name) === undefined)
+      res
+        .status(this.errorStatus('UnknownError') as number)
+        .send({ error: error.message });
+    else
+      res
+        .status(this.errorStatus(error.name) as number)
+        .send({ error: error.message });
     return res;
   }
 
