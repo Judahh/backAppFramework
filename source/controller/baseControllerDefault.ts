@@ -143,8 +143,8 @@ export default class BaseControllerDefault extends Default {
     singleDefault?: boolean
   ): Promise<Response> {
     try {
-      const object = {};
       const event = this.formatEvent(req, operation, singleDefault);
+      const object = {};
       if (this.getName())
         object[this.getName()] = (await useFunction(event))['receivedItem'];
       else throw new Error('Element is not specified.');
