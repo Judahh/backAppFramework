@@ -76,6 +76,62 @@ export default class BaseControllerDefault extends Default {
     return res;
   }
 
+  formatName() {
+    const name = this.getClassName().replace('Controller', '');
+    return name;
+  }
+
+  formatContent(req: Request) {
+    const content = req.body as ServiceSimpleModel;
+    return content;
+  }
+
+  formatParams(req: Request) {
+    return req['params'];
+  }
+
+  formatQuery(req: Request) {
+    const { query } = req;
+    return query;
+  }
+
+  formatSingle(params?, singleDefault?: boolean) {
+    //  deepcode ignore HTTPSourceWithUncheckedType: params do not exist on next
+    let single;
+    if (params) {
+      single = params.single as boolean;
+    }
+    // console.log(single);
+    if (singleDefault !== undefined && single === undefined)
+      single = singleDefault;
+    return single;
+  }
+
+  formatSelection(params?, query?) {
+    let selection;
+    if (params) {
+      if (params.filter) selection = params.filter;
+      else selection = query as any;
+    }
+    return selection;
+  }
+
+  formatEvent(req: Request, operation: Operation, singleDefault?: boolean) {
+    const params = this.formatParams(req);
+    const name = this.formatName();
+    const event = new Event({
+      operation,
+      single: this.formatSingle(params, singleDefault),
+      content: this.formatContent(req),
+      selection: this.formatSelection(params, this.formatQuery(req)),
+      name,
+    });
+    req['event'] = {
+      operation,
+      name,
+    };
+    return event;
+  }
   protected async generateEvent(
     req: Request,
     res: Response,
@@ -87,32 +143,8 @@ export default class BaseControllerDefault extends Default {
     singleDefault?: boolean
   ): Promise<Response> {
     try {
-      const content = req.body as ServiceSimpleModel;
       const object = {};
-      const { query } = req;
-      const params = req['params'];
-      let selection;
-      //  deepcode ignore HTTPSourceWithUncheckedType: params do not exist on next
-      let single;
-      if (params) {
-        if (params.filter) selection = params.filter;
-        else selection = query as any;
-        single = (params.single as unknown) as boolean;
-      }
-      const name = this.getClassName().replace('Controller', '');
-      // console.log(single);
-      if (singleDefault !== undefined && single === undefined)
-        single = singleDefault;
-      const event = new Event({
-        operation,
-        single: single,
-        content: content,
-        selection: selection,
-        name: name,
-      });
-
-      // console.log('Event', event);
-
+      const event = this.formatEvent(req, operation, singleDefault);
       if (this.getName())
         object[this.getName()] = (await useFunction(event))['receivedItem'];
       else throw new Error('Element is not specified.');
