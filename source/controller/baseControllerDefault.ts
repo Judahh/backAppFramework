@@ -60,6 +60,24 @@ export default class BaseControllerDefault extends Default {
     });
   }
 
+  protected hasObjectName() {
+    if (process.env.API_HAS_OBJECT_NAME)
+      return /^true$/i.test(process.env.API_HAS_OBJECT_NAME);
+    return false;
+  }
+
+  protected getObject(object) {
+    if (this.hasObjectName()) return object[this.getName()];
+    return object;
+  }
+
+  protected setObject(object, value) {
+    if (this.hasObjectName()) {
+      if (!this.getName()) throw new Error('Element is not specified.');
+      object[this.getName()] = value;
+    } else object = value;
+  }
+
   protected generateName() {
     this.setName(this.getClassName().replace('Controller', this.getType()));
   }
@@ -134,6 +152,7 @@ export default class BaseControllerDefault extends Default {
     return event;
   }
   protected generateStatus(operation: Operation, object): number {
+    const resultObject = this.getObject(object);
     switch (operation) {
       case Operation.create:
         return 201;
@@ -141,9 +160,9 @@ export default class BaseControllerDefault extends Default {
         return 410;
       default:
         if (
-          object[this.getName()] === undefined ||
-          object[this.getName()] === {} ||
-          object[this.getName()].length === 0
+          resultObject === undefined ||
+          resultObject === {} ||
+          resultObject.length === 0
         )
           return 204;
         else return 200;
@@ -158,11 +177,7 @@ export default class BaseControllerDefault extends Default {
     ) => Promise<ServiceModel[] | ServiceModel | number | boolean>,
     event: Event
   ) {
-    const object = {};
-    if (this.getName())
-      object[this.getName()] = (await useFunction(event))['receivedItem'];
-    else throw new Error('Element is not specified.');
-    return object;
+    return this.setObject({}, (await useFunction(event))['receivedItem']);
   }
   protected async generateEvent(
     req: Request,
