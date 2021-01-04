@@ -76,6 +76,7 @@ export default class BaseControllerDefault extends Default {
       if (!this.getName()) throw new Error('Element is not specified.');
       object[this.getName()] = value;
     } else object = value;
+    return object;
   }
 
   protected generateName() {
