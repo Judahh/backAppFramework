@@ -28,7 +28,7 @@ test('store test, update, select all, select by id test and delete it', async (d
       } as unknown) as Request,
       (mockResponse as unknown) as Response
     );
-    // console.log('store:', store);
+    console.log('store:', store);
     const storedTest = store['received'].Test;
     // console.log('storedTest:', storedTest);
 
