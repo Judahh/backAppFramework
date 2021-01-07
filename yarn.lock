@@ -298,6 +298,11 @@
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/@flexiblepersistence/dao/-/dao-0.2.6.tgz#c138d1745107f33d2a9b352d5851bbe4dd3ef5ba"
   integrity sha512-TFjdpoq6ggj2Vi3y/uT/p6HHd5LegEuGCQ4uH19VxlHaMJ/5dxr1zxQPC3Z1aFgCfO1qNx+COitSHv0UCzFXwQ==
+  dependencies:
+    bignumber.js latest
+    journaly latest
+    pg latest
+    ts-mixer latest
 
 "@flexiblepersistence/default-initializer@latest":
   version "0.1.3"
