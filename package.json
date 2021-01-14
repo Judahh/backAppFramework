@@ -50,14 +50,12 @@
     "@flexiblepersistence/dao": "latest",
     "pg": "latest",
     "cors": "latest",
-    "express": "latest",
     "flexiblepersistence": "latest",
     "journaly": "latest",
     "ts-mixer": "latest"
   },
   "devDependencies": {
     "sequelize": "latest",
-    "@types/express": "latest",
     "@types/jest": "latest",
     "@types/node": "latest",
     "@typescript-eslint/eslint-plugin": "latest",
