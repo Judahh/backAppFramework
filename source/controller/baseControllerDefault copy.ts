@@ -34,6 +34,24 @@ export default class BaseControllerDefault extends Default {
   protected handler: Handler | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected middlewares?: any[];
+  async mainRequestHandler(req: Request, res: Response): Promise<Response> {
+    try {
+      let response;
+      if (
+        req.method &&
+        this.method[req.method] &&
+        this[this.method[req.method]]
+      )
+        response = await this[this.method[req.method]](req, res);
+      else {
+        const error = new Error('Missing HTTP method.');
+        throw error;
+      }
+      return response;
+    } catch (error) {
+      return new Promise(() => this.generateError(res, error));
+    }
+  }
 
   protected errorStatus(
     error?: string
@@ -222,15 +240,11 @@ export default class BaseControllerDefault extends Default {
     ) => Promise<ServiceModel[] | ServiceModel | number | boolean>,
     singleDefault?: boolean
   ): Promise<Response> {
-    try {
-      const event = this.formatEvent(request, operation, singleDefault);
-      await this.runMiddlewares(request, response);
-      const object = await this.generateObject(useFunction, event);
-      const status = this.generateStatus(operation, object);
-      response.status(status).json(object);
-      return response;
-    } catch (error) {
-      return this.generateError(response, error);
-    }
+    const event = this.formatEvent(request, operation, singleDefault);
+    await this.runMiddlewares(request, response);
+    const object = await this.generateObject(useFunction, event);
+    const status = this.generateStatus(operation, object);
+    response.status(status).json(object);
+    return response;
   }
 }

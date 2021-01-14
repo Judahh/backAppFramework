@@ -1,5 +1,4 @@
-import { Request, Response } from 'express';
-
+/* eslint-disable no-unused-vars */
 export default interface ControllerDeleteAdapter {
-  delete(req: Request, res: Response): Promise<Response>;
+  delete(request, response): Promise<Response>;
 }

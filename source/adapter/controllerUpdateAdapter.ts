@@ -1,5 +1,4 @@
-import { Request, Response } from 'express';
-
+/* eslint-disable no-unused-vars */
 export default interface ControllerUpdateAdapter {
-  update(req: Request, res: Response): Promise<Response>;
+  update(request, response): Promise<Response>;
 }

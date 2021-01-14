@@ -1,5 +1,4 @@
-import { Request, Response } from 'express';
-
+/* eslint-disable no-unused-vars */
 export default interface ControllerIndexAdapter {
-  index(req: Request, res: Response): Promise<Response>;
+  index(request, response): Promise<Response>;
 }

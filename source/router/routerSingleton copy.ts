@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Router } from 'express';
 import BaseControllerDefault from '../controller/baseControllerDefault';
 import RouterInitializer from './routerInitializer';
 // @ts-ignore
@@ -16,12 +14,6 @@ export default class RouterSingleton {
   abstract createRoutes(initDefault?: RouterInitializer): void;
   protected static _instance: RouterSingleton;
 
-  protected routes: Router;
-
-  protected constructor() {
-    this.routes = Router();
-  }
-
   static getInstance(): RouterSingleton {
     if (!this._instance) {
       this._instance = new this();
@@ -29,7 +21,7 @@ export default class RouterSingleton {
     return this._instance;
   }
 
-  getRoutes(): Router {
-    return this.routes;
+  getController() {
+    return this.controller;
   }
 }

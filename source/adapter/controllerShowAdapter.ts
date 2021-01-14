@@ -1,5 +1,4 @@
-import { Request, Response } from 'express';
-
+/* eslint-disable no-unused-vars */
 export default interface ControllerShowAdapter {
-  show(req: Request, res: Response): Promise<Response>;
+  show(request, response): Promise<Response>;
 }
