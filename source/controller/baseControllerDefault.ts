@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // file deepcode ignore no-any: any needed
 // file deepcode ignore object-literal-shorthand: argh
-import { Request, Response } from 'express';
 import { ServiceModel, ServiceSimpleModel } from '@flexiblepersistence/service';
 import { Handler, Event, Operation, Default } from 'flexiblepersistence';
 import { settings } from 'ts-mixer';
-import DatabaseHandlerInitializer from '../database/databaseHandlerInitializer';
+import RouterInitializer from '../router/routerInitializer';
 settings.initFunction = 'init';
 export default class BaseControllerDefault extends Default {
   protected regularErrorStatus: {
@@ -22,9 +21,37 @@ export default class BaseControllerDefault extends Default {
     MethodNotAllowed: 405,
     UnknownError: 500,
   };
+  protected method: {
+    [method: string]: string;
+  } = {
+    GET: 'read',
+    POST: 'store',
+    PUT: 'update',
+    PATCH: 'update',
+    DELETE: 'delete',
+  };
   // @ts-ignore
-
   protected handler: Handler | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected middlewares?: any[];
+  async mainRequestHandler(req: Request, res: Response): Promise<Response> {
+    try {
+      let response;
+      if (
+        req.method &&
+        this.method[req.method] &&
+        this[this.method[req.method]]
+      )
+        response = await this[this.method[req.method]](req, res);
+      else {
+        const error = new Error('Missing HTTP method.');
+        throw error;
+      }
+      return response;
+    } catch (error) {
+      return new Promise(() => this.generateError(res, error));
+    }
+  }
 
   protected errorStatus(
     error?: string
@@ -37,13 +64,18 @@ export default class BaseControllerDefault extends Default {
     return this.regularErrorStatus;
   }
 
-  constructor(initDefault?: DatabaseHandlerInitializer) {
+  constructor(initDefault?: RouterInitializer) {
     super(initDefault);
   }
 
-  init(initDefault?: DatabaseHandlerInitializer): void {
+  init(initDefault?: RouterInitializer): void {
     super.init(initDefault);
-    if (initDefault) this.handler = initDefault.handler;
+    if (initDefault) {
+      this.handler = initDefault.handler;
+      this.middlewares = [];
+      if (initDefault.middlewares)
+        this.middlewares.push(...initDefault.middlewares);
+    }
     // console.log(this.handler);
   }
 
@@ -60,6 +92,41 @@ export default class BaseControllerDefault extends Default {
     });
   }
 
+  protected runMiddleware(request, response, fn) {
+    return new Promise((resolve, reject) => {
+      fn(request, response, (result) => {
+        if (result instanceof Error) {
+          return reject(result);
+        }
+        return resolve(result);
+      });
+    });
+  }
+
+  protected async runMiddlewares(request, response) {
+    if (this.middlewares)
+      for (const middleware of this.middlewares)
+        await this.runMiddleware(request, response, middleware);
+  }
+
+  protected generateName() {
+    this.setName(this.getClassName().replace('Controller', this.getType()));
+  }
+
+  protected generateError(response, error) {
+    if ((error.message as string).includes('does not exist'))
+      error.name = 'NotFound';
+    if (!this.errorStatus() || this.errorStatus(error.name) === undefined)
+      response
+        .status(this.errorStatus('UnknownError') as number)
+        .send({ error: error.message });
+    else
+      response
+        .status(this.errorStatus(error.name) as number)
+        .send({ error: error.message });
+    return response;
+  }
+
   protected hasObjectName() {
     if (process.env.API_HAS_OBJECT_NAME)
       return /^true$/i.test(process.env.API_HAS_OBJECT_NAME);
@@ -72,6 +139,7 @@ export default class BaseControllerDefault extends Default {
   }
 
   protected setObject(object, value) {
+    if (value === undefined) value = {};
     if (this.hasObjectName()) {
       if (!this.getName()) throw new Error('Element is not specified.');
       object[this.getName()] = value;
@@ -79,40 +147,22 @@ export default class BaseControllerDefault extends Default {
     return object;
   }
 
-  protected generateName() {
-    this.setName(this.getClassName().replace('Controller', this.getType()));
-  }
-
-  protected generateError(res: Response, error) {
-    if ((error.message as string).includes('does not exist'))
-      error.name = 'NotFound';
-    if (!this.errorStatus() || this.errorStatus(error.name) === undefined)
-      res
-        .status(this.errorStatus('UnknownError') as number)
-        .send({ error: error.message });
-    else
-      res
-        .status(this.errorStatus(error.name) as number)
-        .send({ error: error.message });
-    return res;
-  }
-
   formatName() {
     const name = this.getClassName().replace('Controller', '');
     return name;
   }
 
-  formatContent(req: Request) {
-    const content = req.body as ServiceSimpleModel;
+  formatContent(request) {
+    const content = request.body as ServiceSimpleModel;
     return content;
   }
 
-  formatParams(req: Request) {
-    return req['params'];
+  formatParams(request) {
+    return request['params'];
   }
 
-  formatQuery(req: Request) {
-    const { query } = req;
+  formatQuery(request) {
+    const { query } = request;
     return query;
   }
 
@@ -135,18 +185,18 @@ export default class BaseControllerDefault extends Default {
     return selection;
   }
 
-  formatEvent(req: Request, operation: Operation, singleDefault?: boolean) {
-    const params = this.formatParams(req);
+  formatEvent(request, operation: Operation, singleDefault?: boolean) {
+    const params = this.formatParams(request);
     const name = this.formatName();
     const event = new Event({
       operation,
       single: this.formatSingle(params, singleDefault),
-      content: this.formatContent(req),
-      selection: this.formatSelection(params, this.formatQuery(req)),
+      content: this.formatContent(request),
+      selection: this.formatSelection(params, this.formatQuery(request)),
       name,
-      options: req.headers,
+      options: request.headers,
     });
-    req['event'] = {
+    request['event'] = {
       operation,
       name,
     };
@@ -162,7 +212,7 @@ export default class BaseControllerDefault extends Default {
       default:
         if (
           resultObject === undefined ||
-          resultObject === {} ||
+          Object.keys(resultObject).length === 0 ||
           resultObject.length === 0
         )
           return 204;
@@ -181,8 +231,8 @@ export default class BaseControllerDefault extends Default {
     return this.setObject({}, (await useFunction(event))['receivedItem']);
   }
   protected async generateEvent(
-    req: Request,
-    res: Response,
+    request,
+    response,
     operation: Operation,
     useFunction: (
       // eslint-disable-next-line no-unused-vars
@@ -191,13 +241,14 @@ export default class BaseControllerDefault extends Default {
     singleDefault?: boolean
   ): Promise<Response> {
     try {
-      const event = this.formatEvent(req, operation, singleDefault);
+      const event = this.formatEvent(request, operation, singleDefault);
+      await this.runMiddlewares(request, response);
       const object = await this.generateObject(useFunction, event);
       const status = this.generateStatus(operation, object);
-      return res.status(status).json(object);
-      // return res;
+      response.status(status).json(object);
+      return response;
     } catch (error) {
-      return this.generateError(res, error);
+      return this.generateError(response, error);
     }
   }
 }

@@ -1,8 +1,8 @@
 {
-  "name": "@flexiblepersistence/backapi",
-  "productName": "backApi",
+  "name": "backapirest",
+  "productName": "backAPIRest",
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
-  "version": "0.1.18",
+  "version": "0.1.0",
   "private": false,
   "description": "A simple API framework using Flexible Persistence",
   "main": "dist/source/index.js",
@@ -20,9 +20,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Judahh/backApi.git"
+    "url": "git+https://github.com/Judahh/back.git"
   },
-  "homepage": "https://github.com/Judahh/backApi#readme",
+  "homepage": "https://github.com/Judahh/back#readme",
   "license": "MIT",
   "config": {
     "jest": "--coverage --passWithNoTests --ci --verbose --forceExit --detectOpenHandles --colors",
@@ -50,14 +50,12 @@
     "@flexiblepersistence/dao": "latest",
     "pg": "latest",
     "cors": "latest",
-    "express": "latest",
     "flexiblepersistence": "latest",
     "journaly": "latest",
     "ts-mixer": "latest"
   },
   "devDependencies": {
     "sequelize": "latest",
-    "@types/express": "latest",
     "@types/jest": "latest",
     "@types/node": "latest",
     "@typescript-eslint/eslint-plugin": "latest",

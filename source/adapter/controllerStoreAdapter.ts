@@ -1,5 +1,4 @@
-import { Request, Response } from 'express';
-
+/* eslint-disable no-unused-vars */
 export default interface ControllerStoreAdapter {
-  store(req: Request, res: Response): Promise<Response>;
+  store(request, response): Promise<Response>;
 }

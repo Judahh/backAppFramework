@@ -7,8 +7,6 @@ import TestController from './testController';
 import { Test } from './test.class';
 import { mockResponse } from './response.mock';
 
-import { Request, Response } from 'express';
-
 test('store test, update, select all, select by id test and delete it', async (done) => {
   const pool = new Pool(
     ((DBHandler.getReadHandler() as ServiceHandler)

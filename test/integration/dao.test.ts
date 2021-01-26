@@ -8,8 +8,6 @@ import TestController from './testController';
 import { Test } from './test.class';
 import { mockResponse } from './response.mock';
 
-import { Request, Response } from 'express';
-
 test('store test, update, select all, select by id test and delete it', async (done) => {
   const pool = ((DBHandler.getReadHandler() as ServiceHandler)
     .persistence as DAODB).getPool();
@@ -28,7 +26,7 @@ test('store test, update, select all, select by id test and delete it', async (d
       } as unknown) as Request,
       (mockResponse as unknown) as Response
     );
-    console.log('store:', store);
+    // console.log('store:', store);
     const storedTest = store['received'];
     // console.log('storedTest:', storedTest);
 

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Request, Response } from 'express';
 import BaseControllerDefault from './baseControllerDefault';
 import ControllerUpdateAdapter from '../adapter/controllerUpdateAdapter';
 import { Operation } from 'flexiblepersistence';
@@ -8,10 +7,10 @@ import { Operation } from 'flexiblepersistence';
 export default class BaseControllerUpdate
   extends BaseControllerDefault
   implements ControllerUpdateAdapter {
-  async update(req: Request, res: Response): Promise<Response> {
+  async update(request, response): Promise<Response> {
     return this.generateEvent(
-      req,
-      res,
+      request,
+      response,
       Operation.update,
       this.event.bind(this)
     );

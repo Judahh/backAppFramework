@@ -20,30 +20,25 @@ import {
   PublisherSubscriberWithMemory,
 } from 'journaly';
 import { Mixin } from 'ts-mixer';
-import SimpleApp from './simpleApp';
 import { Utils } from '@flexiblepersistence/dao';
 
 import BaseController from './controller/baseController';
 import BaseControllerDefault from './controller/baseControllerDefault';
 import BaseControllerDelete from './controller/baseControllerDelete';
 import BaseControllerIndex from './controller/baseControllerIndex';
-import BaseControllerReserved from './controller/baseControllerReserved';
-import BaseControllerRestricted from './controller/baseControllerRestricted';
 import BaseControllerShow from './controller/baseControllerShow';
+import BaseControllerRead from './controller/baseControllerRead';
 import BaseControllerStore from './controller/baseControllerStore';
 import BaseControllerUpdate from './controller/baseControllerUpdate';
-
-import RouterSingleton from './router/routerSingleton';
 
 import { Pool } from 'pg';
 import BasicService from './service/basicService';
 import DatabaseHandler from './database/databaseHandler';
 import DatabaseHandlerInitializer from './database/databaseHandlerInitializer';
+import RouterInitializer from './router/routerInitializer';
 
 export {
-  SimpleApp,
   DatabaseHandler,
-  DatabaseHandlerInitializer,
   Utils,
   Journaly,
   BasicService,
@@ -51,18 +46,15 @@ export {
   BaseControllerDefault,
   BaseControllerDelete,
   BaseControllerIndex,
-  BaseControllerReserved,
-  BaseControllerRestricted,
+  BaseControllerRead,
   BaseControllerShow,
   BaseControllerStore,
   BaseControllerUpdate,
-  RouterSingleton,
   Handler,
   Event,
   Operation,
   Write,
   Read,
-  PersistenceAdapter,
   PersistenceInfo,
   MongoDB,
   SubjectObserver,
@@ -73,4 +65,9 @@ export {
   SequelizeDB,
   Mixin,
   Pool,
+};
+export type {
+  RouterInitializer,
+  DatabaseHandlerInitializer,
+  PersistenceAdapter,
 };

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Request, Response } from 'express';
 import BaseControllerDefault from './baseControllerDefault';
 import ControllerStoreAdapter from '../adapter/controllerStoreAdapter';
 import { Operation } from 'flexiblepersistence';
@@ -9,10 +8,10 @@ export default class BaseControllerStore
   extends BaseControllerDefault
   implements ControllerStoreAdapter {
   // @ts-ignore
-  async store(req: Request, res: Response): Promise<Response> {
+  async store(request, response): Promise<Response> {
     return this.generateEvent(
-      req,
-      res,
+      request,
+      response,
       Operation.create,
       this.event.bind(this),
       true
