@@ -1,4 +1,4 @@
-# BackAPIRest
+# backAPIRest
 
 ![Publish](https://github.com/Judahh/backAPIRest/workflows/Publish/badge.svg)
 [![npm version](https://badge.fury.io/js/backAPIRest.svg)](https://badge.fury.io/js/backAPIRest)
@@ -84,6 +84,6 @@ $ yarn test
 
 ## People
 
-The original author of Back is [Judah Lima](https://github.com/Judahh)
+The original author of backAPIRest is [Judah Lima](https://github.com/Judahh)
 
 [List of all contributors](https://github.com/Judahh/backAPIRest/graphs/contributors)
