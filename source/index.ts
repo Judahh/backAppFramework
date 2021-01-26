@@ -20,7 +20,6 @@ import {
   PublisherSubscriberWithMemory,
 } from 'journaly';
 import { Mixin } from 'ts-mixer';
-import SimpleApp from './simpleApp';
 import { Utils } from '@flexiblepersistence/dao';
 
 import BaseController from './controller/baseController';
@@ -32,8 +31,6 @@ import BaseControllerRead from './controller/baseControllerRead';
 import BaseControllerStore from './controller/baseControllerStore';
 import BaseControllerUpdate from './controller/baseControllerUpdate';
 
-import RouterSingleton from './router/routerSingleton';
-
 import { Pool } from 'pg';
 import BasicService from './service/basicService';
 import DatabaseHandler from './database/databaseHandler';
@@ -41,7 +38,6 @@ import DatabaseHandlerInitializer from './database/databaseHandlerInitializer';
 import RouterInitializer from './router/routerInitializer';
 
 export {
-  SimpleApp,
   DatabaseHandler,
   Utils,
   Journaly,
@@ -54,7 +50,6 @@ export {
   BaseControllerShow,
   BaseControllerStore,
   BaseControllerUpdate,
-  RouterSingleton,
   Handler,
   Event,
   Operation,

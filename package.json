@@ -1,6 +1,6 @@
 {
-  "name": "@flexiblepersistence/back",
-  "productName": "back",
+  "name": "backapirest",
+  "productName": "backAPIRest",
   "author": "Judah Holanda Correia Lima <judahholanda7@gmail.com> (https://judahh.com)",
   "version": "0.1.0",
   "private": false,
