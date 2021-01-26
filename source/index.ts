@@ -8,10 +8,8 @@ import {
   PersistenceInfo,
   MongoDB,
 } from 'flexiblepersistence';
-
-import { DAODB } from '@flexiblepersistence/dao';
+import { DAODB, Utils } from '@flexiblepersistence/dao';
 import { SequelizeDB } from '@flexiblepersistence/sequelize';
-
 import {
   Journaly,
   SubjectObserver,
@@ -20,7 +18,7 @@ import {
   PublisherSubscriberWithMemory,
 } from 'journaly';
 import { Mixin } from 'ts-mixer';
-import { Utils } from '@flexiblepersistence/dao';
+import { Pool } from 'pg';
 
 import BaseController from './controller/baseController';
 import BaseControllerDefault from './controller/baseControllerDefault';
@@ -31,7 +29,6 @@ import BaseControllerRead from './controller/baseControllerRead';
 import BaseControllerStore from './controller/baseControllerStore';
 import BaseControllerUpdate from './controller/baseControllerUpdate';
 
-import { Pool } from 'pg';
 import BasicService from './service/basicService';
 import DatabaseHandler from './database/databaseHandler';
 import DatabaseHandlerInitializer from './database/databaseHandlerInitializer';
