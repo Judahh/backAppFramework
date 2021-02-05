@@ -28,6 +28,10 @@ import BaseControllerShow from './controller/baseControllerShow';
 import BaseControllerRead from './controller/baseControllerRead';
 import BaseControllerStore from './controller/baseControllerStore';
 import BaseControllerUpdate from './controller/baseControllerUpdate';
+import BaseControllerConnect from './controller/baseControllerConnect';
+import BaseControllerHead from './controller/baseControllerHead';
+import BaseControllerTrace from './controller/baseControllerTrace';
+import BaseControllerOptions from './controller/baseControllerOptions';
 
 import BasicService from './service/basicService';
 import DatabaseHandler from './database/databaseHandler';
@@ -47,6 +51,10 @@ export {
   BaseControllerShow,
   BaseControllerStore,
   BaseControllerUpdate,
+  BaseControllerConnect,
+  BaseControllerHead,
+  BaseControllerTrace,
+  BaseControllerOptions,
   Handler,
   Event,
   Operation,
