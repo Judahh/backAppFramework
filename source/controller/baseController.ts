@@ -5,6 +5,10 @@ import BaseControllerDelete from './baseControllerDelete';
 import BaseControllerStore from './baseControllerStore';
 import BaseControllerUpdate from './baseControllerUpdate';
 import BaseControllerRead from './baseControllerRead';
+import BaseControllerConnect from './baseControllerConnect';
+import BaseControllerHead from './baseControllerHead';
+import BaseControllerOptions from './baseControllerOptions';
+import BaseControllerTrace from './baseControllerTrace';
 
 // @ts-ignore
 export default class BaseController
@@ -12,6 +16,10 @@ export default class BaseController
     BaseControllerStore,
     BaseControllerDelete,
     BaseControllerUpdate,
-    BaseControllerRead
+    BaseControllerRead,
+    BaseControllerConnect,
+    BaseControllerHead,
+    BaseControllerOptions,
+    BaseControllerTrace
   )
   implements ControllerAdapter {}

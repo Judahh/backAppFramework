@@ -15,7 +15,6 @@ export default class BaseControllerUpdate
       this.event.bind(this)
     );
   }
-
   async forceUpdate(request, response): Promise<Response> {
     return this.generateEvent(
       request,
