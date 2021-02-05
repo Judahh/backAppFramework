@@ -26,9 +26,13 @@ export default class BaseControllerDefault extends Default {
   } = {
     GET: 'read',
     POST: 'store',
-    PUT: 'update',
+    PUT: 'forceUpdate',
     PATCH: 'update',
     DELETE: 'delete',
+    OPTIONS: 'options',
+    CONNECT: 'connect',
+    HEAD: 'head',
+    TRACE: 'trace',
   };
   // @ts-ignore
   protected handler: Handler | undefined;
