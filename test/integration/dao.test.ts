@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import { ServiceHandler } from '@flexiblepersistence/service';
-import { DAODB, Utils } from '../../source/index';
 // import dBHandler from './dBHandler';
 
 import DBHandler from './dBHandler';
 import TestController from './testController';
 import { Test } from './test.class';
 import { mockResponse } from './response.mock';
+import { DAODB, Utils } from '@flexiblepersistence/dao';
 
 test('store test, update, select all, select by id test and delete it', async (done) => {
   const pool = ((DBHandler.getReadHandler() as ServiceHandler)

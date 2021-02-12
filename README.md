@@ -1,8 +1,8 @@
 # backAPIRest
 
 ![Publish](https://github.com/Judahh/backAPIRest/workflows/Publish/badge.svg)
-[![npm version](https://badge.fury.io/js/backAPIRest.svg)](https://badge.fury.io/js/backAPIRest)
-[![npm downloads](https://img.shields.io/npm/dt/backAPIRest.svg)](https://img.shields.io/npm/dt/backAPIRest.svg)
+[![npm version](https://badge.fury.io/js/backapirest.svg)](https://badge.fury.io/js/backapirest)
+[![npm downloads](https://img.shields.io/npm/dt/backapirest.svg)](https://img.shields.io/npm/dt/backapirest.svg)
 
 A simple API framework using Flexible Persistence
 

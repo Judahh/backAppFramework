@@ -8,8 +8,6 @@ import {
   PersistenceInfo,
   MongoDB,
 } from 'flexiblepersistence';
-import { DAODB, Utils } from '@flexiblepersistence/dao';
-import { SequelizeDB } from '@flexiblepersistence/sequelize';
 import {
   Journaly,
   SubjectObserver,
@@ -40,7 +38,6 @@ import RouterInitializer from './router/routerInitializer';
 
 export {
   DatabaseHandler,
-  Utils,
   Journaly,
   BasicService,
   BaseController,
@@ -66,8 +63,6 @@ export {
   SubjectObserverWithMemory,
   PublisherSubscriber,
   PublisherSubscriberWithMemory,
-  DAODB,
-  SequelizeDB,
   Mixin,
   Pool,
 };
