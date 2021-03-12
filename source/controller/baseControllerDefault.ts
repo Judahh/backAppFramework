@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // file deepcode ignore no-any: any needed
 // file deepcode ignore object-literal-shorthand: argh
+import { Default } from '@flexiblepersistence/default-initializer';
 import { ServiceModel, ServiceSimpleModel } from '@flexiblepersistence/service';
-import { Handler, Event, Operation, Default } from 'flexiblepersistence';
+import { Handler, Event, Operation } from 'flexiblepersistence';
 import { settings } from 'ts-mixer';
 import RouterInitializer from '../router/routerInitializer';
 settings.initFunction = 'init';
@@ -184,6 +187,7 @@ export default class BaseControllerDefault extends Default {
 
   formatSelection(params?, query?) {
     let selection;
+    // deepcode ignore HTTPSourceWithUncheckedType: <please specify a reason of ignoring this>, deepcode ignore HTTPSourceWithUncheckedType: <please specify a reason of ignoring this>
     if (params && params.filter) selection = params.filter;
     else selection = query as any;
     return selection;
