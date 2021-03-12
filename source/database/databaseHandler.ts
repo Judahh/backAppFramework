@@ -2,14 +2,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // file deepcode ignore no-any: any needed
 import { Handler, PersistenceAdapter } from 'flexiblepersistence';
-import { SubjectObserver } from 'journaly';
+import { SenderReceiver } from 'journaly';
 import DatabaseHandlerInitializer from './databaseHandlerInitializer';
 // @ts-ignore
 export default abstract class DatabaseHandler {
   // @ts-ignore
   protected init?: DatabaseHandlerInitializer;
 
-  getJournaly(): SubjectObserver<any> {
+  getJournaly(): SenderReceiver<any> {
     if (this.init && this.init.journaly) return this.init.journaly;
     throw new Error('DatabaseHandler must have a init and a handler.');
   }

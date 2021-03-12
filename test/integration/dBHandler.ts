@@ -3,12 +3,13 @@
 // file deepcode ignore no-any: any needed
 // file deepcode ignore object-literal-shorthand: argh
 import { Handler, MongoDB, PersistenceInfo } from 'flexiblepersistence';
-import { Journaly, SubjectObserver, DatabaseHandler } from '../../source/index';
+import { DatabaseHandler } from '../../source/index';
 import TestService from './testService';
 import TestDAO from './testDAO';
 import { eventInfo, readInfo } from './databaseInfos';
 import { ServiceHandler } from '@flexiblepersistence/service';
 import { DAODB } from '@flexiblepersistence/dao';
+import { Journaly, SenderReceiver } from 'journaly';
 
 class DBHandler extends DatabaseHandler {
   // async migrate(): Promise<boolean> {
@@ -47,7 +48,7 @@ class DBHandler extends DatabaseHandler {
   // }
 }
 
-const journaly = Journaly.newJournaly() as SubjectObserver<any>;
+const journaly = Journaly.newJournaly() as SenderReceiver<any>;
 const database = new PersistenceInfo(readInfo, journaly);
 const eventdatabase = new PersistenceInfo(eventInfo, journaly);
 

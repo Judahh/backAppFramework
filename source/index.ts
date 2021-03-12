@@ -1,22 +1,4 @@
-import {
-  Handler,
-  Event,
-  Operation,
-  Write,
-  Read,
-  PersistenceAdapter,
-  PersistenceInfo,
-  MongoDB,
-} from 'flexiblepersistence';
-import {
-  Journaly,
-  SubjectObserver,
-  SubjectObserverWithMemory,
-  PublisherSubscriber,
-  PublisherSubscriberWithMemory,
-} from 'journaly';
 import { Mixin } from 'ts-mixer';
-import { Pool } from 'pg';
 
 import BaseController from './controller/baseController';
 import BaseControllerDefault from './controller/baseControllerDefault';
@@ -38,7 +20,6 @@ import RouterInitializer from './router/routerInitializer';
 
 export {
   DatabaseHandler,
-  Journaly,
   BasicService,
   BaseController,
   BaseControllerDefault,
@@ -52,22 +33,6 @@ export {
   BaseControllerHead,
   BaseControllerTrace,
   BaseControllerOptions,
-  Handler,
-  Event,
-  Operation,
-  Write,
-  Read,
-  PersistenceInfo,
-  MongoDB,
-  SubjectObserver,
-  SubjectObserverWithMemory,
-  PublisherSubscriber,
-  PublisherSubscriberWithMemory,
   Mixin,
-  Pool,
 };
-export type {
-  RouterInitializer,
-  DatabaseHandlerInitializer,
-  PersistenceAdapter,
-};
+export type { RouterInitializer, DatabaseHandlerInitializer };

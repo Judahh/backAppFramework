@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import { ServiceHandler } from '@flexiblepersistence/service';
-import { Pool } from '../../source/index';
+import { Pool } from 'pg';
 
 import DBHandler from './sequelizeHandler';
 import TestController from './testController';
