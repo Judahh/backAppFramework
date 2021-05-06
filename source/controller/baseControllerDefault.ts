@@ -249,8 +249,8 @@ export default class BaseControllerDefault extends Default {
     singleDefault?: boolean
   ): Promise<Response> {
     try {
-      const event = this.formatEvent(request, operation, singleDefault);
       await this.runMiddlewares(request, response);
+      const event = this.formatEvent(request, operation, singleDefault);
       const object = await this.generateObject(useFunction, event);
       const status = this.generateStatus(operation, object);
       response.status(status).json(object);
