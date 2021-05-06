@@ -1,4 +1,4 @@
-# backAPI
+# backAPIRest
 
 ![Publish](https://github.com/Judahh/backAPIRest/workflows/Publish/badge.svg)
 [![npm version](https://badge.fury.io/js/backapirest.svg)](https://badge.fury.io/js/backapirest)
