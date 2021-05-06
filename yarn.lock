@@ -328,9 +328,9 @@
     ts-mixer latest
 
 "@flexiblepersistence/default-initializer@latest":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@flexiblepersistence/default-initializer/-/default-initializer-0.1.6.tgz#b16a259b8ac8e382e28f9e9e14195a36ba00121d"
-  integrity sha512-gBc3CJxF4+FM1U8Fb21o02TiGjRPH2dKnLPM9G5I7K25qggdNtYhWF04UY/TA6qHo1HZ9bLAS8v/iVgvr8hUiQ==
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@flexiblepersistence/default-initializer/-/default-initializer-0.1.7.tgz#aaa92e001f9fd931d88b7a5a7dce4ed215150a69"
+  integrity sha512-nV8rNOBtIEz6MxHzjvwzuptcaBwIHJBee0vUssJKUhfz9oMEHNfwX8g2y12hL909w6QM5FuQ7/H6uW6VbxzC0Q==
   dependencies:
     journaly latest
     ts-mixer latest
@@ -346,9 +346,9 @@
     ts-mixer latest
 
 "@flexiblepersistence/service@latest":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@flexiblepersistence/service/-/service-0.2.1.tgz#41e54b516201631c9afd098eec1a6f2e461f90ef"
-  integrity sha512-eyq3us74e9k38MJPhari/esRWyKUGAOnsTTz+qDA6U2roAziqdCv8yBI3CKsbM+gdap2OP544XQ62tkViFljNg==
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@flexiblepersistence/service/-/service-0.2.2.tgz#c46aa8b2cc88b833a52647c94134729f5668d40a"
+  integrity sha512-7AxRCnvKuDEQbb/FOSS/dviAgsYNUJHwg9gCMRBvjKgPiyKedw2ps0ez5kcQOzCLQxYj7Jj+QfoKcRdCx3/eTw==
   dependencies:
     journaly latest
     ts-mixer latest
@@ -1998,9 +1998,9 @@ flatted@^3.1.0:
   integrity sha512-zAoAQiudy+r5SvnSw3KJy5os/oRJYHzrzja/tBDqrZtNhUw8bt6y8OBzMWcjWr+8liV8Eb6yOhw8WZ7VFZ5ZzA==
 
 flexiblepersistence@latest:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/flexiblepersistence/-/flexiblepersistence-1.4.0.tgz#1e61d639b8bf28660fd86816575dcdeaf2a06f23"
-  integrity sha512-lc5GahB/ER4qFKbcRQ6ifsQunGojc2S5+ZfUcyE3BEUstVldLoJpuVvKd1LbF9W1r0EG3t9Hy+gS2QaYQ8qgQA==
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/flexiblepersistence/-/flexiblepersistence-1.4.1.tgz#41b34cd9fc159649d61bf36d9c7266b81bdd9fed"
+  integrity sha512-GqBbCOvT9Vh+52oLJVo6hyUd/EPpsWp1w4ehgkweDS5Z4Uis4mAXVuspmvpuHPRmCBCEE/15hHHYvxt4dsgutg==
   dependencies:
     "@flexiblepersistence/default-initializer" latest
     journaly latest
@@ -2975,9 +2975,9 @@ jest@latest:
     jest-cli "^26.6.3"
 
 journaly@latest:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/journaly/-/journaly-3.0.2.tgz#b66cb26bd0020c13ae3e252d99c8c6a70376fd54"
-  integrity sha512-C9IjUMCOGfAt7GDl1wRlmepMEeIemBo8UW11VfzEMmC4UJp48Dje1u17ANnz9TdCBXz1ehzXJe8bkIeDNO3p4Q==
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/journaly/-/journaly-3.0.4.tgz#710886cfb578043e6339cce68653c8f171ca5a10"
+  integrity sha512-BkSQqlcWSwM2FDPGrDwUfR+WbFwsIaMuepO0zgSsZNinTpcUHFSs3PjcD/C2I8QDFOgDLq5RhoLAuv1JMfynWQ==
 
 js-tokens@^4.0.0:
   version "4.0.0"
